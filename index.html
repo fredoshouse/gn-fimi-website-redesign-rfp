@@ -6,6 +6,10 @@
 <title>Ghost Note × Food is Medicine Institute</title>
 <meta property="og:title" content="Ghost Note × Food is Medicine Institute">
 <meta property="og:description" content="Website Redesign Proposal — Confidential 2026">
+<link rel="icon" type="image/png" href="https://www.ghostnoteagency.com/wp-content/uploads/2025/05/GN-White-350x350.png">
+<link rel="apple-touch-icon" href="https://www.ghostnoteagency.com/wp-content/uploads/2025/05/GN-White-350x350.png">
+<meta name="theme-color" content="#090909">
+<meta name="robots" content="noindex, nofollow">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;min-width:0}
@@ -71,6 +75,7 @@ h1.big em{font-style:italic;color:var(--lime)}
 .imgfull .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(9,9,9,.88) 0%,rgba(9,9,9,.35) 55%,rgba(9,9,9,.25) 100%)}
 .imgfull .fg{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:60px 64px 70px;max-width:1160px;margin:0 auto}
 
+.statrow.cover2{grid-template-columns:repeat(2,1fr)}
 .statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 8px}
 .stat{border:1px solid var(--bd);padding:22px 20px;background:rgba(9,9,9,.35)}
 .cream .stat{border-color:var(--bl);background:rgba(255,255,255,.4)}
@@ -184,6 +189,10 @@ tr.total td{border-top:2px solid var(--lime);border-bottom:none;font-weight:700;
 .csbtn.ghost{background:transparent;color:var(--lime);margin-left:10px}
 .csbtn.ghost:hover{background:var(--lime);color:var(--black)}
 
+.inlink{color:var(--purple);border-bottom:1px solid rgba(96,70,232,.4);transition:border-color .18s}
+.inlink:hover{border-bottom-color:var(--purple)}
+.dark .inlink,.d2 .inlink,.purple .inlink{color:var(--lime);border-bottom-color:rgba(200,241,53,.45)}
+.dark .inlink:hover,.d2 .inlink:hover{border-bottom-color:var(--lime)}
 .bigquote{font-family:var(--ff);font-size:clamp(28px,3.6vw,46px);font-style:italic;font-weight:600;line-height:1.25;max-width:900px}
 .caps-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
 
@@ -287,6 +296,8 @@ tr.total td{border-top:2px solid var(--lime);border-bottom:none;font-weight:700;
   .g-hdr,.g-row{grid-template-columns:110px repeat(24,1fr)}
   .g-lbl{font-size:9px}
   .imgfull .fg{padding:40px 22px 60px}
+  .fn{position:static;left:auto;bottom:auto;margin-top:26px;padding-top:13px;border-top:1px solid var(--bd)}
+  .cream .fn{border-top-color:var(--bl)}
 }
 
 @media print{
@@ -302,9 +313,10 @@ tr.total td{border-top:2px solid var(--lime);border-bottom:none;font-weight:700;
      the split images, the dual-read panels, and the services columns onto
      phantom second pages. These declarations lock the desktop layout for print. */
   .split{grid-template-columns:1.05fr .95fr;gap:48px;min-height:0}
-  .split-img{height:5in}
+  .split-img{height:4.6in}
   .cols2{grid-template-columns:1fr 1fr}
   .statrow{grid-template-columns:repeat(3,1fr)}
+  .statrow.cover2{grid-template-columns:repeat(2,1fr)}
   .caps-cols{grid-template-columns:repeat(3,1fr)}
   .team-cards{grid-template-columns:repeat(4,1fr)}
   .team-cards.c3{grid-template-columns:repeat(3,1fr)}
@@ -312,7 +324,7 @@ tr.total td{border-top:2px solid var(--lime);border-bottom:none;font-weight:700;
   .g-hdr,.g-row{grid-template-columns:220px repeat(24,1fr)}
   .g-lbl{font-size:11px}
   .center{min-height:0}
-  .fn{left:56px}
+  .fn{position:absolute;bottom:20px;left:56px;margin-top:0;padding-top:0;border-top:none}
   h1.big{font-size:44px}
   .mockwrap{grid-template-columns:340px 1fr;gap:34px}
   .pinlist{grid-template-columns:1fr 1fr}
@@ -393,10 +405,9 @@ tr.total td{border-top:2px solid var(--lime);border-bottom:none;font-weight:700;
     <div class="eye" style="margin-bottom:16px">A Proposal for the Food is Medicine Institute · Tufts University</div>
     <h1 class="big" style="font-size:clamp(42px,6vw,74px);margin-bottom:16px">Food is Medicine Institute<br><em>× Ghost Note.</em></h1>
     <p class="lead" style="color:rgba(255,255,255,.85)">Website redesign. Prepared with care, July 2026.</p>
-    <div class="statrow" style="max-width:820px">
+    <div class="statrow cover2" style="max-width:560px">
       <div class="stat"><div class="stat-lbl">Timeline</div><div class="stat-v">Aug 2026 to Jan 2027</div></div>
       <div class="stat"><div class="stat-lbl">Prepared for</div><div class="stat-v">Julia Sharib and the FIMI team</div></div>
-      <div class="stat"><div class="stat-lbl">Investment</div><div class="stat-v">$186,000 fixed fee</div></div>
     </div>
   </div>
 </section>
@@ -899,7 +910,7 @@ tr.total td{border-top:2px solid var(--lime);border-bottom:none;font-weight:700;
   <div class="team-cards c3" id="tg-design"></div>
   <div class="tg-label">Build and delivery <span class="tg-purpose">Making it real and keeping it on track. Own the platform build and the weekly rhythm.</span></div>
   <div class="team-cards c3" id="tg-build"></div>
-  <p class="small" style="margin-top:14px">Development runs through Integral Studio, our specialized technical partner for platform builds, under Ghost Note's single contract and single point of accountability. One team, one schedule.</p>
+  <p class="small" style="margin-top:14px">One Ghost Note contract, one point of accountability, one schedule. You have a single team and a single place to go with any question.</p>
   <div class="fn">Responds to the named-team requirement in RFP 7.5</div>
 </div></section>
 
@@ -908,24 +919,15 @@ tr.total td{border-top:2px solid var(--lime);border-bottom:none;font-weight:700;
   <div>
     <div class="eye">09 · Who we are</div>
     <h1 class="big">Nice to meet you.<br><em>We're Ghost Note.</em></h1>
-    <p class="lead">We're a Black-owned, cross-cultural creative studio, born in Washington DC and now living in New York and LA too, and a member of the kyu collective. We craft brands and stories that honor the complexity of the modern world, and much of our practice sits with mission-driven institutions, foundations, and health organizations whose work deserves a bigger room.</p>
+    <p class="lead">Ghost Note is a cross-cultural studio that channels the complexity and beauty of the modern world through strategy, design, and story.</p>
+    <p class="lead">Our work is built to be felt, not just seen, to reverberate beyond metrics from the most authentic expressions of identity, culture, and community. We collaborate with the most influential and emerging brands and institutions to spark discourse that authentically speaks to the modern world.</p>
     <p class="lead">A ghost note in music is felt more than heard. That's our thesis about good work, and it fits this project. Your visitors should never notice the architecture. They should simply find what they came for and leave convinced.</p>
-    <p class="lead">Translating rigorous, credible work for the audiences who can act on it is the job we do most, and honestly, the job we love most.</p>
+    <p class="small" style="margin-top:16px">Born in Washington DC. Now living in LA, Philadelphia, Detroit, Seattle, and Florida too. A member of the <a href="https://kyu.com/" target="_blank" rel="noopener" class="inlink">kyu collective</a>.</p>
   </div>
   <div><div class="split-img" style="background-image:url('https://www.ghostnoteagency.com/wp-content/uploads/2022/03/Founders_01_Ghost-Note-1274-b_w-scaled.jpg')"></div><div class="imgcap">Founders Steve Jumper, Brandon Ellis, and Reggie Snowden</div></div>
 </div></section>
 
-<!-- 30b SUBCULTURE : full-bleed family dinner -->
-<section class="slide imgfull" data-title="Where we start">
-  <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1543362906-acfc16c67564?q=80&w=2400&auto=format&fit=crop')"></div>
-  <div class="ov"></div>
-  <div class="fg">
-    <div class="eye" style="margin-bottom:18px">09 · Who we are</div>
-    <div class="bigquote">None of us can own culture. We can only create beautiful things alongside it.</div>
-    <p class="lead" style="margin-top:18px;color:rgba(255,255,255,.82);max-width:820px">Real culture bubbles up from communities with their own codes, languages, and rituals. Our job isn't to claim it. It's to understand the human motivations underneath it, so the work is felt rather than just filed. For us, the work begins at the origins. It starts at subculture.</p>
-    <p class="lead" style="color:rgba(255,255,255,.82);max-width:820px"><b style="color:#fff">On this project, subculture is your two audiences.</b> A hospital COO and a legislative staffer each move through the world in a different language. We start there, at the level of how they actually read, decide, and act, and we build the site up from that.</p>
-  </div>
-</section>
+
 
 <!-- 31 HOW WE WORK / CAPABILITIES -->
 <section class="slide cream" data-title="What we bring"><div class="inner">
@@ -1083,8 +1085,8 @@ const TEAM=[
    bio:"Sarah leads strategy at Ghost Note. On this engagement she owns the audience framework, the findability strategy, and the content strategy that turns 200 publications and 30 projects into a system a health executive and a legislative staffer can actually navigate. She's the reason the dual-read module has teeth instead of just being a nice idea."},
   {g:"design",name:"Jahred Corbin",role:"UX/UI Design",title:"Senior UX/UI Designer, Ghost Note",photo:"https://www.ghostnoteagency.com/wp-content/uploads/2026/04/Jahred-Corbin_Headshot.jpeg",init:"JC",
    bio:"Jahred leads UX and UI design. He owns the information architecture, wireframes, and template design system, and he builds accessibility into the design layer rather than bolting it on in QA. He's designed digital systems for mission-driven and institutional clients where dense content and real usability have to coexist, which is exactly this project."},
-  {g:"build",name:"Megh Vakharia",role:"Development",title:"Development Lead, Integral Studio",photo:MEGH,init:"MV",
-   bio:"Megh leads development through Integral Studio, Ghost Note's technical partner for platform builds. He owns the WordPress build, the taxonomy and relationship engine, the locked block library, and Pantheon deployment. He's built content platforms where non-technical teams have to run the system independently after handoff, which is the exact bar this project sets."},
+  {g:"build",name:"Megh Vakharia",role:"Development",title:"Development Lead",photo:MEGH,init:"MV",
+   bio:"Megh leads development. He owns the WordPress build, the taxonomy and relationship engine, the locked block library, and Pantheon deployment. He's built content platforms where non-technical teams have to run the system independently after handoff, which is the exact bar this project sets."},
   {g:"build",name:"Nadja Boncoeur-Creavalle",role:"Project Management",title:"Operations Manager, Ghost Note",photo:"https://www.ghostnoteagency.com/wp-content/uploads/2024/04/Nadja_2024-700x700.jpg",init:"NB",
    bio:"Nadja runs the project. Schedule, milestones, feedback consolidation, and the weekly rhythm with Julia all route through her. She's the reason the seven-day feedback windows hold, the reason December doesn't surprise anyone, and the reason you always know exactly where things stand."}
 ];
@@ -1112,6 +1114,124 @@ function openModal(i){
 function closeModal(){document.getElementById('modal').classList.remove('show')}
 
 const track=document.getElementById('track');
+/* ======================================================================
+   VISIT ALERTS
+   Emails alfred@ghostnoteagency.com when someone opens this deck, and
+   again with a read-through summary when they leave.
+
+   SETUP (2 minutes, one time):
+     1. Go to formspree.io, sign up free, create a form.
+        Set the notification address to alfred@ghostnoteagency.com
+     2. Copy the endpoint it gives you (https://formspree.io/f/xxxxxxxx)
+     3. Paste it into ALERT_ENDPOINT below.
+
+   Leave ALERT_ENDPOINT empty and nothing is sent. Nothing breaks.
+   Any endpoint that accepts a JSON POST works — Zapier, Make, a Netlify
+   function, your own webhook. Formspree is just the fastest to stand up.
+   ====================================================================== */
+const ALERT_ENDPOINT = '';   // <-- paste your endpoint here
+const ALERT_LABEL    = 'FIMI proposal';
+
+const visit = {
+  id: 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+  start: Date.now(),
+  journey: [],          // [{title, seconds}]
+  deepest: 0,
+  exported: false,
+  slideEnter: Date.now(),
+  lastIndex: null,
+  openSent: false,
+  summarySent: false
+};
+
+function ls(k, v){
+  try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }
+  catch(e){ return null; }
+}
+
+function visitContext(){
+  let tz = '';
+  try{ tz = Intl.DateTimeFormat().resolvedOptions().timeZone; }catch(e){}
+  return {
+    deck: ALERT_LABEL,
+    visit_id: visit.id,
+    opened_at: new Date().toLocaleString(),
+    timezone: tz,
+    returning: ls('gn_seen_' + ALERT_LABEL) ? 'yes — has opened this before' : 'no — first open',
+    came_from: document.referrer || 'direct or private link',
+    screen: window.screen.width + ' × ' + window.screen.height,
+    language: navigator.language || '',
+    device: navigator.userAgent
+  };
+}
+
+function sendAlert(payload, beacon){
+  if(!ALERT_ENDPOINT) return;
+  const body = JSON.stringify(payload);
+  if(beacon && navigator.sendBeacon){
+    try{
+      navigator.sendBeacon(ALERT_ENDPOINT, new Blob([body], {type:'application/json'}));
+      return;
+    }catch(e){}
+  }
+  fetch(ALERT_ENDPOINT, {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body: body,
+    keepalive: true
+  }).catch(()=>{});
+}
+
+/* fires once, the moment the deck is unlocked */
+function alertOpened(){
+  if(visit.openSent) return;
+  visit.openSent = true;
+  const c = visitContext();
+  sendAlert(Object.assign({_subject: ALERT_LABEL + ' — opened just now'}, c), false);
+  ls('gn_seen_' + ALERT_LABEL, '1');
+}
+
+/* called by render() on every slide change */
+function trackSlide(i, title){
+  const now = Date.now();
+  if(visit.lastIndex !== null){
+    const secs = Math.round((now - visit.slideEnter)/1000);
+    if(secs > 0){
+      const prev = visit.journey[visit.journey.length-1];
+      if(prev && prev.i === visit.lastIndex) prev.seconds += secs;
+      else visit.journey.push({i: visit.lastIndex, title: visit.lastTitle, seconds: secs});
+    }
+  }
+  visit.lastIndex = i; visit.lastTitle = title; visit.slideEnter = now;
+  if(i+1 > visit.deepest) visit.deepest = i+1;
+}
+
+/* fires when they leave, close, or background the tab */
+function alertSummary(){
+  if(visit.summarySent || !visit.openSent) return;
+  const total = Math.round((Date.now() - visit.start)/1000);
+  if(total < 8) return;                       // ignore accidental opens
+  visit.summarySent = true;
+  trackSlide(visit.lastIndex, visit.lastTitle);
+
+  const ranked = [...visit.journey].sort((a,b)=>b.seconds-a.seconds).slice(0,5)
+    .map(x => x.title + ' — ' + x.seconds + 's');
+  const path = visit.journey.map(x => x.title).join('  →  ');
+  const mins = Math.floor(total/60), secs = total%60;
+
+  sendAlert(Object.assign({
+    _subject: ALERT_LABEL + ' — read for ' + (mins?mins+'m ':'') + secs + 's, reached slide ' + visit.deepest,
+    time_on_deck: (mins?mins+'m ':'') + secs + 's',
+    slides_reached: visit.deepest + ' of ' + document.querySelectorAll('.slide').length,
+    exported_pdf: visit.exported ? 'YES — they saved the PDF' : 'no',
+    most_time_on: ranked.join('\n'),
+    full_path: path
+  }, visitContext()), true);
+}
+
+window.addEventListener('pagehide', alertSummary);
+document.addEventListener('visibilitychange', ()=>{ if(document.hidden) alertSummary(); });
+
 const slides=[...document.querySelectorAll('.slide')];
 let cur=0;
 function render(){
@@ -1119,6 +1239,7 @@ function render(){
   document.getElementById('counter').textContent=String(cur+1).padStart(2,'0')+' / '+slides.length;
   document.getElementById('progress').style.width=((cur+1)/slides.length*100)+'%';
   const s=slides[cur];
+  trackSlide(cur, s.dataset.title||('Slide '+(cur+1)));
   s.querySelectorAll('[data-count]').forEach(el=>{
     if(el.dataset.done)return;el.dataset.done=1;
     const target=+el.dataset.count,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';
@@ -1170,6 +1291,7 @@ function pwSubmit(){
     const g=document.getElementById('pw-gate');
     g.style.opacity='0';g.style.pointerEvents='none';
     setTimeout(()=>{g.style.display='none'},650);
+    alertOpened();
   } else {
     document.getElementById('pw-error').style.opacity='1';
   }
@@ -1209,6 +1331,7 @@ function preloadDeck(){
 }
 async function savePDF(btn){
   const label=btn?btn.textContent:null;
+  visit.exported=true;
   if(btn){btn.textContent='Preparing…';btn.disabled=true}
   try{await preloadDeck()}catch(e){}
   if(btn){btn.textContent=label;btn.disabled=false}
