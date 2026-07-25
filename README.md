@@ -9,14 +9,11 @@ Horizontal click-through on screen, one-slide-per-page landscape PDF on export.
 
 Three things must be handled. They are deliberately impossible to miss.
 
-1. **Three red `FILL BEFORE SENDING` boxes** on the *Selected work* slide. Each needs one
-   concrete outcome for that engagement. They print in red on purpose. If you can see a red
-   box in the PDF, the PDF is not ready.
-2. **The founders photo** on the *Meet Ghost Note* slide was not resolving. Confirm
+1. **The founders photo** on the *Meet Ghost Note* slide was not resolving. Confirm
    `Founders_01_Ghost-Note-1274-b_w-scaled.jpg` loads before you export.
-3. **The findability footnote** currently reads "required in the RFP scope of work." Swap in
+2. **The findability footnote** currently reads "required in the RFP scope of work." Swap in
    the real section number once you have the RFP in front of you.
-4. **Paste your alert endpoint** (see Visit alerts below) if you want the open notifications.
+3. **Paste your alert endpoint** (see Visit alerts below) if you want the open notifications.
 
 ---
 
@@ -57,7 +54,7 @@ In the Chrome dialog:
 | Background graphics | On |
 | Headers and footers | Off |
 
-**Expected output: 37 pages.** One page per slide, no blanks. If you get more, something
+**Expected output: 36 pages.** One page per slide, no blanks. If you get more, something
 overflowed — see below.
 
 ---
@@ -86,7 +83,7 @@ longer than eight seconds so accidental opens stay quiet.
 | Field | What it tells you |
 | --- | --- |
 | `time_on_deck` | Total time with the deck open |
-| `slides_reached` | Deepest slide, e.g. `31 of 37` |
+| `slides_reached` | Deepest slide, e.g. `31 of 36` |
 | `exported_pdf` | Whether they hit Save as PDF |
 | `most_time_on` | Top five slides by dwell time |
 | `full_path` | The slides they hit, in order |
