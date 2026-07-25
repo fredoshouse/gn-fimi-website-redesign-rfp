@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ghost Note × Food is Medicine Institute</title>
+<meta property="og:title" content="Ghost Note × Food is Medicine Institute">
+<meta property="og:description" content="Website Redesign Proposal — Confidential 2026">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;min-width:0}
+:root{
+  --lime:#C8F135;--purple:#6046E8;--pd:#4530B0;--pl:#EBE7FD;
+  --black:#090909;--d2:#111;--d3:#181818;
+  --cream:#F0EDE4;--cream2:#E6E2D8;--white:#FAFAF8;
+  --bd:rgba(255,255,255,.09);--bl:rgba(9,9,9,.1);
+  --md:rgba(255,255,255,.52);--ml:rgba(9,9,9,.55);
+  --ff:'Playfair Display',Georgia,serif;
+  --fg:'DM Sans',system-ui,sans-serif;
+}
+html,body{height:100%;overflow:hidden;background:var(--black);color:#fff;font-family:var(--fg);font-size:15px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--fg)}
+img{display:block;max-width:100%}
+
+.topbar{position:fixed;top:0;left:0;right:0;height:5px;background:var(--lime);z-index:300}
+.chrome{position:fixed;top:5px;left:0;right:0;z-index:250;background:rgba(9,9,9,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd)}
+.chrome-bar{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:46px;gap:12px}
+.ch-logo img{height:16px;filter:brightness(0) invert(1)}
+.ch-title{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--md);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ch-right{display:flex;gap:8px;flex-shrink:0}
+.ch-btn{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:none;border:1px solid var(--bd);color:var(--lime);padding:6px 12px;cursor:pointer;transition:all .2s}
+.ch-btn:hover{background:rgba(200,241,53,.08);border-color:var(--lime)}
+.progress{position:fixed;top:51px;left:0;height:2px;background:var(--lime);z-index:260;width:0;transition:width .28s cubic-bezier(.4,0,.2,1)}
+
+.deck{position:fixed;inset:0;top:53px;bottom:0}
+.track{display:flex;height:100%;transition:transform .32s cubic-bezier(.5,0,.15,1)}
+.slide{width:100vw;flex-shrink:0;height:100%;overflow-y:auto;padding:52px 64px 80px;position:relative}
+.slide.dark{background:var(--black)}
+.slide.d2{background:var(--d2)}
+.slide.cream{background:var(--cream);color:var(--black)}
+.slide.purple{background:var(--purple)}
+.slide.imgfull{padding:0;overflow:hidden}
+.inner{max-width:1160px;margin:0 auto}
+.center{display:flex;flex-direction:column;justify-content:center;min-height:74vh}
+
+.eye{font-size:10px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--lime);margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.cream .eye{color:var(--purple)}
+.eye::after{content:'';flex:1;height:1px;background:var(--bd)}
+.cream .eye::after{background:var(--bl)}
+h1.big{font-family:var(--ff);font-size:clamp(32px,4.4vw,56px);font-weight:600;line-height:1.08;letter-spacing:-.01em;margin-bottom:22px}
+h1.big em{font-style:italic;color:var(--lime)}
+.cream h1.big em{color:var(--purple)}
+.lead{font-size:16.5px;line-height:1.7;color:rgba(255,255,255,.82);max-width:760px;margin-bottom:14px}
+.cream .lead{color:rgba(9,9,9,.78)}
+.lead b{color:#fff;font-weight:600}
+.cream .lead b{color:var(--black)}
+.small{font-size:13px;color:var(--md);max-width:720px}
+.cream .small{color:var(--ml)}
+.fn{position:absolute;bottom:20px;left:64px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.cream .fn{color:rgba(9,9,9,.32)}
+.purple .fn{color:rgba(255,255,255,.4)}
+
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;min-height:74vh}
+.split-img{height:66vh;background-size:cover;background-position:center;border:1px solid var(--bd)}
+.cream .split-img{border-color:var(--bl)}
+.imgcap{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--md);margin-top:10px}
+.cream .imgcap{color:var(--ml)}
+
+.imgfull .bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.imgfull .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(9,9,9,.88) 0%,rgba(9,9,9,.35) 55%,rgba(9,9,9,.25) 100%)}
+.imgfull .fg{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:60px 64px 70px;max-width:1160px;margin:0 auto}
+
+.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 8px}
+.stat{border:1px solid var(--bd);padding:22px 20px;background:rgba(9,9,9,.35)}
+.cream .stat{border-color:var(--bl);background:rgba(255,255,255,.4)}
+.stat-n{font-family:var(--ff);font-size:38px;font-weight:700;color:var(--lime);line-height:1;margin-bottom:8px}
+.cream .stat-n{color:var(--purple)}
+.stat-t{font-size:12px;color:var(--md);line-height:1.5}
+.cream .stat-t{color:var(--ml)}
+.stat-lbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px;color:var(--md)}
+.stat-v{color:#fff;font-size:14px}
+
+.rows{margin-top:24px}
+.row{display:grid;grid-template-columns:52px 1fr;gap:20px;padding:16px 0;border-top:1px solid var(--bd);align-items:start}
+.cream .row{border-color:var(--bl)}
+.row:last-child{border-bottom:1px solid var(--bd)}
+.cream .row:last-child{border-color:var(--bl)}
+.row-n{font-family:var(--ff);font-size:22px;font-style:italic;color:var(--lime)}
+.cream .row-n{color:var(--purple)}
+.row-h{font-weight:700;font-size:14.5px;margin-bottom:4px}
+.row-b{font-size:13.5px;color:rgba(255,255,255,.66);line-height:1.65;max-width:900px}
+.cream .row-b{color:rgba(9,9,9,.68)}
+
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.panel{border:1px solid var(--bd);padding:24px 22px}
+.cream .panel{border-color:var(--bl);background:rgba(255,255,255,.45)}
+.purple .panel{border-color:rgba(255,255,255,.22)}
+.panel-tag{font-size:9.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);margin-bottom:12px}
+.cream .panel-tag{color:var(--purple)}
+.panel-h{font-family:var(--ff);font-size:20px;font-weight:600;font-style:italic;margin-bottom:12px;line-height:1.25}
+.panel ul{list-style:none}
+.panel li{font-size:13px;color:rgba(255,255,255,.72);padding:7px 0 7px 18px;position:relative;line-height:1.55;border-top:1px solid var(--bd)}
+.cream .panel li{color:rgba(9,9,9,.72);border-color:var(--bl)}
+.purple .panel li{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.18)}
+.panel li::before{content:'→';position:absolute;left:0;color:var(--lime);font-size:11px}
+.cream .panel li::before{color:var(--purple)}
+
+table{width:100%;border-collapse:collapse;margin-top:22px;font-size:13px}
+th{font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-align:left;padding:11px 14px;color:var(--lime);border-bottom:1px solid rgba(255,255,255,.2)}
+.cream th{color:var(--purple);border-color:rgba(9,9,9,.25)}
+td{padding:11px 14px;border-bottom:1px solid var(--bd);color:rgba(255,255,255,.78);vertical-align:top;line-height:1.55}
+.cream td{border-color:var(--bl);color:rgba(9,9,9,.75)}
+td.amt{text-align:right;font-weight:700;color:#fff;white-space:nowrap}
+.cream td.amt{color:var(--black)}
+tr.total td{border-top:2px solid var(--lime);border-bottom:none;font-weight:700;color:#fff;font-size:15px;padding-top:16px}
+.cream tr.total td{border-top-color:var(--purple);color:var(--black)}
+
+.wire{margin-top:22px;border:1px solid var(--bl)}
+.wire-band{display:grid;grid-template-columns:44px 1fr;border-top:1px solid var(--bl)}
+.wire-band:first-child{border-top:none}
+.wire-n{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--purple);border-right:1px solid var(--bl);font-family:var(--ff);font-style:italic}
+.wire-c{padding:13px 18px}
+.wire-h{font-weight:700;font-size:13px;margin-bottom:3px}
+.wire-b{font-size:12.5px;color:rgba(9,9,9,.62);line-height:1.6}
+
+.gantt{margin-top:24px;font-size:11px}
+.g-hdr{display:grid;grid-template-columns:220px repeat(24,1fr);gap:1px;margin-bottom:2px}
+.g-m{grid-column:span 4;text-align:center;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ml);padding-bottom:8px}
+.g-row{display:grid;grid-template-columns:220px repeat(24,1fr);gap:1px;align-items:center;margin-bottom:5px}
+.g-lbl{font-size:11px;color:rgba(9,9,9,.75);padding-right:12px;line-height:1.3}
+.g-cell{height:15px;background:rgba(9,9,9,.05)}
+.g-cell.on{background:var(--purple)}
+.g-cell.on.hot{background:var(--lime)}
+.g-note{margin-top:14px;font-size:11px;color:var(--ml);display:flex;gap:22px;flex-wrap:wrap}
+.g-key{display:inline-block;width:12px;height:12px;vertical-align:-2px;margin-right:6px}
+
+.tg-label{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);margin:16px 0 9px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.tg-label::after{content:'';flex:1;height:1px;background:var(--bd);align-self:center;min-width:30px}
+.tg-purpose{font-size:11px;font-weight:400;letter-spacing:.01em;text-transform:none;color:var(--md);order:3;flex-basis:100%;margin-top:-2px}
+.team-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.team-cards.c3{grid-template-columns:repeat(3,1fr);max-width:900px}
+.tcard{background:rgba(255,255,255,.03);border:1px solid var(--bd);padding:12px 14px;cursor:pointer;transition:all .18s;position:relative;display:flex;align-items:center;gap:13px}
+.tcard:hover{border-color:var(--lime);transform:translateY(-2px)}
+.tcard-av{width:46px;height:46px;border-radius:50%;margin-bottom:0;flex-shrink:0;overflow:hidden;background:var(--purple);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff}
+.tcard-av img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.tcard-txt{min-width:0}
+.tcard-role{font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);margin-bottom:4px}
+.tcard-name{font-size:12.5px;font-weight:700;text-transform:uppercase;line-height:1.12;margin-bottom:2px}
+.tcard-title{font-size:10.5px;color:var(--md);line-height:1.25}
+.tcard-cta{position:absolute;bottom:12px;right:12px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);opacity:0;transition:opacity .2s}
+.tcard:hover .tcard-cta{opacity:1}
+
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:500;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .22s}
+.modal-bg.show{opacity:1;pointer-events:all}
+.modal-box{background:var(--d2);border:1px solid rgba(255,255,255,.14);max-width:600px;width:100%;max-height:88vh;overflow-y:auto;transform:translateY(12px);transition:transform .25s;position:relative}
+.modal-bg.show .modal-box{transform:translateY(0)}
+.modal-close{position:absolute;top:14px;right:14px;background:none;border:1px solid var(--bd);color:var(--md);width:30px;height:30px;font-size:15px;cursor:pointer}
+.modal-close:hover{background:var(--purple);border-color:var(--purple);color:#fff}
+.modal-head{padding:32px 32px 20px;border-bottom:1px solid var(--bd);display:flex;gap:18px;align-items:center}
+.modal-av{width:62px;height:62px;border-radius:50%;overflow:hidden;background:var(--purple);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;flex-shrink:0;color:#fff}
+.modal-av img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.modal-role{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);margin-bottom:5px}
+.modal-name{font-family:var(--ff);font-size:22px;font-weight:600;line-height:1.05;color:#fff}
+.modal-body{padding:24px 32px 32px;font-size:13.5px;line-height:1.7;color:rgba(255,255,255,.75)}
+
+.arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:240;width:46px;height:46px;background:rgba(9,9,9,.7);border:1px solid var(--bd);color:var(--lime);font-size:18px;cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center}
+.arrow:hover{background:var(--lime);color:var(--black);border-color:var(--lime)}
+.arrow.prev{left:14px}.arrow.next{right:14px}
+.counter{position:fixed;bottom:16px;right:20px;z-index:240;font-size:10px;letter-spacing:.18em;color:var(--md);background:rgba(9,9,9,.7);padding:6px 12px;border:1px solid var(--bd)}
+.hint{position:fixed;bottom:16px;left:20px;z-index:240;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--md);background:rgba(9,9,9,.7);padding:6px 12px;border:1px solid var(--bd)}
+
+.menu-bg{position:fixed;inset:0;background:rgba(9,9,9,.96);z-index:400;overflow-y:auto;padding:80px 40px 60px;opacity:0;pointer-events:none;transition:opacity .2s}
+.menu-bg.show{opacity:1;pointer-events:all}
+.menu-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd)}
+.menu-grid button{display:block;width:100%;text-align:left;padding:15px 18px;background:var(--black);border:none;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--md);cursor:pointer;transition:all .12s}
+.menu-grid button:hover{background:var(--d2);color:var(--lime)}
+.menu-grid button span{color:var(--lime);margin-right:10px;font-weight:700}
+
+.csbtn{display:inline-block;margin-top:22px;padding:13px 26px;background:var(--lime);color:var(--black);font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;transition:all .2s;border:1px solid var(--lime);cursor:pointer}
+.csbtn:hover{background:transparent;color:var(--lime)}
+.cream .csbtn{background:var(--purple);border-color:var(--purple);color:#fff}
+.cream .csbtn:hover{background:transparent;color:var(--purple)}
+.csbtn.ghost{background:transparent;color:var(--lime);margin-left:10px}
+.csbtn.ghost:hover{background:var(--lime);color:var(--black)}
+
+.bigquote{font-family:var(--ff);font-size:clamp(28px,3.6vw,46px);font-style:italic;font-weight:600;line-height:1.25;max-width:900px}
+.caps-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+
+#pw-gate{position:fixed;inset:0;background:#000;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s;padding:24px}
+#pw-gate .gate-logo{height:34px;filter:brightness(0) invert(1);margin-bottom:40px}
+.gate-eye{font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+.gate-h{font-family:var(--ff);font-size:clamp(26px,4vw,40px);font-weight:600;text-align:center;margin-bottom:6px;color:#fff}
+.gate-h em{font-style:italic;color:var(--lime)}
+.gate-sub{font-size:12px;color:var(--md);margin-bottom:34px;text-align:center}
+.gate-form{position:relative;width:100%;max-width:340px}
+#pw-input{width:100%;background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff;padding:14px 106px 14px 16px;font-size:16px;letter-spacing:.1em;font-family:var(--fg);outline:none}
+#pw-input::-ms-reveal,#pw-input::-ms-clear{display:none}
+#pw-input:focus{border-color:var(--lime)}
+.gate-go{position:absolute;right:0;top:0;bottom:0;width:52px;background:var(--lime);border:none;color:var(--black);font-size:16px;cursor:pointer;font-weight:700}
+.gate-eyebtn{position:absolute;right:52px;top:0;bottom:0;width:46px;background:none;border:none;border-left:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.48);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:color .18s}
+.gate-eyebtn:hover{color:var(--lime)}
+.gate-eyebtn:focus-visible{outline:1px solid var(--lime);outline-offset:-1px}
+.gate-eyebtn svg{width:19px;height:19px;display:block;pointer-events:none}
+.gate-eyebtn .ic-off{display:none}
+.gate-eyebtn.on{color:var(--lime)}
+.gate-eyebtn.on .ic-on{display:none}
+.gate-eyebtn.on .ic-off{display:block}
+#pw-error{margin-top:12px;font-size:11px;color:#ff7a7a;opacity:0;transition:opacity .2s;text-align:center}
+
+
+/* ---- project page concept mockup (RFP 7.3) ---- */
+.mockwrap{display:grid;grid-template-columns:340px 1fr;gap:34px;margin-top:16px;align-items:start}
+.browser{border:1px solid rgba(9,9,9,.22);background:#fff}
+.br-bar{display:flex;align-items:center;gap:6px;padding:7px 10px;background:#E4E0D6;border-bottom:1px solid rgba(9,9,9,.16)}
+.br-dot{width:7px;height:7px;border-radius:50%;background:rgba(9,9,9,.24)}
+.br-url{flex:1;margin-left:6px;background:#fff;border:1px solid rgba(9,9,9,.14);font-size:7.5px;letter-spacing:.02em;color:rgba(9,9,9,.5);padding:3px 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.br-body{padding:0}
+
+.mk{position:relative;border-bottom:1px solid rgba(9,9,9,.1);padding:9px 12px}
+.mk:last-child{border-bottom:none}
+.mk-pin{position:absolute;top:8px;right:8px;width:15px;height:15px;border-radius:50%;background:var(--purple);color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--fg)}
+.mk-eyebrow{font-size:6.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(9,9,9,.42);margin-bottom:4px}
+.mk-hl{height:8px;background:rgba(9,9,9,.78);margin-bottom:4px}
+.mk-hl.w80{width:80%}.mk-hl.w60{width:60%}.mk-hl.w45{width:45%}
+.mk-tx{height:3px;background:rgba(9,9,9,.17);margin-bottom:3px}
+.mk-tx.w90{width:90%}.mk-tx.w70{width:70%}.mk-tx.w55{width:55%}.mk-tx.w35{width:35%}
+.mk-chips{display:flex;gap:4px;margin-top:6px}
+.mk-chip{height:9px;width:34px;border:1px solid rgba(9,9,9,.3);background:rgba(9,9,9,.04)}
+.mk-chip.lit{background:var(--purple);border-color:var(--purple)}
+.mk-hero{background:rgba(9,9,9,.86);padding:12px 12px}
+.mk-hero .mk-eyebrow{color:rgba(255,255,255,.5)}
+.mk-hero .mk-hl{background:rgba(255,255,255,.92)}
+.mk-hero .mk-chip{border-color:rgba(255,255,255,.42);background:rgba(255,255,255,.1)}
+.mk-hero .mk-chip.lit{background:var(--lime);border-color:var(--lime)}
+.mk-stat{text-align:center;padding:12px 12px;background:var(--pl)}
+.mk-stat-n{font-family:var(--ff);font-size:30px;font-weight:700;color:var(--purple);line-height:1}
+.mk-stat-c{font-size:7px;letter-spacing:.12em;text-transform:uppercase;color:rgba(9,9,9,.5);margin-top:4px}
+.mk-two{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.mk-box{border:1px solid rgba(9,9,9,.22);padding:7px 8px;background:rgba(9,9,9,.02)}
+.mk-box .mk-eyebrow{color:var(--purple);font-size:6px;margin-bottom:4px}
+.mk-three{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.mk-card{border:1px solid rgba(9,9,9,.16);padding:6px;background:rgba(9,9,9,.02)}
+.mk-bar{height:14px;background:rgba(9,9,9,.1);margin-bottom:4px;position:relative}
+.mk-bar::after{content:'';position:absolute;left:0;bottom:0;width:62%;height:100%;background:var(--purple);opacity:.55}
+.mk-rail{display:flex;gap:5px}
+.mk-rail div{flex:1;height:22px;border:1px solid rgba(9,9,9,.16);background:rgba(9,9,9,.03)}
+.mk-cta{display:flex;gap:7px}
+.mk-btn{flex:1;height:17px;background:var(--purple)}
+.mk-btn.alt{background:transparent;border:1px solid var(--purple)}
+
+.pinlist{display:grid;grid-template-columns:1fr 1fr;gap:9px 20px}
+.pin{display:grid;grid-template-columns:17px 1fr;gap:9px;align-items:start}
+.pin-n{width:15px;height:15px;border-radius:50%;background:var(--purple);color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.pin-h{font-weight:700;font-size:11.5px;margin-bottom:2px;line-height:1.2}
+.pin-b{font-size:10.5px;line-height:1.45;color:rgba(9,9,9,.62)}
+
+/* ---- case study cards (RFP 7.1 / 7.2) ---- */
+.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.cs-card{border:1px solid var(--bd);padding:17px 16px;display:flex;flex-direction:column}
+.cream .cs-card{border-color:var(--bl);background:rgba(255,255,255,.45)}
+.cs-org{font-family:var(--ff);font-size:19px;font-weight:600;font-style:italic;line-height:1.15;margin-bottom:3px}
+.cs-sector{font-size:8.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);margin-bottom:11px}
+.cream .cs-sector{color:var(--purple)}
+.cs-lbl{font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42);margin:9px 0 3px}
+.cream .cs-lbl{color:rgba(9,9,9,.42)}
+.cs-tx{font-size:11.5px;line-height:1.5;color:rgba(255,255,255,.72)}
+.cream .cs-tx{color:rgba(9,9,9,.7)}
+.cs-fill{margin-top:auto;padding-top:11px}
+.fillme{display:block;border:1px dashed #C0392B;background:rgba(192,57,43,.07);color:#C0392B;font-size:10px;line-height:1.4;padding:7px 9px;font-weight:600}
+
+@media(max-width:760px){
+  #pw-gate{justify-content:flex-start;padding-top:11vh}
+  .slide{padding:40px 22px 90px}
+  .fn{left:22px}
+  .split{grid-template-columns:1fr;gap:22px;min-height:0}
+  .split-img{height:34vh}
+  .statrow,.cols2{grid-template-columns:1fr}
+  .team-cards,.team-cards.c3{grid-template-columns:1fr 1fr}
+  .menu-grid{grid-template-columns:1fr}
+  .arrow{display:none}
+  h1.big{font-size:29px}
+  .caps-cols{grid-template-columns:1fr}
+  .mockwrap{grid-template-columns:1fr}
+  .pinlist{grid-template-columns:1fr}
+  .cs-grid{grid-template-columns:1fr}
+  .g-hdr,.g-row{grid-template-columns:110px repeat(24,1fr)}
+  .g-lbl{font-size:9px}
+  .imgfull .fg{padding:40px 22px 60px}
+}
+
+@media print{
+  @page{size:11in 8.5in;margin:0}
+  html,body{overflow:visible;height:auto;background:var(--black)}
+  .topbar,.chrome,.progress,.arrow,.counter,.hint,.menu-bg,#pw-gate,.modal-bg{display:none!important}
+  .deck{position:static}
+  .track{display:block;transform:none!important;height:auto}
+
+  /* ROOT FIX 1 — re-assert the desktop grids.
+     The @media(max-width:760px) block above was winning during PDF export and
+     collapsing every multi-column set into a single stack. That is what pushed
+     the split images, the dual-read panels, and the services columns onto
+     phantom second pages. These declarations lock the desktop layout for print. */
+  .split{grid-template-columns:1.05fr .95fr;gap:48px;min-height:0}
+  .split-img{height:5in}
+  .cols2{grid-template-columns:1fr 1fr}
+  .statrow{grid-template-columns:repeat(3,1fr)}
+  .caps-cols{grid-template-columns:repeat(3,1fr)}
+  .team-cards{grid-template-columns:repeat(4,1fr)}
+  .team-cards.c3{grid-template-columns:repeat(3,1fr)}
+  .menu-grid{grid-template-columns:repeat(4,1fr)}
+  .g-hdr,.g-row{grid-template-columns:220px repeat(24,1fr)}
+  .g-lbl{font-size:11px}
+  .center{min-height:0}
+  .fn{left:56px}
+  h1.big{font-size:44px}
+  .mockwrap{grid-template-columns:340px 1fr;gap:34px}
+  .pinlist{grid-template-columns:1fr 1fr}
+  .cs-grid{grid-template-columns:repeat(3,1fr)}
+  .mk-two{grid-template-columns:1fr 1fr}
+  .mk-three{grid-template-columns:repeat(3,1fr)}
+  .bigquote{font-size:40px}
+  .arrow{display:none}
+
+  /* ROOT FIX 2 — one slide is exactly one page.
+     Fixed height plus hidden overflow makes each slide an atomic box that
+     cannot fragment, so no slide can ever spill a stray line onto a new page.
+     min-height allowed growth; height does not. */
+  .slide{
+    width:100%;
+    height:8.5in;min-height:0;max-height:8.5in;
+    overflow:hidden;
+    page-break-after:always;break-after:page;
+    page-break-inside:avoid;break-inside:avoid;
+    padding:44px 56px
+  }
+
+  /* ROOT FIX 3 — kill the trailing blank page.
+     page-break-after:always on the final slide was generating an empty page 43. */
+  .slide:last-child{page-break-after:auto;break-after:auto}
+
+  /* Full-bleed image slides pinned to exactly one page so the background
+     layer cannot stretch past the page box. */
+  .slide.imgfull{padding:0;height:8.5in;max-height:8.5in;overflow:hidden;position:relative}
+  .imgfull .bg,.imgfull .ov{position:absolute;inset:0}
+  .imgfull .fg{height:8.5in;min-height:0;justify-content:flex-end;padding:60px 64px 70px}
+
+  /* print-only rhythm trim so the dense pricing slide stays on one page */
+  table{margin-top:16px;font-size:12.5px}
+  th{padding:9px 14px}
+  td{padding:8px 14px}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .tcard-cta{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="pw-gate">
+  <img class="gate-logo" src="https://www.ghostnoteagency.com/wp-content/uploads/2022/02/GN_2020_Logo-horizontal-small-1.png" alt="Ghost Note">
+  <div class="gate-eye">Confidential Proposal · 2026</div>
+  <div class="gate-h">Food is Medicine Institute <em>× Ghost Note</em></div>
+  <div class="gate-sub">This proposal is password protected. Enter the password shared with you to continue.</div>
+  <div class="gate-form">
+    <input id="pw-input" type="password" placeholder="••••••••••" autocomplete="current-password" spellcheck="false" onkeydown="if(event.key==='Enter')pwSubmit()">
+    <button type="button" class="gate-eyebtn" id="pw-toggle" onclick="togglePw()" aria-label="Show password" aria-pressed="false" title="Show password"><svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.8 12S5.4 5 12 5s10.2 7 10.2 7-3.6 7-10.2 7S1.8 12 1.8 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.9 5.2A9.6 9.6 0 0 1 12 5c6.6 0 10.2 7 10.2 7a17.6 17.6 0 0 1-3.4 4.3"/><path d="M6.4 6.5A17.4 17.4 0 0 0 1.8 12S5.4 19 12 19a9.7 9.7 0 0 0 4.3-1"/><path d="M10 10a3 3 0 0 0 4.2 4.2"/><path d="m3 3 18 18"/></svg></button>
+    <button type="button" class="gate-go" onclick="pwSubmit()" aria-label="Enter">→</button>
+  </div>
+  <div id="pw-error">That's not it. Try again.</div>
+</div>
+
+<div class="topbar"></div>
+<div class="chrome">
+  <div class="chrome-bar">
+    <div class="ch-logo"><img src="https://www.ghostnoteagency.com/wp-content/uploads/2022/02/GN_2020_Logo-horizontal-small-1.png" alt="Ghost Note"></div>
+    <div class="ch-title">FIMI Website Redesign · A Proposal for the Food is Medicine Institute at Tufts University</div>
+    <div class="ch-right">
+      <button class="ch-btn" onclick="savePDF(this)">Save as PDF</button>
+      <button class="ch-btn" onclick="toggleMenu()">Menu ▾</button>
+    </div>
+  </div>
+</div>
+<div class="progress" id="progress"></div>
+<div class="menu-bg" id="menu"><div class="menu-grid" id="menu-grid"></div></div>
+
+<div class="deck"><div class="track" id="track">
+
+<!-- 1 COVER : full-bleed FIMI hero -->
+<section class="slide imgfull" data-title="Cover">
+  <div class="bg" style="background-image:url('https://tuftsfoodismedicine.org/wp-content/uploads/2023/01/Hero-2.jpg')"></div>
+  <div class="ov"></div>
+  <div class="fg">
+    <div class="eye" style="margin-bottom:16px">A Proposal for the Food is Medicine Institute · Tufts University</div>
+    <h1 class="big" style="font-size:clamp(42px,6vw,74px);margin-bottom:16px">Food is Medicine Institute<br><em>× Ghost Note.</em></h1>
+    <p class="lead" style="color:rgba(255,255,255,.85)">Website redesign. Prepared with care, July 2026.</p>
+    <div class="statrow" style="max-width:820px">
+      <div class="stat"><div class="stat-lbl">Timeline</div><div class="stat-v">Aug 2026 to Jan 2027</div></div>
+      <div class="stat"><div class="stat-lbl">Prepared for</div><div class="stat-v">Julia Sharib and the FIMI team</div></div>
+      <div class="stat"><div class="stat-lbl">Investment</div><div class="stat-v">$186,000 fixed fee</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 OPENING -->
+<section class="slide cream" data-title="Why we're here"><div class="inner">
+  <div class="eye">01 · Why we're here</div>
+  <h1 class="big">You have the evidence.<br><em>The site is the bottleneck.</em></h1>
+  <p class="lead">FIMI's research makes one of the strongest health economics cases in the country. It just isn't landing where it needs to. The people who can act on this work, the health system executive and the legislative staffer, arrive at a site built for a different reader entirely.</p>
+  <p class="lead">We want to build the version of this site where the argument makes itself.</p>
+  <div class="statrow">
+    <div class="stat"><div class="stat-n" data-count="24" data-prefix="$" data-suffix="B">$24B</div><div class="stat-t">saved annually if all eligible patients received medically tailored meals</div></div>
+    <div class="stat"><div class="stat-n" data-count="20" data-suffix="%">20%</div><div class="stat-t">of hospitalizations averted for adults receiving medically tailored meals for six months</div></div>
+    <div class="stat"><div class="stat-n" data-count="121" data-suffix="K">121K</div><div class="stat-t">cardiovascular events preventable through produce prescriptions over ten years</div></div>
+  </div>
+</div></section>
+
+<!-- 3 HUMAN INTERLUDE : produce image -->
+<section class="slide imgfull" data-title="What's at stake">
+  <div class="bg" style="background-image:url('https://cdn.sanity.io/images/ec9j7ju7/production/f6f10b735cf1c9c7bb494d56af0af099dfd823a5-3884x2594.jpg?w=3840&q=75&fit=clip&auto=format')"></div>
+  <div class="ov"></div>
+  <div class="fg">
+    <div class="eye" style="margin-bottom:18px">Why this matters</div>
+    <div class="bigquote">Behind every dataset on this site is a meal on someone's table, a diagnosis that went differently, a family that got more time.</div>
+    <p class="lead" style="margin-top:18px;color:rgba(255,255,255,.8)">That's the story the numbers are carrying. The new site has to let people feel it, not just file it.</p>
+  </div>
+</section>
+
+<!-- 4 AUDIT INTRO -->
+<section class="slide dark" data-title="The audit"><div class="inner split">
+  <div>
+    <div class="eye">02 · The audit</div>
+    <h1 class="big">Before we wrote a word,<br><em>we went through your site.</em></h1>
+    <p class="lead">Not a skim. We went page by page through tuftsfoodismedicine.org, the homepage, the projects listing, individual project pages, the nav on every template, and the code underneath it all. Everything on the next two slides is a specific, verifiable observation from that pass.</p>
+    <p class="lead">We're sharing it because you asked for a thought partner, not a vendor. Thought partnership starts with doing the homework.</p>
+  </div>
+  <div><div class="split-img" style="background-image:url('https://tuftsfoodismedicine.org/wp-content/uploads/2023/01/Hero-1.jpg')"></div><div class="imgcap">The one photo doing the work of four on your current homepage</div></div>
+</div></section>
+
+<!-- 5 AUDIT PART 1 -->
+<section class="slide d2" data-title="Audit: the front door"><div class="inner">
+  <div class="eye">02 · The audit</div>
+  <h1 class="big">What we found<br><em>at the front door.</em></h1>
+  <div class="rows">
+    <div class="row"><div class="row-n">01</div><div><div class="row-h">Four hero cards, one identical image</div><div class="row-b">The homepage rotates four hero panels, About, Projects, Updates, and Partners, and all four load the exact same photo file. The page is telling a first-time visitor that everything matters equally, and it's saying it with identical art. Nothing signals where a healthcare leader or a policymaker should go.</div></div></div>
+    <div class="row"><div class="row-n">02</div><div><div class="row-h">Your strongest content is buried</div><div class="row-b">The FIM Facts stats, 85% of healthcare spending, the $24B figure, the 49% hospitalization reduction, are the most persuasive things on the entire site. They sit near the bottom of the homepage as static text, with the full fact sheet locked inside a PDF download. That's your lead argument, hidden.</div></div></div>
+    <div class="row"><div class="row-n">03</div><div><div class="row-h">Eight nav items, no orientation, one dead link</div><div class="row-b">The top nav carries eight flat items with no hierarchy and no guidance. "Partners" goes nowhere on its own, it only opens a dropdown. And the nav isn't even consistent. The submenu items change depending on which page you're on. The Federal Nutrition Advisory Coalition appears in the Partners menu on some pages and vanishes on others.</div></div></div>
+    <div class="row"><div class="row-n">04</div><div><div class="row-h">Your best tool lives on a different site</div><div class="row-b">The FIM Toolkit, probably the single most actionable asset for a clinician or health system, sits on a separate subdomain with no integrated presence. Your most conversion-ready resource is a departure point, not a destination.</div></div></div>
+  </div>
+</div></section>
+
+<!-- 6 AUDIT PART 2 -->
+<section class="slide d2" data-title="Audit: under the hood"><div class="inner">
+  <div class="eye">02 · The audit</div>
+  <h1 class="big">What we found<br><em>underneath.</em></h1>
+  <div class="rows">
+    <div class="row"><div class="row-n">05</div><div><div class="row-h">Project pages speak grant, not decision</div><div class="row-b">Take your Medically Tailored Meal Interventions page. The headline is the grant title. The body opens with study design, then Aim One through Aim Four in nested academic lists, some with visibly broken numbering. Publications appear as raw citations. The only way to engage is a mailto link to one staff member's personal email. There isn't a single image, chart, or plain-language takeaway on the page. A hospital COO closes that tab in fifteen seconds.</div></div></div>
+    <div class="row"><div class="row-n">06</div><div><div class="row-h">A taxonomy exists, but it speaks researcher</div><div class="row-b">The projects listing has real filters, which tells us someone on your team cared about this. But the categories are "Intervention Study / Evaluation" and "Cardiometabolic Disease," and every card wears a long string of dot-separated tags that mean nothing to your two primary audiences. One listing card even leaks raw unformatted body text straight into the grid. The bones are there. The audience logic isn't.</div></div></div>
+    <div class="row"><div class="row-n">07</div><div><div class="row-h">Accessibility has a real problem, today</div><div class="row-b">The site's viewport settings disable pinch-to-zoom on mobile. That's not a style choice, it's a barrier for low-vision visitors, and it conflicts with WCAG 2.1 AA, the exact standard your RFP requires. It should be fixed no matter who wins this work.</div></div></div>
+    <div class="row"><div class="row-n">08</div><div><div class="row-h">Technical debt is quietly taxing you</div><div class="row-b">Images serve from two domains at once, the public site and the raw Pantheon URL. At least one key page declares an http canonical instead of https. Small things individually. Together they cost performance, dilute search authority, and suggest nobody's minding the store between your site and Google.</div></div></div>
+  </div>
+  <p class="small" style="margin-top:16px">And to be clear, none of this is a knock on the 2023 build. It did its job for a brand new institute, and someone on your team clearly cared about it. The Institute simply outgrew it. That's a good problem, and it's the reason this project exists.</p>
+</div></section>
+
+<!-- 7 CORE PROBLEM -->
+<section class="slide purple" data-title="The core problem"><div class="inner center">
+  <div class="eye">02 · The audit</div>
+  <h1 class="big" style="font-size:clamp(38px,5vw,64px)">It's a repository.<br><em>It needs to be an argument.</em></h1>
+  <p class="lead" style="color:rgba(255,255,255,.85)">A repository organizes what exists. An argument moves someone toward a decision.</p>
+  <p class="lead" style="color:rgba(255,255,255,.85)">Everything on your current site is accurate. Almost none of it is arranged to persuade. There's no synthesis layer, no through-line from a clinical trial result to "here's why your health system should pilot this in Q1," no version of the research written for someone who will never read a methods section.</p>
+  <p class="lead" style="color:rgba(255,255,255,.85)"><b style="color:#fff">That gap is the whole project.</b></p>
+</div></section>
+
+<!-- 8 FOUR JOBS -->
+<section class="slide dark" data-title="Four jobs"><div class="inner">
+  <div class="eye">02 · The audit</div>
+  <h1 class="big">The new site has four jobs.<br><em>In this order.</em></h1>
+  <div class="rows">
+    <div class="row"><div class="row-n">01</div><div><div class="row-h">Establish</div><div class="row-b">Before a visitor scrolls, they should know FIMI is the source on food is medicine, not one more voice in the field. First screen. No exceptions.</div></div></div>
+    <div class="row"><div class="row-n">02</div><div><div class="row-h">Translate</div><div class="row-b">Every project, publication, and finding gets a plain-language read written for a decision-maker. The science stays rigorous. The framing stops assuming a PhD.</div></div></div>
+    <div class="row"><div class="row-n">03</div><div><div class="row-h">Connect</div><div class="row-b">A visitor should never hit a dead end. Every page opens into related evidence, related people, and related tools, powered by taxonomy rather than maintained by hand.</div></div></div>
+    <div class="row"><div class="row-n">04</div><div><div class="row-h">Convert</div><div class="row-b">Each audience gets a specific next step in their own language. "Talk to us about piloting this." "Request a policy briefing." Not one shared contact form for everyone.</div></div></div>
+  </div>
+</div></section>
+
+<!-- 9 ORGANIZING PRINCIPLE -->
+<section class="slide cream" data-title="Our organizing principle"><div class="inner">
+  <div class="eye">03 · Our approach</div>
+  <h1 class="big">Two readers.<br><em>One site.</em></h1>
+  <p class="lead">Your RFP names two primary audiences, and most redesigns will answer that with two landing pages and call it segmentation. We think that fails, because people don't enter through the front door. They land on a project page from a Google search or a colleague's forwarded link.</p>
+  <p class="lead"><b>So the audience split doesn't live in the navigation. It lives inside the page templates.</b></p>
+  <p class="lead">Every substantive page carries a dual read: what this means if you run a health system, and what this means if you write policy. Same evidence, two translations, side by side. A visitor self-selects in one glance, on whatever page a search engine dropped them.</p>
+  <div class="cols2">
+    <div class="panel"><div class="panel-tag">If you run a health system</div><div class="panel-h">Cost, utilization, feasibility.</div><ul><li>What this evidence means for your cost curve and readmission rates</li><li>What implementing it actually took: setting, population, duration, partners</li><li>A direct path to pilot or scale with FIMI's support</li></ul></div>
+    <div class="panel"><div class="panel-tag">If you write policy</div><div class="panel-h">Evidence, precedent, levers.</div><ul><li>Eligible population and projected budget impact, ready to cite</li><li>Where this evidence has already shaped legislation, regulation, or guidance</li><li>A direct path to a briefing or technical assistance</li></ul></div>
+  </div>
+</div></section>
+
+<!-- 10 TWO JOURNEYS -->
+<section class="slide dark" data-title="The two journeys"><div class="inner">
+  <div class="eye">03 · Our approach</div>
+  <h1 class="big">Two clicks.<br><em>Every time.</em></h1>
+  <p class="lead">Your brief defines the ideal journey for each audience. Here's how the architecture delivers it, from any entry point, not just the homepage.</p>
+  <div class="cols2">
+    <div class="panel"><div class="panel-tag">The healthcare leader</div><div class="panel-h">Lands, understands, acts.</div><ul>
+      <li><b>Lands.</b> Poor diet is driving costs and outcomes, and food is medicine is a proven, scalable response. That's the first screen.</li>
+      <li><b>Click one.</b> The Impact hub, filtered to cost and utilization outcomes, in executive language.</li>
+      <li><b>Click two.</b> A project page with real-world implementation detail, the tools to act, and relevant partner examples.</li>
+      <li><b>Acts.</b> Requests a conversation about piloting or scaling a FIM program.</li>
+    </ul></div>
+    <div class="panel"><div class="panel-tag">The policymaker</div><div class="panel-h">Lands, trusts, cites.</div><ul>
+      <li><b>Lands.</b> FIMI is the credible, nonpartisan academic authority on food is medicine. Unmistakable, immediately.</li>
+      <li><b>Click one.</b> The Policy hub: evidence summaries written for a policy audience, legislation rooted in FIMI research.</li>
+      <li><b>Click two.</b> A specific brief, testimony, or public comment, with the underlying evidence one tap away.</li>
+      <li><b>Acts.</b> Requests a briefing, accesses tools, or engages FIMI for technical assistance.</li>
+    </ul></div>
+  </div>
+  <div class="fn">Responds to the audience journeys in RFP section 3</div>
+</div></section>
+
+<!-- 11 SAMPLE PAGE INTRO -->
+<section class="slide purple" data-title="Sample page concept"><div class="inner center">
+  <div class="eye">04 · Design thinking</div>
+  <h1 class="big" style="font-size:clamp(38px,5vw,60px)">You asked for one page.<br><em>We picked the hardest one.</em></h1>
+  <p class="lead" style="color:rgba(255,255,255,.85)">You asked every vendor to redesign one project page as proof of design thinking. We chose the project page precisely because it's where the gap is widest. These pages hold the most valuable content on your site, and they're the least ready to be read by the people you're trying to reach.</p>
+  <p class="lead" style="color:rgba(255,255,255,.85)">We used your Medically Tailored Meal Interventions page as the test case. Here's how we'd rebuild it.</p>
+  <div class="fn">This section is our response to RFP 7.3, the required sample page concept</div>
+</div></section>
+
+<!-- 12 PROJECT PAGE CONCEPT : the visual -->
+<section class="slide cream" data-title="Project page: the concept"><div class="inner">
+  <div class="eye">04 · Design thinking</div>
+  <h1 class="big">Structure first.<br><em>Here's the shape of it.</em></h1>
+  <div class="mockwrap">
+
+    <div class="browser">
+      <div class="br-bar">
+        <div class="br-dot"></div><div class="br-dot"></div><div class="br-dot"></div>
+        <div class="br-url">tuftsfoodismedicine.org / projects / medically-tailored-meal-interventions</div>
+      </div>
+      <div class="br-body">
+
+        <div class="mk mk-hero">
+          <div class="mk-pin">1</div>
+          <div class="mk-eyebrow">Grant title, demoted to an eyebrow</div>
+          <div class="mk-hl w80"></div>
+          <div class="mk-hl w60"></div>
+          <div class="mk-chips">
+            <div class="mk-chip lit"></div><div class="mk-chip"></div><div class="mk-chip"></div>
+          </div>
+        </div>
+
+        <div class="mk mk-stat">
+          <div class="mk-pin">2</div>
+          <div class="mk-stat-n">49%</div>
+          <div class="mk-stat-c">Sourced · links to the publication</div>
+        </div>
+
+        <div class="mk">
+          <div class="mk-pin">3</div>
+          <div class="mk-two">
+            <div class="mk-box">
+              <div class="mk-eyebrow">If you run a health system</div>
+              <div class="mk-tx w90"></div><div class="mk-tx w70"></div><div class="mk-tx w55"></div>
+            </div>
+            <div class="mk-box">
+              <div class="mk-eyebrow">If you write policy</div>
+              <div class="mk-tx w90"></div><div class="mk-tx w70"></div><div class="mk-tx w55"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mk">
+          <div class="mk-pin">4</div>
+          <div class="mk-eyebrow">What we found</div>
+          <div class="mk-three">
+            <div class="mk-card"><div class="mk-bar"></div><div class="mk-tx w90"></div><div class="mk-tx w55"></div></div>
+            <div class="mk-card"><div class="mk-bar"></div><div class="mk-tx w90"></div><div class="mk-tx w55"></div></div>
+            <div class="mk-card"><div class="mk-bar"></div><div class="mk-tx w90"></div><div class="mk-tx w55"></div></div>
+          </div>
+        </div>
+
+        <div class="mk">
+          <div class="mk-pin">5</div>
+          <div class="mk-eyebrow">How it worked in practice</div>
+          <div class="mk-tx w90"></div><div class="mk-tx w90"></div><div class="mk-tx w35"></div>
+        </div>
+
+        <div class="mk">
+          <div class="mk-pin">6</div>
+          <div class="mk-eyebrow">Connected content · populated by taxonomy</div>
+          <div class="mk-rail"><div></div><div></div><div></div><div></div></div>
+        </div>
+
+        <div class="mk">
+          <div class="mk-pin">7</div>
+          <div class="mk-cta"><div class="mk-btn"></div><div class="mk-btn alt"></div></div>
+        </div>
+
+        <div class="mk">
+          <div class="mk-pin">8</div>
+          <div class="mk-eyebrow">Related projects · shared focus area</div>
+          <div class="mk-rail"><div></div><div></div><div></div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="pinlist">
+        <div class="pin"><div class="pin-n">1</div><div><div class="pin-h">Outcome hero</div><div class="pin-b">The finding, in plain language. The grant title shrinks to an eyebrow. Focus-area chips and status sit below.</div></div></div>
+        <div class="pin"><div class="pin-n">2</div><div><div class="pin-h">One number</div><div class="pin-b">Counts up on scroll, sourced, linked to the paper. Chosen by one test: would a CFO stop.</div></div></div>
+        <div class="pin"><div class="pin-n">3</div><div><div class="pin-h">The dual read</div><div class="pin-b">Both audiences served side by side, high on the page. The module that makes the whole site work.</div></div></div>
+        <div class="pin"><div class="pin-n">4</div><div><div class="pin-h">What we found</div><div class="pin-b">Three or four findings as scannable cards with a chart or callout. Replaces the abstract.</div></div></div>
+        <div class="pin"><div class="pin-n">5</div><div><div class="pin-h">How it worked</div><div class="pin-b">Setting, population, duration, partners, and what delivery actually took. Missing from your site today.</div></div></div>
+        <div class="pin"><div class="pin-n">6</div><div><div class="pin-h">Connected content</div><div class="pin-b">People, publications, tools, coverage. Rendered from relationship fields, maintained by nobody.</div></div></div>
+        <div class="pin"><div class="pin-n">7</div><div><div class="pin-h">The ask, in their language</div><div class="pin-b">"Talk to us about piloting this" and "Request a policy briefing." Routed with context, not a personal mailto.</div></div></div>
+        <div class="pin"><div class="pin-n">8</div><div><div class="pin-h">Related projects</div><div class="pin-b">Surfaced by shared focus area, so the visit deepens instead of ending.</div></div></div>
+      </div>
+      <p class="small" style="margin-top:15px">Structure, not styling. Type, colour, and photography get resolved against the Tufts palette in the design strategy phase, with your central marketing team in the room. What we're committing to here is the order of the argument.</p>
+    </div>
+
+  </div>
+  <div class="fn">Responds to RFP 7.3, the required sample page concept</div>
+</div></section>
+
+<!-- 12 PROJECT PAGE TOP -->
+<section class="slide cream" data-title="Project page: the top half"><div class="inner">
+  <div class="eye">04 · Design thinking</div>
+  <h1 class="big">Lead with the finding,<br><em>not the grant title.</em></h1>
+  <div class="wire">
+    <div class="wire-band"><div class="wire-n">01</div><div class="wire-c"><div class="wire-h">Outcome hero</div><div class="wire-b">Full-bleed photo or a short looping clip. The headline is what the project proved, in plain language: "Medically tailored meals cut hospitalizations for high-risk Medicaid patients." The grant title becomes a small eyebrow above it. Focus-area and program-type chips sit below, with a clear Active or Completed status.</div></div></div>
+    <div class="wire-band"><div class="wire-n">02</div><div class="wire-c"><div class="wire-h">The number</div><div class="wire-b">One statistic, set very large, counting up on scroll, sourced and linked to the publication behind it. One number per project, chosen by a single test: would this make a CFO stop scrolling. For this page, it's the hospitalization reduction.</div></div></div>
+    <div class="wire-band"><div class="wire-n">03</div><div class="wire-c"><div class="wire-h">The dual read</div><div class="wire-b">Two panels side by side. "If you run a health system" covers cost per patient, utilization change, and what running this program actually required. "If you write policy" covers the eligible population, budget impact, and which statutory or regulatory levers this evidence supports. This is the module that makes the whole site work, and it appears here first.</div></div></div>
+  </div>
+  <p class="small" style="margin-top:14px">Per your brief, this doesn't need to be a finished design, and it isn't. It's the structural argument. We'd pressure-test it with you in discovery before a pixel gets drawn.</p>
+</div></section>
+
+<!-- 13 PROJECT PAGE BOTTOM -->
+<section class="slide cream" data-title="Project page: the bottom half"><div class="inner">
+  <div class="eye">04 · Design thinking</div>
+  <h1 class="big">Then the evidence.<br><em>Then the door.</em></h1>
+  <div class="wire">
+    <div class="wire-band"><div class="wire-n">04</div><div class="wire-c"><div class="wire-h">What we found</div><div class="wire-b">Three or four findings as scannable cards, each with a small chart or data callout. This replaces the abstract. It doesn't reprint it.</div></div></div>
+    <div class="wire-band"><div class="wire-n">05</div><div class="wire-c"><div class="wire-h">How it worked in practice</div><div class="wire-b">Setting, population, duration, delivery partners, and what implementation took day to day. This is the section a director of population health reads before deciding whether to email you. Today it doesn't exist anywhere on your site.</div></div></div>
+    <div class="wire-band"><div class="wire-n">06</div><div class="wire-c"><div class="wire-h">Connected content</div><div class="wire-b">A taxonomy-driven rail that automatically surfaces this project's team members, the publications it produced, related resources and toolkits, news coverage, and video. Nobody maintains this by hand. It populates itself from relationship fields.</div></div></div>
+    <div class="wire-band"><div class="wire-n">07</div><div class="wire-c"><div class="wire-h">The ask, in their language</div><div class="wire-b">Two calls to action, not one generic contact link and definitely not a staffer's personal mailto. "Talk to us about piloting this" and "Request a policy briefing." Each routes to the right person on your team with context attached.</div></div></div>
+    <div class="wire-band"><div class="wire-n">08</div><div class="wire-c"><div class="wire-h">Related projects</div><div class="wire-b">Surfaced automatically by shared focus area, so the visit deepens instead of ending.</div></div></div>
+  </div>
+</div></section>
+
+<!-- 14 40-WORD RULE -->
+<section class="slide dark" data-title="The 40-word rule"><div class="inner center">
+  <div class="eye">04 · Design thinking</div>
+  <h1 class="big">One required field<br><em>changes everything.</em></h1>
+  <p class="lead">Every project gets a mandatory plain-language summary, capped at roughly 40 words, written for someone with zero nutrition science background. The CMS won't let a project publish without it.</p>
+  <p class="lead">That single constraint does more for your two primary audiences than any visual decision on any page. It forces the translation to happen once, at the source, instead of being reinvented on every collection page, search result, and related-content card.</p>
+  <p class="lead">It's small to build and real to commit to. We'd rather name that now than surprise you with it in October.</p>
+</div></section>
+
+<!-- 15 WORDPRESS -->
+<section class="slide cream" data-title="CMS recommendation"><div class="inner">
+  <div class="eye">05 · The build</div>
+  <h1 class="big">WordPress.<br><em>And it isn't close.</em></h1>
+  <p class="lead">You asked vendors to make a case rather than state a preference. Here's ours, and it starts with something we confirmed in the audit: your current site already runs WordPress on the Tufts Pantheon account.</p>
+  <div class="rows">
+    <div class="row"><div class="row-n">A</div><div><div class="row-h">Re-platforming is your biggest avoidable risk</div><div class="row-b">Choosing Drupal means a full platform migration stacked on top of a full redesign, on a five-month runway, through the December holidays. Nothing in your requirements justifies taking that on.</div></div></div>
+    <div class="row"><div class="row-n">B</div><div><div class="row-h">Your own primary consideration decides it</div><div class="row-b">You said non-technical staff self-sufficiency matters most. Your team already knows the WordPress admin. Drupal means redesigning the site and retraining every editor in the same quarter. WordPress means launch day feels familiar, just dramatically better.</div></div></div>
+    <div class="row"><div class="row-n">C</div><div><div class="row-h">The taxonomy requirement doesn't need Drupal</div><div class="row-b">The usual argument for Drupal is complex content modeling. Custom post types with shared taxonomies and bidirectional relationship fields handle all eight of your content types cleanly. We spell out how, two slides from now.</div></div></div>
+    <div class="row"><div class="row-n">D</div><div><div class="row-h">Pantheon stays exactly as Tufts knows it</div><div class="row-b">Same dev, test, and live workflow. Multidev branches for review. We work inside that structure from day one and hand it back to Tufts the way we found it, minus the split-domain asset issue, which we fix.</div></div></div>
+  </div>
+  <div class="fn">Responds to the CMS recommendation and Pantheon requirements in RFP 4.2 and 7.4</div>
+</div></section>
+
+<!-- 16 EDITORIAL -->
+<section class="slide dark" data-title="Editorial experience"><div class="inner">
+  <div class="eye">05 · The build</div>
+  <h1 class="big">A locked block library.<br><em>Not a page builder.</em></h1>
+  <p class="lead">We build on the native WordPress block editor with a custom library of locked, brand-compliant blocks. Your team assembles pages from approved components. They can't accidentally break a layout, and they never touch code.</p>
+  <p class="lead">We deliberately avoid third-party page builders. They create more ways to break a design than they solve, they slow pages down, and they leave you holding a licensing dependency after we're gone.</p>
+  <div class="cols2">
+    <div class="panel"><div class="panel-tag">What day to day looks like</div><div class="panel-h">Fill a form. Tag. Publish.</div><ul>
+      <li>Adding a publication: paste the citation, write the summary, tag the related project and team members, publish</li>
+      <li>Every connected page updates itself. The project page, the author profiles, the collection filters, all of it</li>
+      <li>Homepage stats, spotlight, and news modules editable as simple fields, no layout risk</li>
+    </ul></div>
+    <div class="panel"><div class="panel-tag">Guardrails built in</div><div class="panel-h">Safe by default.</div><ul>
+      <li>Locked blocks enforce Tufts brand rules automatically: colors, type, spacing</li>
+      <li>The 40-word plain-language summary is a required field, enforced at publish</li>
+      <li>Alt text prompts and heading-order checks keep accessibility from drifting after launch</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<!-- 17 TAXONOMY -->
+<section class="slide d2" data-title="Taxonomy engine"><div class="inner">
+  <div class="eye">05 · The build</div>
+  <h1 class="big">Tag once.<br><em>Surface everywhere.</em></h1>
+  <p class="lead">The interconnectivity requirement is the spine of this build. Eight content types, connected by shared taxonomies and true bidirectional relationships.</p>
+  <table>
+    <tr><th>Layer</th><th>How we build it</th></tr>
+    <tr><td style="font-weight:700;color:#fff">Content types</td><td>Custom post types for Projects, Publications, Team Members, Resources, News and Media, Events, and Videos, each with purpose-built fields</td></tr>
+    <tr><td style="font-weight:700;color:#fff">Shared taxonomies</td><td>Focus Area (your six), Program Type, Audience, and Topic, applied across every content type so filtering works everywhere, not per silo</td></tr>
+    <tr><td style="font-weight:700;color:#fff">Relationships</td><td>Bidirectional relationship fields. Tag a publication to a project once and both pages update. No double entry. No orphaned links. Ever</td></tr>
+    <tr><td style="font-weight:700;color:#fff">Frontend</td><td>Related-content rails render automatically from relationships. Collection pages filter across taxonomy fields, in audience language rather than researcher language</td></tr>
+    <tr><td style="font-weight:700;color:#fff">Governance</td><td>A short taxonomy guide and a locked term list, so the vocabulary doesn't drift as staff and students rotate through</td></tr>
+  </table>
+  <p class="small" style="margin-top:14px">Worth naming: your current site already has filters, which tells us someone on your team values this. We're not introducing taxonomy to FIMI. We're rebuilding it around your audiences and making it self-maintaining.</p>
+  <div class="fn">Responds to the taxonomy and content relationship system in RFP 4.1</div>
+</div></section>
+
+<!-- 18 FINDABILITY -->
+<section class="slide dark" data-title="Findability strategy"><div class="inner">
+  <div class="eye">05 · The build</div>
+  <h1 class="big">Search, navigation, and tags<br><em>as one system.</em></h1>
+  <p class="lead">The findability strategy is a required discovery deliverable, and we build it as one document covering four connected layers.</p>
+  <div class="rows">
+    <div class="row"><div class="row-n">01</div><div><div class="row-h">Site search that understands intent</div><div class="row-b">Weighted indexing so plain-language summaries and titles outrank body text, with taxonomy-aware facets on the results page. A staffer searching "produce prescription evidence" gets the policy brief and trial results first, not an old news post that happens to contain both words. A health executive searching "medically tailored meal cost data" lands on cost evidence, ranked by relevance to their world.</div></div></div>
+    <div class="row"><div class="row-n">02</div><div><div class="row-h">Lateral movement through taxonomy</div><div class="row-b">Tags and filters let a visitor move sideways, from a project to its publications to the people behind it, without ever returning to the top nav. The related-content rails do the navigating for them.</div></div></div>
+    <div class="row"><div class="row-n">03</div><div><div class="row-h">Audience entry points from anywhere</div><div class="row-b">Persistent pathways for both primary audiences, reachable from any page, not just the homepage. The dual-read module doubles as a navigation device. Wherever you land, your lane is one click away.</div></div></div>
+    <div class="row"><div class="row-n">04</div><div><div class="row-h">A mega-menu that orients</div><div class="row-b">Eight flat items become a structured mega-menu with a one-line orientation statement at the top of each dropdown. It's the Rockefeller device you flagged, and it's the right fix for a nav that currently changes shape from page to page.</div></div></div>
+  </div>
+  <div class="fn">Responds to the findability strategy deliverable required in the RFP scope of work</div>
+</div></section>
+
+<!-- 19 MIGRATION : split with harvest image -->
+<section class="slide cream" data-title="Content migration"><div class="inner">
+  <div class="eye">05 · The build</div>
+  <h1 class="big">Programmatic where we can.<br><em>Curated where it counts.</em></h1>
+  <table>
+    <tr><th>Content</th><th>Volume</th><th>Method</th></tr>
+    <tr><td>Publications</td><td>~200</td><td>Programmatic import from a structured export, metadata mapped to the new taxonomy, then a spot-check pass</td></tr>
+    <tr><td>News and media</td><td>~60</td><td>Programmatic, with a date and link integrity sweep</td></tr>
+    <tr><td>Projects</td><td>~30</td><td>Manual and curated. Every project gets its plain-language summary, its dual read, and fresh audience framing. This is where the redesign actually happens</td></tr>
+    <tr><td>Resources</td><td>~30</td><td>Manual, with retain, update, or retire decisions made during the audit</td></tr>
+    <tr><td>Team profiles</td><td>~25</td><td>Programmatic for names and titles, manual for the bios, photos, and relationship tagging you flagged as needing to be added</td></tr>
+    <tr><td>Videos</td><td>~15</td><td>Manual, deduplicated against the overlapping content types</td></tr>
+    <tr><td>Events</td><td>~12</td><td>Manual, with archive and retire decisions</td></tr>
+  </table>
+  <p class="lead" style="margin-top:18px">The content audit lands in week four with a recommendation for every single item. You make the final calls. Those decisions drive the critical path, which is why we put them first and why we've scoped student support against the mechanical work.</p>
+  <div class="fn">Responds to the content migration scope in RFP 4.5</div>
+</div></section>
+
+<!-- 20 A11Y PERF SEO -->
+<section class="slide dark" data-title="The non-negotiables"><div class="inner">
+  <div class="eye">05 · The build</div>
+  <h1 class="big">The non-negotiables,<br><em>handled like they matter.</em></h1>
+  <div class="rows">
+    <div class="row"><div class="row-n">01</div><div><div class="row-h">Accessibility</div><div class="row-b">WCAG 2.1 AA is the floor, built to the Tufts digital accessibility standard. Automated scanning through the whole build, plus manual keyboard and screen reader testing before launch. Contrast gets checked against the Tufts palette during design, not retrofitted after. And yes, the first fix is the pinch-zoom block we found in your current code.</div></div></div>
+    <div class="row"><div class="row-n">02</div><div><div class="row-h">Performance and Core Web Vitals</div><div class="row-b">Pantheon's Advanced Global CDN, a responsive image pipeline, and click-to-load video facades so an embedded player never blocks a page render. Data visualizations built as lightweight SVG rather than heavy charting libraries. We measure against your heaviest real templates, the video-rich and data-rich ones, because that's where Core Web Vitals actually get decided.</div></div></div>
+    <div class="row"><div class="row-n">03</div><div><div class="row-h">SEO</div><div class="row-b">One canonical https domain, which also retires the split-asset issue from the audit. Structured data for publications, events, and the organization. A keyword map built around what your audiences actually type, "medically tailored meals cost savings," "produce prescription policy," not academic phrasing. Redirects mapped one-to-one before cutover so years of accumulated authority survive the launch.</div></div></div>
+    <div class="row"><div class="row-n">04</div><div><div class="row-h">Mobile</div><div class="row-b">Designed mobile-first for the project and impact templates specifically, because a legislative staffer reads on a phone between meetings, and that's the read that matters.</div></div></div>
+  </div>
+  <div class="fn">Responds to the technical requirements in RFP 4.2</div>
+</div></section>
+
+<!-- 21 INTEGRATIONS -->
+<section class="slide d2" data-title="Modules and integrations"><div class="inner">
+  <div class="eye">05 · The build</div>
+  <h1 class="big">The connective<br><em>pieces.</em></h1>
+  <div class="cols2">
+    <div class="panel"><div class="panel-tag">Required modules</div><div class="panel-h">All in scope.</div><ul>
+      <li><b>LinkedIn feed</b> on the homepage, cached server-side so a third-party outage never slows your page</li>
+      <li><b>Mailchimp signup</b>, prominent on the homepage and repeated at natural exit points across the site</li>
+      <li><b>YouTube and Vimeo embeds</b> with lazy-loaded poster frames, fast and visually integrated</li>
+      <li><b>Google Analytics 4</b>, configured with audience-relevant conversion events, not just pageviews</li>
+      <li><b>Cookie consent</b> configured to applicable privacy regulations and Tufts policy</li>
+    </ul></div>
+    <div class="panel"><div class="panel-tag">Brand compliance</div><div class="panel-h">Confirmed.</div><ul>
+      <li>We design to the Tufts University brand guidelines, covering palette, typography, logos, lockups, cobranding, and voice</li>
+      <li>We bring Tufts central marketing into the design strategy review, before mockups exist, so university sign-off never ambushes the schedule</li>
+      <li>Your photo library leads, licensed stock fills gaps, and every page carries at least one visual element beyond text</li>
+    </ul></div>
+  </div>
+  <div class="fn">Responds to the module, integration, and brand requirements in RFP 4.3 and 4.4</div>
+</div></section>
+
+<!-- 22 INTERLUDE 2 : harvest -->
+<section class="slide imgfull" data-title="Built for the long run">
+  <div class="bg" style="background-image:url('https://onwisconsin.uwalumni.com/content/uploads/2024/02/FH-King-Harvest-2023-10-01BR-1436.jpg')"></div>
+  <div class="ov"></div>
+  <div class="fg">
+    <div class="eye" style="margin-bottom:18px">How we think about this work</div>
+    <div class="bigquote">Good infrastructure is like good soil. You build it once, honestly, and it keeps producing long after the builders have gone home.</div>
+    <p class="lead" style="margin-top:18px;color:rgba(255,255,255,.8)">Everything in the next section, the phases, the training, the support quarter, is designed for the years after we leave, not just the day we launch.</p>
+  </div>
+</section>
+
+<!-- 23 PHASES -->
+<section class="slide cream" data-title="How the work unfolds"><div class="inner">
+  <div class="eye">06 · How we work</div>
+  <h1 class="big">Nine phases.<br><em>One line of sight.</em></h1>
+  <table>
+    <tr><th style="width:190px">Phase</th><th>What happens</th><th>Key deliverable</th></tr>
+    <tr><td style="font-weight:700">01 · Discovery</td><td>Stakeholder sessions, audience validation, full content audit, analytics review</td><td>Findability strategy, content audit</td></tr>
+    <tr><td style="font-weight:700">02 · Architecture</td><td>Sitemap, taxonomy model, template inventory</td><td>IA and taxonomy documentation</td></tr>
+    <tr><td style="font-weight:700">03 · Design strategy</td><td>Creative direction synthesized and argued before any mockups</td><td>Design strategy document</td></tr>
+    <tr><td style="font-weight:700">04 · Design</td><td>Homepage, project, impact, publication, team, and collection templates</td><td>Approved design system</td></tr>
+    <tr><td style="font-weight:700">05 · Build</td><td>WordPress theme, block library, taxonomy engine, integrations</td><td>Staging site on Pantheon</td></tr>
+    <tr><td style="font-weight:700">06 · Migration</td><td>Programmatic and curated content transfer</td><td>Fully populated staging site</td></tr>
+    <tr><td style="font-weight:700">07 · QA and launch</td><td>Accessibility, performance, cross-device testing, UAT, hard cutover</td><td>Live site, old site sunset</td></tr>
+    <tr><td style="font-weight:700">08 · Training</td><td>Screen-recorded tutorials and live sessions on your real site</td><td>Video library and docs</td></tr>
+    <tr><td style="font-weight:700">09 · Support</td><td>One full calendar quarter post-launch, flexible scope</td><td>Tracked support hours</td></tr>
+  </table>
+  <p class="small" style="margin-top:14px">The design strategy document is a gate. Two rounds of consolidated feedback, then sign-off, then and only then does design begin. It's the cheapest place in the whole project to disagree, so we make full use of it.</p>
+</div></section>
+
+<!-- 24 GOVERNANCE -->
+<section class="slide dark" data-title="Governance and rhythm"><div class="inner">
+  <div class="eye">06 · How we work</div>
+  <h1 class="big">Clear rhythm.<br><em>One voice of feedback.</em></h1>
+  <div class="rows">
+    <div class="row"><div class="row-n">01</div><div><div class="row-h">Two rounds, exactly as you specified</div><div class="row-b">Two consolidated revision rounds per major milestone: architecture, design mockups, and development staging. You return consolidated feedback within seven business days. We turn revisions in five to seven depending on the milestone. Anything beyond the two rounds gets scoped and priced as a change order before we start it, never after.</div></div></div>
+    <div class="row"><div class="row-n">02</div><div><div class="row-h">Julia is the hub</div><div class="row-b">A weekly 30-minute standing call with Julia as day-to-day contact, plus a shared live status board so nobody ever has to ask where something stands. Feedback reaches us as one consolidated voice. Five conflicting comment threads is the single most common way projects like this blow their timeline, so we design it out on day one.</div></div></div>
+    <div class="row"><div class="row-n">03</div><div><div class="row-h">Decisions have names</div><div class="row-b">Before kickoff we agree on who approves each milestone, with a named backup for the holidays and conference season. Strategic decisions route to your Managing Director and Director on the schedule, not as surprises.</div></div></div>
+    <div class="row"><div class="row-n">04</div><div><div class="row-h">Tufts marketing comes in early</div><div class="row-b">You anticipated that some design decisions need university sign-off. We invite central marketing into the design strategy review, before any mockup exists. A brand review after design approval can quietly cost three weeks. Pulled forward, it costs none.</div></div></div>
+  </div>
+  <div class="fn">Responds to the governance and revision structure in RFP 4.6 and 7.5</div>
+</div></section>
+
+<!-- 25 TRAINING SUPPORT -->
+<section class="slide d2" data-title="Training and support"><div class="inner">
+  <div class="eye">06 · How we work</div>
+  <h1 class="big">We leave you<br><em>genuinely independent.</em></h1>
+  <div class="cols2">
+    <div class="panel"><div class="panel-tag">Training · confirmed in scope</div><div class="panel-h">A video manual built to last.</div><ul>
+      <li>Screen-recorded tutorials on your actual staging or production site, not a generic demo</li>
+      <li>Covering every task you listed: homepage content, publications, projects and their tagging, team profiles, news and events, the Stories page, newsletter and social modules, and the full taxonomy system</li>
+      <li>Delivered as a titled, indexed, searchable library, plus two live training sessions and a written quick-reference guide</li>
+      <li>Built to still be useful in 2029, when the people watching them may not be the people we trained</li>
+    </ul></div>
+    <div class="panel"><div class="panel-tag">Support · one full quarter</div><div class="panel-h">Not just bug fixes.</div><ul>
+      <li>Three months from launch. Bugs, broken elements, and functional issues fixed at no additional cost</li>
+      <li>Non-critical issues answered within two business days. Critical or site-blocking issues same business day</li>
+      <li>A flexible hours pool explicitly open to design and content work: reworking a layout that isn't performing, refining a template against real content, smoothing whatever friction shows up in real use</li>
+      <li>Hours tracked in a shared log you can see anytime, reviewed together monthly. An ongoing retainer is available after the quarter</li>
+    </ul></div>
+  </div>
+  <div class="fn">Responds to the training and post-launch support requirements in RFP 4.7 and 4.8</div>
+</div></section>
+
+<!-- 26 TIMELINE -->
+<section class="slide cream" data-title="Timeline"><div class="inner">
+  <div class="eye">07 · Timeline</div>
+  <h1 class="big">Mid-August to January.<br><em>Here's the shape.</em></h1>
+  <div class="gantt">
+    <div class="g-hdr"><div></div><div class="g-m">Aug</div><div class="g-m">Sep</div><div class="g-m">Oct</div><div class="g-m">Nov</div><div class="g-m">Dec</div><div class="g-m">Jan</div></div>
+    <div class="g-row"><div class="g-lbl">Discovery, audit, findability</div><div class="g-cell"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="g-lbl">IA and taxonomy model</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="g-lbl">Design strategy document ◆</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell on hot"></div><div class="g-cell on hot"></div><div class="g-cell on hot"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="g-lbl">UX/UI design ◆</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="g-lbl">Development on Pantheon</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="g-lbl">Content migration</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="g-lbl">QA, accessibility, UAT</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="g-lbl">Training and tutorials</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell on"></div><div class="g-cell on"></div><div class="g-cell"></div></div>
+    <div class="g-row"><div class="g-lbl">Launch · Jan 20, 2027</div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell"></div><div class="g-cell on hot"></div><div class="g-cell on hot"></div></div>
+  </div>
+  <div class="g-note"><span><span class="g-key" style="background:var(--purple)"></span>Active phase</span><span><span class="g-key" style="background:var(--lime)"></span>Approval gate or launch</span><span>◆ Two consolidated feedback rounds</span><span>Post-launch support runs Jan 20 to Apr 20, 2027</span></div>
+</div></section>
+
+<!-- 27 FEASIBILITY -->
+<section class="slide dark" data-title="Is January realistic?"><div class="inner">
+  <div class="eye">07 · Timeline</div>
+  <h1 class="big">Is January realistic?<br><em>Yes, with three conditions.</em></h1>
+  <p class="lead">You asked for a straight answer, so here it is. January 2027 is achievable and it is not generous. Three risks decide it, and each one has a plan.</p>
+  <div class="rows">
+    <div class="row"><div class="row-n">01</div><div><div class="row-h">Serial approvals</div><div class="row-b">Two feedback rounds per milestone plus a university brand review is a chain, and a chain moves at the speed of its slowest link. Our mitigation: overlapping phases as shown, Tufts marketing pulled into the design strategy gate before mockups exist, and the seven-day feedback window written into the contract rather than assumed.</div></div></div>
+    <div class="row"><div class="row-n">02</div><div><div class="row-h">Content decisions</div><div class="row-b">Roughly 200 publications and 30 projects need retain-or-retire calls, and every project needs a new plain-language summary. Nothing on the critical path is more likely to slip. Our mitigation: the audit lands week four, decisions lock by September 30, and student support is scoped against the mechanical work so your staff spends judgment, not hours.</div></div></div>
+    <div class="row"><div class="row-n">03</div><div><div class="row-h">December</div><div class="row-b">Two weeks are effectively gone and pretending otherwise is how launches die. We plan for it. Development completes December 18, migration wraps December 19, and QA opens January 4 with a real buffer instead of a scramble.</div></div></div>
+  </div>
+  <p class="lead" style="margin-top:18px">One honest caveat. If contract execution slips past August 31, the math changes, and we'd recommend an early February launch over a compressed QA window. We'd tell you that in September, not at Christmas.</p>
+  <div class="fn">Responds to the timeline and feasibility assessment in RFP 5 and 7.7</div>
+</div></section>
+
+<!-- 28 WHAT WE NEED -->
+<section class="slide d2" data-title="What we'll need from you"><div class="inner">
+  <div class="eye">07 · Preparing together</div>
+  <h1 class="big">What we'll need from you,<br><em>and when.</em></h1>
+  <table>
+    <tr><th style="width:200px">When</th><th>What keeps us on schedule</th></tr>
+    <tr><td style="font-weight:700">Before kickoff</td><td>Named decision-makers per milestone with holiday backups. Analytics access. Tufts brand assets. The photo library. Pantheon and CMS credentials. An early intro to your Tufts central marketing contact</td></tr>
+    <tr><td style="font-weight:700">Weeks 1 to 4</td><td>Stakeholder availability for discovery, including at least one healthcare leader and one policy contact from your network if possible. Their reactions are worth ten internal opinions</td></tr>
+    <tr><td style="font-weight:700">Weeks 4 to 8</td><td>Content retention decisions. This is the critical path and the single most likely thing to slip, which is why we bring the audit to you with recommendations already attached</td></tr>
+    <tr><td style="font-weight:700">Weeks 6 to 14</td><td>Plain-language project summaries drafted by your team. We supply the template, the word cap, and two worked examples. The subject-matter judgment has to be yours. Students handle inventory tagging, metadata cleanup, and link checking alongside</td></tr>
+    <tr><td style="font-weight:700">Weeks 12 to 20</td><td>Consolidated feedback inside the seven-business-day window at each milestone</td></tr>
+    <tr><td style="font-weight:700">January</td><td>Two to three staff for about a week of UAT, then training sessions</td></tr>
+  </table>
+  <p class="small" style="margin-top:14px">And the honest answer to your question about how client teams create friction: unconsolidated feedback, content treated as a launch-week task, late brand sign-off, scope that grows one small ask at a time, and approvals that stall around holidays. Every one of those has a named fix in this proposal, because we've absorbed every one of them before.</p>
+  <div class="fn">Responds to the preparation questions in RFP 7.6</div>
+</div></section>
+
+<!-- 29 TEAM -->
+<section class="slide dark" data-title="The team"><div class="inner">
+  <div class="eye">08 · The team</div>
+  <h1 class="big">The people<br><em>behind the work.</em></h1>
+  <p class="lead" style="margin-bottom:2px;max-width:820px">Named individuals, committed to an August 2026 start. Tap anyone to read more. We've grouped them by the role they play, so you know exactly who holds what.</p>
+  <div class="tg-label">Leading the engagement <span class="tg-purpose">Your anchors. Own scope, schedule, and the quality bar at every review.</span></div>
+  <div class="team-cards c3" id="tg-lead"></div>
+  <div class="tg-label">Strategy and design <span class="tg-purpose">Driving the thinking. Own the audience framework, the architecture, and the design system.</span></div>
+  <div class="team-cards c3" id="tg-design"></div>
+  <div class="tg-label">Build and delivery <span class="tg-purpose">Making it real and keeping it on track. Own the platform build and the weekly rhythm.</span></div>
+  <div class="team-cards c3" id="tg-build"></div>
+  <p class="small" style="margin-top:14px">Development runs through Integral Studio, our specialized technical partner for platform builds, under Ghost Note's single contract and single point of accountability. One team, one schedule.</p>
+  <div class="fn">Responds to the named-team requirement in RFP 7.5</div>
+</div></section>
+
+<!-- 30 WHO WE ARE : GN intro -->
+<section class="slide cream" data-title="Meet Ghost Note"><div class="inner split">
+  <div>
+    <div class="eye">09 · Who we are</div>
+    <h1 class="big">Nice to meet you.<br><em>We're Ghost Note.</em></h1>
+    <p class="lead">We're a Black-owned, cross-cultural creative studio, born in Washington DC and now living in New York and LA too, and a member of the kyu collective. We craft brands and stories that honor the complexity of the modern world, and much of our practice sits with mission-driven institutions, foundations, and health organizations whose work deserves a bigger room.</p>
+    <p class="lead">A ghost note in music is felt more than heard. That's our thesis about good work, and it fits this project. Your visitors should never notice the architecture. They should simply find what they came for and leave convinced.</p>
+    <p class="lead">Translating rigorous, credible work for the audiences who can act on it is the job we do most, and honestly, the job we love most.</p>
+  </div>
+  <div><div class="split-img" style="background-image:url('https://www.ghostnoteagency.com/wp-content/uploads/2022/03/Founders_01_Ghost-Note-1274-b_w-scaled.jpg')"></div><div class="imgcap">Founders Steve Jumper, Brandon Ellis, and Reggie Snowden</div></div>
+</div></section>
+
+<!-- 30b SUBCULTURE : full-bleed family dinner -->
+<section class="slide imgfull" data-title="Where we start">
+  <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1543362906-acfc16c67564?q=80&w=2400&auto=format&fit=crop')"></div>
+  <div class="ov"></div>
+  <div class="fg">
+    <div class="eye" style="margin-bottom:18px">09 · Who we are</div>
+    <div class="bigquote">None of us can own culture. We can only create beautiful things alongside it.</div>
+    <p class="lead" style="margin-top:18px;color:rgba(255,255,255,.82);max-width:820px">Real culture bubbles up from communities with their own codes, languages, and rituals. Our job isn't to claim it. It's to understand the human motivations underneath it, so the work is felt rather than just filed. For us, the work begins at the origins. It starts at subculture.</p>
+    <p class="lead" style="color:rgba(255,255,255,.82);max-width:820px"><b style="color:#fff">On this project, subculture is your two audiences.</b> A hospital COO and a legislative staffer each move through the world in a different language. We start there, at the level of how they actually read, decide, and act, and we build the site up from that.</p>
+  </div>
+</section>
+
+<!-- 31 HOW WE WORK / CAPABILITIES -->
+<section class="slide cream" data-title="What we bring"><div class="inner">
+  <div class="eye">09 · Who we are</div>
+  <h1 class="big">Strategy, design, and story,<br><em>under one roof.</em></h1>
+  <div class="caps-cols">
+    <div class="panel"><div class="panel-tag">Insights</div><div class="panel-h">We listen first.</div><ul><li>Research and discovery</li><li>Strategic workshops</li><li>Brand and content audits</li><li>Landscape analysis</li></ul></div>
+    <div class="panel"><div class="panel-tag">Creation</div><div class="panel-h">Then we make.</div><ul><li>Brand positioning and identity</li><li>Content and story strategy</li><li>Creative direction</li><li>Campaign development</li></ul></div>
+    <div class="panel"><div class="panel-tag">Activation</div><div class="panel-h">Then it ships.</div><ul><li>UX/UI design</li><li>Web design and development</li><li>Motion and graphic design</li><li>Content production</li></ul></div>
+  </div>
+  <p class="lead" style="margin-top:22px">Our full portfolio, including the redesigns, rich media, and information architecture work most relevant to this project, lives in our capabilities deck. Three of the most relevant engagements are on the next slide, and the clients behind them are on the one after that.</p>
+  <a class="csbtn" href="https://pitch.com/v/capabilities-deck-asmd54" target="_blank" rel="noopener">View full case studies →</a>
+  <div class="fn">Responds to the background and portfolio requirements in RFP 7.1 and 7.2</div>
+</div></section>
+
+<!-- CASE STUDIES : RFP 7.1 / 7.2 -->
+<section class="slide cream" data-title="Selected work"><div class="inner">
+  <div class="eye">09 · Who we are</div>
+  <h1 class="big">Three engagements<br><em>that map to this one.</em></h1>
+  <p class="lead">Same problem shape every time. Rigorous, credible work that wasn't reaching the people who could act on it.</p>
+  <div class="cs-grid">
+
+    <div class="cs-card">
+      <div class="cs-org">Hopelab</div>
+      <div class="cs-sector">Health · Youth Wellbeing</div>
+      <div class="cs-lbl">Engagement</div>
+      <div class="cs-tx">Multi-year brand and digital partnership across TOG, Hopelab, Imaginable Futures, and RTYPF.</div>
+      <div class="cs-lbl">Why it maps here</div>
+      <div class="cs-tx">Related organisations, one shared evidence base, several audiences who each needed a different translation of the same research. That is the architecture problem FIMI has.</div>
+      <div class="cs-fill"><span class="fillme">FILL BEFORE SENDING — one concrete outcome. Remove this box.</span></div>
+    </div>
+
+    <div class="cs-card">
+      <div class="cs-org">Beneficial State Foundation</div>
+      <div class="cs-sector">Policy · Financial Justice</div>
+      <div class="cs-lbl">Engagement</div>
+      <div class="cs-tx">Brand refresh, US messaging framework, and an ongoing digital and communications partnership.</div>
+      <div class="cs-lbl">Why it maps here</div>
+      <div class="cs-tx">A rigorous, policy-facing institution whose case was stronger than its ability to make it. We built the messaging framework first and let it drive the digital work. That is the order we're proposing here.</div>
+      <div class="cs-fill"><span class="fillme">FILL BEFORE SENDING — one concrete outcome. Remove this box.</span></div>
+    </div>
+
+    <div class="cs-card">
+      <div class="cs-org">Vital Strategies</div>
+      <div class="cs-sector">Public Health</div>
+      <div class="cs-lbl">Engagement</div>
+      <div class="cs-tx">You Can Save Lives and the New Jersey Harm Reduction Story campaign development.</div>
+      <div class="cs-lbl">Why it maps here</div>
+      <div class="cs-tx">Public health evidence turned into something a general audience and a policymaker could both act on, without softening the science underneath it.</div>
+      <div class="cs-fill"><span class="fillme">FILL BEFORE SENDING — one concrete outcome. Remove this box.</span></div>
+    </div>
+
+  </div>
+  <div class="fn">Responds to the background and portfolio requirements in RFP 7.1 and 7.2</div>
+</div></section>
+
+<!-- 31b REFERENCES -->
+<section class="slide dark" data-title="Client references"><div class="inner">
+  <div class="eye">09 · Who we are</div>
+  <h1 class="big">Don't take our word for it.<br><em>Take theirs.</em></h1>
+  <p class="lead">Three clients who can speak to our approach, our craft, and what the partnership actually feels like. All three engagements sit in the health, policy, and mission-driven space this project lives in.</p>
+  <table>
+    <tr><th>Reference</th><th>Organization</th><th>Engagement</th><th>Contact</th></tr>
+    <tr><td><b style="color:#fff">Juan Martinez</b><br><span style="font-size:12px;color:var(--md)">VP of Strategic Communications &amp; Policy</span></td><td>Hopelab</td><td>Multi-year brand and digital partnership across TOG, Hopelab, Imaginable Futures, and RTYPF</td><td><a href="mailto:jmartinez@hopelab.org" style="color:var(--lime)">jmartinez@hopelab.org</a></td></tr>
+    <tr><td><b style="color:#fff">Wil Kristin</b><br><span style="font-size:12px;color:var(--md)">Senior Director of Strategic Communications</span></td><td>Beneficial State Foundation</td><td>Brand refresh, US messaging framework, ongoing digital and communications partnership</td><td><a href="mailto:wkristin@beneficialstate.org" style="color:var(--lime)">wkristin@beneficialstate.org</a></td></tr>
+    <tr><td><b style="color:#fff">Tony Newman</b><br><span style="font-size:12px;color:var(--md)">Director of Communication, Overdose Prevention Program</span></td><td>Vital Strategies</td><td>You Can Save Lives and New Jersey Harm Reduction Story campaign development</td><td><a href="mailto:TNewman@vitalstrategies.org" style="color:var(--lime)">TNewman@vitalstrategies.org</a></td></tr>
+  </table>
+  <div class="fn">Responds to the reference requirements in RFP 7.2</div>
+</div></section>
+
+<!-- 32 INVESTMENT -->
+<section class="slide dark" data-title="Investment"><div class="inner">
+  <div class="eye">10 · Investment</div>
+  <h1 class="big">Fixed fee.<br><em>Everything included.</em></h1>
+  <p class="lead" style="margin-bottom:8px">Fixed-fee pricing, so your budget is predictable and we carry the delivery risk. Every required deliverable is in the base fee, nothing below is held back as an upsell.</p>
+  <table>
+    <tr><th>Phase</th><th style="text-align:right">Investment</th></tr>
+    <tr><td>01 · Discovery, content audit, findability strategy</td><td class="amt">$24,000</td></tr>
+    <tr><td>02 · Information architecture and taxonomy design</td><td class="amt">$16,000</td></tr>
+    <tr><td>03 · Design strategy document</td><td class="amt">$10,000</td></tr>
+    <tr><td>04 · UX/UI design</td><td class="amt">$40,000</td></tr>
+    <tr><td>05 · Development, taxonomy engine, integrations</td><td class="amt">$48,000</td></tr>
+    <tr><td>06 · Content migration</td><td class="amt">$14,000</td></tr>
+    <tr><td>07 · QA, accessibility, performance, launch</td><td class="amt">$12,000</td></tr>
+    <tr><td>08 · Training and screen-recorded video tutorials</td><td class="amt">$8,000</td></tr>
+    <tr><td>09 · Post-launch support, one full quarter</td><td class="amt">$14,000</td></tr>
+    <tr class="total"><td>Total investment</td><td class="amt">$186,000</td></tr>
+  </table>
+  <p class="small" style="margin-top:12px">Out-of-pocket expenses and third-party licensing pass through at cost with no markup, always approved by you first.</p>
+  <div class="fn">Responds to the budget requirements in RFP 6 and 7.8</div>
+</div></section>
+
+<!-- 33 ADD-ONS -->
+<section class="slide d2" data-title="Optional add-ons"><div class="inner">
+  <div class="eye">10 · Investment</div>
+  <h1 class="big">Optional add-ons.<br><em>Priced separately.</em></h1>
+  <table>
+    <tr><th>Add-on</th><th style="text-align:right">Investment</th></tr>
+    <tr><td>Ongoing support retainer beyond the initial quarter</td><td class="amt">$2,750 / month</td></tr>
+    <tr><td>Custom interactive data visualization suite for the Impact section</td><td class="amt">$18,000</td></tr>
+    <tr><td>Photography art direction and a one-day shoot in Boston</td><td class="amt">$12,000</td></tr>
+    <tr><td>Hero and focus-area video production</td><td class="amt">Scoped on request</td></tr>
+    <tr><td>Additional page template beyond the approved set</td><td class="amt">$4,500 each</td></tr>
+    <tr><td>Additional revision round beyond the two included</td><td class="amt">$3,500 / milestone</td></tr>
+    <tr><td>Spanish-language site layer</td><td class="amt">$15,000</td></tr>
+  </table>
+  <p class="lead" style="margin-top:18px">None of it is required for launch. The base fee delivers everything the brief asks for. These exist for the moments after launch when the site is working and you want it working harder.</p>
+</div></section>
+
+<!-- 34 CLOSE -->
+<section class="slide imgfull" data-title="Close">
+  <div class="bg" style="background-image:url('https://tuftsfoodismedicine.org/wp-content/uploads/2023/01/Hero-2.jpg')"></div>
+  <div class="ov" style="background:linear-gradient(to top,rgba(9,9,9,.94) 0%,rgba(9,9,9,.55) 60%,rgba(9,9,9,.4) 100%)"></div>
+  <div class="fg">
+    <div class="eye" style="margin-bottom:16px">Thank you</div>
+    <h1 class="big" style="font-size:clamp(38px,5.4vw,66px)">You have the evidence.<br><em>Let's build the argument.</em></h1>
+    <p class="lead" style="color:rgba(255,255,255,.85)">FIMI is already the authority. The site should stop making people take that on faith. We'd love to walk through any of this live, and to take the project page concept further with your team in the room.</p>
+    <p class="lead" style="color:rgba(255,255,255,.85);margin-top:6px">With care,<br><b>Alfred, and the whole Ghost Note team</b></p>
+    <div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:10px">
+      <a class="csbtn" href="mailto:alfred@ghostnoteagency.com">alfred@ghostnoteagency.com</a>
+      <a class="csbtn ghost" href="https://www.ghostnoteagency.com" target="_blank" rel="noopener">ghostnoteagency.com</a>
+    </div>
+  </div>
+</section>
+
+</div></div>
+
+<button class="arrow prev" onclick="go(-1)" aria-label="Previous slide">←</button>
+<button class="arrow next" onclick="go(1)" aria-label="Next slide">→</button>
+<div class="counter" id="counter">01 / 36</div>
+<div class="hint">← → keys · swipe · click arrows</div>
+
+<div class="modal-bg" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-head">
+      <div class="modal-av" id="m-av"></div>
+      <div><div class="modal-role" id="m-role"></div><div class="modal-name" id="m-name"></div></div>
+    </div>
+    <div class="modal-body" id="m-bio"></div>
+  </div>
+</div>
+
+<script>
+const AMIRI="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD//gA9T3B0aW1pemVkIGJ5IEpQRUdtaW5pIDMuMTguMzIuMjYwMjA1NTU0LVRCVEJMTlAgMHg5MDVjMzA2YgD/2wBDAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5Ojf/2wBDAQoKCg0MDRoPDxo3JR8lNzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzf/wAARCAJnAbgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD1PFAFLilxQAmKUUtJQAop4FNFOFADhTxTRTxQAUUtJQAtFJS0ALRRQKACiiigAooooAKKKKAEopaKAEpKdSEgdTQAlFQyXUEed8qDHqaz5/EWlQEiS7jBHX5qANalFc3J410NB/x+IeccGmf8JxooXcbpcetAHT0Vz8XjDRpBkXcY+pq9a65p11xFdRk+m6gDSpaYksbD5XB/Gn0ALRRRQAUUUUAFFFFABRRRQAUlLRQAlFFFACUUtJQAhpCKdSUAMIppFPNIRQBGRTSKkIpCKAIiKaakao2oAYaKRqKALGKKWjFACAUuKUClxQAgFOApQKUCgBQKdSCnUAFJS0UAJRS0CgBRS0gpaACkpaKAEpaKKACkpagu7uG0jLzSKoHqaAJqq3l/bWcZeeVVA9TXC+IfiFHE0kGnL5jKPv8AYV5nrPiLUL9ma6nbHp0FAHqWs/Emxtd62amZl7jpXC6j8StVu2dYpUgXtjk1wVxcyseTtA5HvVQyMST69aAOovdfu7iQb7qef+JwpIAHes7VNRiluWaylPlHGN55HrmsUM38LFc8cHtUv2eMbiJlIRgM7Thh60AaVm13d7oreMMwHLen0q99ku0aNp7lCq54AzjFZELyW4EllO0bucYVsFjnt7fWrUGoXdu0jJdfvZcqzL83QenX2zQA1ruSC7bzgdobkYrZXVI4yZoFYNxwFIIHrXOxpK7yMpUlVJZpDjHr1qS3vZLZWCxqzk4DnlhQB2lh4mv7eTy475kIG7DtnPtXXaV4/u4wFvogwHVhXjLzu7hizsW5LEd6uR38vQTMQMde9AH0XpfivT74BRIFc/wtxW7HKko3IwI9q+c7PU1kfMcu1lwOeK6/QvE97ZSqpl8yPPIJ6UAewUVhaP4ktL8BWYJJ6Gt1SGGVORQAUtFFABRRRQAlFLRQAlGKWigBtFLRQAlJS0UANpCKdSUANIppFPNIRQBCwqNhU7Co2FAEDCinsKKAJsUuKXFFACYpwFFFADhSikBpwoABS0UtABRiiloATFLilooAMUUtFACUYpaKAEoJAGTwKbLKkSF3YAD1rzbxl46KyNZaW/zdGkHQfSgDpvEXiyz0pGQOHm7KK8t1/wAQX2rSHz5WWEfwLwKx5J5biRmmdnZjlmJ5rN1G9whRHOKAG3l75TuI2JBHWsm5vJLgkyHd71FJI8hOBz61ETxzQAEl2AY+30pFVixUNzz0PWgAMCMNuONoFO2NsXcoC5ODjrQAFAhKsXyB8uBjnt17UEk4LADAxjPX3pSp7nJ/OpEBZ8hBjJ+UenpQAlo/2e4Eqt93kHHNTrLHFGRBvR3IZTwdnODz1qAguDz3+RfSk24zu6+/agCUM2Jir7vMwG3AEsfX86bC3kuodSjAkMSMn06U1V5wPWlYFQOcr1x+lADSdhAIyMVaSNXMXkupdhllYbQp9MnrVUrwTjvihSMc0AXBK8blWG1hwwIrTsrxwyEN8inJBOM1htgYw27IyfY0+KVhx70Ad9p+p7mBjO188MTXdaL4pntVVbv54x1Ydq8e0+7wdjD5D3HrXV6fd7ojGxyuODQB7dYX8F9EskLhgR2q1XkOmatcaXIHt2JQdUJ4Ir0Xw/r1vq0AZWAkH3lPUGgDZoopaAEopaKAEopaSgApKWkoASkpaSgApKKKAENIaWkNADTTCKeaaaAIyKKcaKAHUUlGaAFzRmm0UAOBp4NRinigB4NKKaKcKAFpaSloAWiiigBaTNFJQAuajmmSGMvIwAFNnmSGMu5wAK8o8d+MpLpnsdOchBw7jv7CgB/j3xm9w72OnS4jHDuO/sK4KKXP+tBIA4+tREMMO4yc5570krlVLYAJ7UAJc3Aji2huaw7qUs57eo9KtTS73I3quATlvbtVBsk5zg9aAI8+ho3HYFOMA5BxSnk5UVJDyGUlgG7AdaAIwM4z07c9Kkwy9T25OafhQTtBIPAyf8KVEfOPmyfQUANC5bGB+fWl8vnleh7VMqqG/h+rHNCorEgqW9Mf4UARALtB3Z46Yp7oMDyzkY69KkcKAFC4z39KVsMThBjPUjigCsVH/wCukK8HvzVhkXoQPXb0/Kmsm0KcjGMDntQBAFxgkEj8hSYBOD0qd1AUDe2DzjFM2HbnIx2OaAGEYHb8KTH4CnEYHTNIR2OaAJIpChGCeK6DTdQyijPPQ1zXTmrFvKUcEGgD0O2lRgPmyCKmTUJbK4Wa1JjkUj6NXPaVeAhdx5HAzW5Koki4OcdPagD1Pwt4ih1a3CsQJlGGXNdDXgemXtzpl0LiCTDA8+49K9f8L+IINZs1ZWAkHDL3BoA3aKKKACkpaSgApDS0lADaSnGkoASkpaSgAppp1JigBtIacRSEUAMNFKRRQA2iiloASjFLSgUAAFPApAKcKAFFLQKWgApaSigBaKKKAFpjsEUljgCn1yHj/wARR6Pp7Kjjzn+VB6mgDm/iF4tZGays3/3yO3tXmrSs0hccZp8s7zyPI/zO5ySagcg8DtQA9pf3exskg5qCVHdSyjAA/WnhSOcdeKmNoxiDtwvcdSaAMRlAJ6k+wpvknlnIAz0xkn8K1WtQxUKrey57e5471LHZoAFdg4J4Q9R7c4H49KAMcW65BIJyMqOpxUiQhQQwC+x4I/8Ar1tNZSFmRVYMDyqDJ/MAZP0/SgWkcYIZo0PTAZS/0OOh/E4oAzPs29Thk4HJBHA+tOSzkEbZAC/3uP8AIrQi3o5CxAcfLldxHr1P68D2qRbd5ny53HltowSv4dv89aAM5bcMuFfIIGdqZIPofSmzWsinDEBcjIwBnitTyVJVSGyQdoYl+fYd6cqmKPBAGThSCQQemM8mgDMWImPBU4XjKnI+nFOaHCqFwMjqAF4960ZovvO4GAf4s5PpnJ4pgMfA5QliDgHr+dAGe1lJJlmReD1AB/lTGs9oxtbOegU8fnWg8YOSrkr3O3v9T0p0bTKwUs7ex/8A19KAMSW3KgFeG9KidWJzsww79CK2nBz8gXcTyu0YP1z1qu4DNsYMQBxuYj9P8D+FAGWVYHO3I6+tIwUjIDKMenANaLwMoJOCBnqP6jiqyxkdwTj5lBI4/rQBVMbbdwIIzjg8/lTUJHPvVowjJDEAg8gih03cAEHGSuMfke4oAuWE5KBM/Ln8q6PT7xvLCscnGK5K2Bhc4yQa14JcAMDxigDZn+RgyngjpU+h6zLo98tzESQTiRR3FZom3DBJyOmaY+3YTz07UAfQWi6nDqllHPC4YMK0K8X+GmvtZX32KZ/3Mpyuexr2aNw6BlPBoAdSUtFACUUtJQAmKTFOpKAExSYp1JQAmKTFOpKAG4pCKfikIoAYRRTjRQBBRSUtAC04U2jNADwacDUWacDQBJmjNNBozQA/NGaZmlBoAfmlzTBSlgoJPQUAVdVvo7CzknkYAKpPNfP/AIr1qXWtQM752AkIPQV2HxK8StcXX9m2zHy1/wBaQf0rzoPvYngAHigCaMFVGecjrTxAGcEk8dgOtAXAXLduDU6ZUKQPmPqeKAFithsZmxnP3SDn8ql+zZBfc2SOAD93ili+bGGI9SO/vzVuOLzAVBUjuMY/Mjp9O9AGfLaeY4SGJ2Q8q7HGf8MGk+yhfv7nYjkbSB+IPb34FbaW+2NVjSHgjJWTofXt/Wo7y3v7oeVHbxKzfM8rLlm7ZGen40AZXkpcSbVEkp6BF+bnuM4HHsanWwZlKupCpwoXBAOemRwP07ZFakWnvFGIpA0mcCRRlgT6Dpx705olUgH5inDBVUBR/dA5P4YyfagChFagDEMMTqw2kqoYHHuSfxycfWnmBPL2vIhC8YLr19D2z0x0xWiyxH5z5gA7mMr9OvA/757UAxghiW+VflKgsQPbjFAFD7EQNxLBcZZWUkj3JBApzWqup3ozKRwxjbI/ofzHtWgkwZiI7Vup+ZwEx7Y5J70rQqBlwF444BUj/gXp9KAMpbKEZEcrA9y67ScHvk1MLbHy4LA/dxkg/Tgj8KvtGA2ZJJUHYgAbh6E4/lSYgMhEQKnHQx5J9O/8jQBQuEVWyIPmIySCDgeuaoy26FSWjcAdHQjOffnFbLyeVxhl55VkB/HH+elQh4y235EJXIG3H8+o/GgDFmsgp5XJxnDnH55/pmoJrdMnIYdMZJbGexH9RW5lOFICcDAHykH9ajkiiP3i6rnHzElR+WcfpQBg/ZpekgKsDj5R83seOtNeBHQBl4H8ceMqfRl6Hv6VsTWqg4aYFWXAIPAz+hGfSq9xbkbS68gfeU8j8R/j/KgDGuLPZhlKlSMBtpAb29j7VB5Z2FW2uOnIH6YrTmTaxaMlSeHxwW9Mjv8AXke3eq7kb8yoCQR8xwAw9Gx6/wB6gCoQc8g7QOQRyDUsMhAKkUkqbDuZcbfwP0NRqwyeee9AF+NxgYzmrAc7eM1nRv8AlU4kPTOKAJY5HhnVo2IIOQR2Ne6+BNaTVNIiJfMija4z0NeBswWQYJNdf8PtbGnawsbNiGfAI9GoA90zRmoopBJGGU8EU7NAD80ZpmaTNAD80Zpm6kzQA/NGaZmjNAD80maZuozQA/NIabmkzQA4mimFqKAIRThTQKcBQAUU7FJigBtKDS4oxQAoNLSAUtAC0tJRQA4Vg+NNbXRdHmm6vjCj1Pat3OBmvIvifqr3OoLaJzHF8zfWgDhrueVy9xcufMkbcwqqJQWJ4C9QMd6tOC7gspYEU1bcBRv60APid2AZhhQeBVxN7HdwcngetVYkDqNzADtz0q5EFQgKCGxj/JoAnjyGGPvEnJPAz/WtK2Kh1SFWkmB+Yk/c9OtUYQiAPJI6npnB5+n+NXFmd5Q371VIA3YBYjHYf4+g60AXlMbBsuSVOORg+mB7/wCRU1vJGjutuAXIGdoy345HH0PNUBbASK7JIxx/y23MQPTbnAPTrirjOEiClCmR91giBfwyM0APdpHJRWmXf/EELH8u1IBDu8oMJXXlQckg/lx+P4UKP3bCViFI52NkD/eP49DxT1W2hQNBGIoj951IwfxPB9selAEKwrLwm3AJJOMZz2ODViOCOFTvwgP+yuB9Ox/U81LAzMhYuw29y+D+AGeMU6Nv3jYiyuPvnsffjNAEawxufljZzjK7UG0e+4dfpSi2AUnYpToQc5PHJ56/lT2fa+9sHsDksD+PT+VOaVRhcM7t1OTkc0AQiIAFZGjcdsjrz6GkMKIpKhSDjYehb2PHFSSSBVbapAxkL90tSRBCmQiqSM7WIx75wfagCsQzp8owc/3tx+pI6VUkhG3zI0RSp5BIIHseeD+n0rRuFRiwOFHZupH6dM+tVPl88NkqzA5MYBJ4/A/higCBGE4/5aJJF8xUgE47/L/hVe4XJHzRjdjDFuG9D3Hb/wDVVwsGJ34cp0O3HB9mH070Aoo+R5AuSOD9zv8AgP8AJFAGU+Y1LCLcqj51UgkH+vWoCUb5H2oWwF5O0npj249fzNadwATubapIxnZ/Pt/nisyZOoALhlAwU6/4/oelAFaSAO21WJIx8smT79Qfc88VSmAiYqiEA5Hz4YLnsfX8easPmNi0W7gYdTgnb7Hrj1GPeo3ZpsldshZSQTndwex6nOe/4UAUJRuTplB7ngVWHzSZLg9tw/nV19yEFdxOOuM/r/jzVaeNVlbaV9c9Mj1AoAOpOD3qUN0I/Go4xz14p+DnnpQA+YggHbznnFPtpTG/yjBzkHuKhIIBIbBpm8LyOtAHvXgDXRqelpHI4M0Y2tXWZrwbwFrP9l6vEGY+XN8rc8Z7V7lFKJI1dehFAE26kLUzdSFqAJN1JuqPdSbqAJd1JuqPdSZoAl3UbqizS5oAk3UhamZpCaAHFqKiJooAmFOApgp4NADqDSA0tADTRSmkoAUU6m04UAFFLRQBV1K5W1spZWOAqk14Pf3b39/czHpI56+les/EG6+z6LIoPL/Lx715NHGA/wAnI9KAKe3b/qsn6DpTSu4joT3960sbY2WPAbHSqzwSEh1QMw5PoKAIlj2YZU+VjycHNTLwAzrh16YOOPU0q/OAof3IpYiqnMrn5jjcOue2Oufy4oAeJmDEyIsu7ru7D09R9Oat28pQ7nUc8eXjeM+5ODn9Koh0QYi2Mobruwqnv759s/lQ0ju26ABwRwY5eMZ7jP6euKAN6OaOZC5tZJtoBwFCrjseSBQZki2khUyeNzhCfovIP1Fc3DNM8pVp2BDD5nk3kemM/wCIqXJZzNC77cYkfy2Ib3wpHGevpzQBstfqIyxZJGJP7xGIz9Cq5+vNRrPI25UjAducqRJuXuecHHbkZ/Os+JU3eXE4jlPXfHnI9id3H0OfSnxzPHtBlVdx+Y7idx7HPJJ/z1oA04/PlcK0qkAfKBGB+R9Ppj/Gwj3GSJH3bTglYxzjsGIOazRdK+BJK8qDoF7H1O7jH+fSrdu01yqrEr/dJUsyLwPTg/Tj8aALqXDhcRx7h/tYwfpgjH40NISh3+Xzzgfe/IioNjo5eNFMhPzLMQzE9ueMD6CpA+35BES55LKcY/MdaAE891VVVFzuJ3RjdgehI/wpJgJk2MIjkHHydPryaU3ABaPyiUbghCMfjx0qBvsispgkEQHVgwOT7kY/ke/NAE8TukaCGRGQLt5yQv159vWiaUswDhORySvyE+2T71A8gJLh23D7xIBGOxGO34U3zEG3y2Vj0yi8qD6n0/P6UANnmiThvM+XqCvy+3H9feqclzFA58p0i6Mo8tv6Hg+1WJYSjknc+72Jx7gfQ9qozIxAILFc8SLwQfp/h2oAmW+tnfAkhUkYx0GPxxVW4kVVZjJgNhgCSAx6EDnn1qtNDKjNIm6RSCTluoPp6/59KqspijbZJJHuBBEfQ89cDigB8sjRvh9vythcYUlc5Hucce4FV5MksGcrgE/NkEdf89fp1qKSd1OHJdd3QnGR6H/9VL5xlkEYBxg4VSQR/u84/L8qAGy7SQCuQxOdxwD6enP+NRrsZQqk8DPB4+o704Fcy7AdoPIAI9+o/qKj34YEE4znPr+I6H9KACMnPPTocVIeCccimOSxySCSOuR+uOv+c04spGOc57UAJjOQO1RvsB2846n3pwyMGkl+6ABznmgCSCUx7GUEYORXv3gzUhqWiQS5y20A/Wvn5JTwnp616h8JL2T9/au3yg5UUAenYpMVJijFAEeKMU/FGKAI8UYqTbRigBmKXFLiigBCKaafTTQBGwopTRQA/NKDUO6nBqAJgaXNRg0uaAH5oFNpRQA4Uopop4FACiigUvagDz/4kylhBED/ABZxXCyIwU7VPPORXUePJnn1pYl6Kma5079uxDkj+KgChIQhzuYAnrUUgl3fuVUr1Ydvxq+IMkDG5T1B5zVz7LFH8rBvXGehoAyFjQOpkCpjgqF/rU0sOVXywMMOS+ACP54rRW3ijYuV3Z6gjOarTB5WYrGE/wBpucen4f8A66AMhrRFYq65yeGVcY9MDn8+9DQmHCy7ywGVCr09zjAz9Dk960JituMJIduCSFPLfU+np2HvWfOIlJZE2dvMflif5j+VACLhnClXC/3I0wFGcnPr9MfjU4XOxeXkBwuIyx/A9AeR9aqmPzP4jIOpjRcYP1/L86mtbQ/NmNMEfelGd34dT6YoAsiLK+XGIdmcjDgAY9cDjn8P0qaKzkkHEoTj5mRgw/n3pUtS/wB63jWPHzFVUAn1+arYsodu6IAr6gqSPagCAafdIB5gbG7kqhYdOmOBV6C0ZfldpNyjjdngfU9vb+dLFp4OCse1cdSxKn8SOKspaPEAY3ddp+UkBgB39z9RQAxS6kx+YckdODn+X60qSvj5txTJ25bHHfIH+P6VP5jmPbKpIzw0YOwEd8Y/rT44CwXaNpHQMu0f/roAqywyEJmJSTwpKH+tVriMyZR8bf7xxgewP9T+NahhLZAjG08bsH+vH5flVURyOoYKwTueefzNAFGIosnKtvxhlBGR+XB+mKtBtqBXj2xk43Ko5+vb/wDXT5I4ZEQJlSOCoVW6/r/OnW9oQ+/O4k/d+UHI/wA+gPrQBVZVY4i+XaenAGfY4GfSoJbdW8wsJTzzuBOP14rckt0bBK53DBHGf/r1XNsSdoABGAMgD9e/40Ac1PayquA5AOPlYZznvyc/rVOW1wmC7BOzDjnjr1roJ7baQuCemA20fkR3rOuYYg7Hau7oAM88Y6YP+RQBizwlhxu+btt5B9sHBqjsDvl32Yz+8CZGeozk8Vq3EUT5Mbx/KM5HIP4H9apyxglW5LjB44z79D+tAFVCdxYhWPXPJBP1AqV23bs8t6EDJ+h6GqzDkn5vU7l70qEk42k+w9Pb60ATuuMDA44Bz29PwqIdc5zzTRtCttyFPr2qRHwNvGPfvQA5eF+UdKhd85UnJBqUcAj071CnL7TjjmgCWNljbJyT6V2nwzvBFryqXP7xcYrhmXLFk6ntW/4KkaHxFZM3UvigD6KXlQaCKSA5iU+1OoAbijFOpKAExSGnUhoAYaQmlJphNAATSZppooADRQaKAIhThQBTwKAAU8CgCngUAIBTgKUClAoAAKcKMUoFAAKSVtsbH0FOAqtqL+XaSN6A0AeVeIpzca9M4+6vy1nsiq+B0PepHlFxcXD5/wCWhqPOGIbNAACFJwentStw27JJPQdqVQMYA4pGXOOuCaAHhiTwxBI5OOKgY+Tyq5BJZe+Meo71OcLgdDjjms24nX/VJknqcPz1/wA/WgCrdHG7Zy+Pv5Ofy7frVGMs7lXPmHOcZB28dc+tXGiE5DzY2E4xgEn8f/r1qWVnbBAIo5Vzzu4B9+n/AOugClBYvIdwVQoPCMox9Qea0E095eJc5HTHB+uev8vzrZtbSEAR87uMgH7w/HJ/rWlFaIMtG5GT6H+vWgDn47KNDtwwOcHGGx+Gf68d6uw2ioOPMYtgYxwfr0H6VquiJy44A+72/KpIZYLhisbqSBjpjFAFFoZguJEz1xzgmkjtm3bvKUH0B6D25wPrWltjUkAAHPfmkkOCQM8cdsGgCo0ZkBVWZRn+6eKDboGYRNtJHzDBJH+H0q0oIKqMAA8E5NTAF1AIUEHjBoAz0tz5fzFsY5GeuOmQRSS24kHyY6YPPQdiMVfES9WQdPvYzUE0CTkFxkKOmCMigCn9lbcVGcOOnP6Unkxo+7bksOSe5/X/ABq8kOyPaWYlf4z8x/OmMgbnhl/iyc4P+c0AREttyDyeuQOfr/jVN4ixbdvEg/iG0Z/Lr+NafkHaAEwMYHp7VHJbLI27PBGMjGDQBiSW5kLE7ypXGwD5T78D+dZs9vtdll+XeMkoeDyef0romty6ghNp+YHjB68/41WW2lcsGVdxx64P+T/OgDlZInUk9CeQSB97PY+9U5YCGIdee5xjr/T2NdZdafI7jkgA55GSfbPrTJbEsmxgNpXAKDdzx69KAOGurKSJuUPQjntVRYVjclhjJA+U/wAjXV3en+UP3Z3nGcJ6VhXUIQ7mADc8Y/pQBUbqNuQccgmmKdr8fdPUGpyoIOF4HUgVA4IbPNAEidcnn0HakkGHJxjFJu+UcdKcMOMUARxZLZ5xWrocix6jbTF8FZV49Oaz4sKCDRDmOQMgxhs0AfTmnyCSzjYHqoqesnwtL52jW7ZzlBWqaADNGaKKADNITS000ANNMNPNJigBmKXFOxRigBmKKfiigCMCngUAU9RQAAU8CgCnCgBMUuKWigAApaSloAUVl+JZPL0qYg4+U1qCsPxg23Rp8/3DQB5dZbPIII+ZiTmhgd3QY9TUNjJ+4xxU4JPB5oAOlKRkYzSHlu4pswJXHGKAGSkxjggg9M96oJBJPLnY7dsKOPr2q+YjKNrYA46ntWxp1qI13ADjs3X689qAKFhp7yRF2U9Tkv04788/jVxoDbqpeNNqnJIDZPsCelakMQBBjibnPzE9P60txIqzMEeNSgwSwLFT/jQBRjkVMhozChA4xjP5cmo59WBkKrK644yvAX8+p9BRPerID+9LEns21R9fU+1Zs2oLDMDiJwOMHAH8uOPqaAL63TeWWUsVxxjAJ+o61asLtSQLiFlJPyyggj/9f1rHTV42HywgA8ZDYXH9alW9DcRsFJP3SSc/XNAHQXEq+WqQv87E4wQePU1XkuyiKAAAWwM9TVLzQ/LBQD0A4/KpIhu2mTaWJHIHGM5wP8aANi0cOAe3vzVllH8I4Pc9qoWsi8BsgjI6E1bL5XbknPHTrQAkhyRjn29KqySrwGxt5GS3f6VYCI+CT09DVaZVwxILLnPTP9KAF3qrYADZ9Dnn3zUsJQOSDx/nj61RZzhQrj02FR/nNN84Ljbywz35H1FAGhdMk0DQuevX2+lV7m4WFd+C23qox+prP+3DcwkkDAHBGelVXnTzWUuwx3J5GelAF2W9ZM5HO3IHGBVRXYx7iyNISB8zHaoH8+tU5ZowxwrE8D5ugx+dMubgSIMTHdjlegP9aANeDUFjcJIxxnltvFSPNH84jUdeexx1wOx/SuaVlyf9IQgDC7mzj/CplmfcRIqsQcrInBP4dD+VAFy5VJiqq+BnuOPx/HHIrm7u2bcy7SDkjBbOeeo9a3QsF0HjlGwEHLA4Kj3H+NLNZgptJwuBkFCCPceuKAOOeB0Y55JOM9QaqTJ83Bro7qxYKSxUMfTIB/8Ar1izxkcFcMPSgChnBwfypwJPOcUOCG5HNGcnOBzQBJGeDgZPqalhgciR85AFQLkqSvBrQglSKzfzAQzDA96APcvh++/w/bHOfkFdKRXM/DsD/hHbXHTYK6nFADMUYp2KKAGGmmnkUhFADCKSnEUmKAEopSKKAENFBooAYKeKQCnAUAOFOpBS0ALSUUUAFKKSlFADhXP+Nv8AkCz/AO6a6AVkeJ7f7TpcyAZO00AeQ2A8uMs469KsJzkk1Wjd1fYV+6cYNWoiW3EjHtQA788UjZ6dvXFP5xxSHrjB/OgCTTLVI3Gwuecncxbn8f5VtJGxfDE7doAx2/Gqtgm3jHUflWoqbQcZzQBFKyBAqhFPuBn8/wClYV/OiBnBLbmIzjqe/wBa0LhV3sFUs54OD0/Wse9gigIF5OzdcQx8nHv2A/KgDHur6PzAgEjdcqvT/wCt9KgS8zjZZgjHUtiteLByLGwVOeCcv+eOP509rLU8AhIEU93RV/Hk0AZlvqUOQslkv125P8jWnb3NrMFVI2U5+7Ei5P54/kaRrLUmGHhtZx3CqP6c1GIRFKUkhaAk9M5Q59QelAG2qoSAm/k9Nn+FWBCxOUZ2/uiqFgxiGCrlO3BZR9CG/pWqrKYhskZkA7AcfjQA0b1xuTBBxyanicEnLZx1HakBHQN14OKbu2tnOewz2oAtmdTg/wAI42461WmlYjcgbP4/zoeN8KYkTJPOeuP60yYrgliA31IoAo3NwWJAODj8c1nm5MhyrLGY+uenQ8j+VS6jJERwFUEYBHp6e2KyopvLkzu9eh4oAvJG2Bg5B+6d3H+FSizd4ww2sByzFuh+lRQS7wH46j7w4x/Sryu7x4VX34+8uTgd+QP04oAqNpYVXYZPssZP8yBVN7CP70kkg6dUXHvxkmtp0CodgUM2CDMMj6nkkflVOeCHcFfZKep52fp1oAxZTaQkFHZj0PyFf509NRs8hWVwp646fka0TbfvfJWP7/IBHUfTgUHTn4BtMkdCuCR+GaAGW91a3O0CXJHQNwyfj0I9q003PF5bbZI1wCo5b8K56ezhYiRY3jIPXBH+fSmJcSWbFfM3Jjqyjj6UAatxGGj6Px91T1Ydu3Nc7qFtncVwAD1Fbc101zCqZycADaMYb+dU7hX8tvNCleBuXucc0AcvcqQQcVBjA5rRulUABT1PSqJXB5oAVQAo5xU85Z7QHP3egpiIW42nFNkVmZI1ySTgCgD6A+HabfDVp/1zFdRWH4OtmtdDto3GCsYFblACUhp1JQA00hpxpMUANxSYp+KTFADMUlSYppFADDRTiKKAExTgKMUooAUCloFLQAlJTqSgBKUUYoJwCaAEeRIxl2AqCWWG5hdVcHiuA+Ier3an7LZSmNj1I6159o3ibWND1NTc3Es1s5w4c5x7igDpdTtGh1i6DDCqciq8Llgcjii/1X+0p/PjONwwfekhzj5hQBYGAOtLEMybs5HSoy2eAOPWp7YcZPPNAGpZAHBxgematXEqoCc9vzqorqiDoMVnX1yGVmlkEcCDLuTjFABJcPcM4iPlwqDvlJwcf0Fc/d69ZwMYNKtGv5s8OR+7B9u7f55pEWbxByxa20oE7I+jTD+83tSXWuaZpb/YNItftFz3eMbue2PX+VAFV38SX4ZpTNBERwkQ8tP0qp/YU8sZkkniZ0zuDSZIPp1qLXE8SxCEak62waMyKryqhC9Ockc+1VNN0C61E+dDqWniXP3GuSH6fe5AzQBd/s24hkJVmiK8lo2zx9Qa0YL/AFW1Gx7j7TGf4ZzuH0zwwNc5qGlapp2yL7TDKjZ4t5t2OBnPPoa6jRdJ1a7062uLK9hvXZGDWUx/eKB1IPf8aALWn6lC3zxFomX/AFkR6j39CPfFb9pPHOAcIzN0YMVOfr0P51xqPHJcCORHtbxGOI24KH6nr9KvWd1LaypnCQSHDL1VT2K/7J/SgDqpJef9Wwznoc4P1pv2khwOR2JPU1T1S5NnHGQTnHC4GBWeLxnZt3PtjH6UAb/225bIlaNUz8qBjyPeqst5tVkIAzztyfzrPlvlUDI3cDjr/k1kXN2TtKlRz90N/M5oAt3k5DcYZcnB9qoLcjepBxzwarTXrFypLKSOec4qFZCWUngjvQBsxXA3fKW8zPQA8H6VuRXLW8G5nVSRks5A/Tr+Vcvpwa6vkhTdtzkjcBkDnrWxctsmEcGGkwQMAkDHcnqB268mgCe71bYPnmZ2flI4UG5vUjI4HvWfc6teMGjhmEII6W67m/Fjx+VZd3eWVm0iM8l1dzN84TlmPYEY4HtRqlt4i0/S0v5LSOxiZwsKuAZCT7dvxoAJke6b98kskoH35pnJwc9AM5FRMt3bIsotHaJsAfMTz9fzqnDo3izUY2mhJZTw2y5UnHuFJPeqd6/iDSNkV3LPESp+XdkHHXI/GgDXXWbm3Yxl54DjGDyAPcHI/lRLqYds3UalT0mi+6fqKy4vEN3PbYurczRINpcLjae2eMU37Ray4ktmCFvvR+/0/wAKAN23umhG5X3I3RgeD6VcaYzLgHB7D1rlVlks5N0J3wNjevb6iti3lGFdW+Q9vSgB11GMbjjNZjkq2MY71szMrpxkcc1kyL857/hQABmxkHBqfRsSaxZR/eHnLn86rhuCo71JpV/FYa1bXcoBWJtxAoA+l7eSK2skMhCgLTYNUtJ22xzKx9jXiHjXx9PrMCWWlO8UWP3kg4J9hXM6Pqd/plwk8E0mVOSCxINAH1DkEZFJWH4Q1YavpUNxnll5+tbtACUlLRQAlJS0UAJSUtJQAhooooABSiowaUGgCQUtMBpc0AOopM0UALSP90/Sikc4Q/SgDyvxbA76+P7pFYeqaUsgJ2810fiWXOucdhUDrvXJHFAHOWtsIEAPAFXIzkdeO2KtXluBCcVThHIHpQBMMgYHQVbtwBjFVCvOCcVZgOM8Hp1NAFt8FRk8e1Y+spBJCFum/cAglP7xrTLEqDgDPQ1manZxXS7TucDnBPH/AOugDkLzUdQ12b+z9Oh2IDhFVgOPUmvVvh14QstGs1nmRJb5/wDWSPyR9PbNeZL4aeeZi80sJkP/ACzPHsMfpW/pp8X6GM2t7Fc26DkT5IABwB/+qgDsPiPokV0sF5LCrog2AlQcNnI/OvMtdu9N/s67WbSIFkdWWKaJipVieDt6cEdu1dwPH+qvBJa6n4ZFxGwIkEU3B49D0rh9esDqlwXg0vUbdN+BCTG20+maAK0vi62GjHTdJ0S2s5JYlikuRhpDgYOOOCeeevNeu/DrRpNF8NwNdKiSyjzJMgBhnsT9MV5Xoui3mnXQubXTLeaeI5R7ybKg8YIUYyeeMmtzUrXXdZIGp6/5kHeOAbFU9wFHXv37UAdZ4isNOvknmeyivJeQCp2lP9rd2+n1rkL22tLacWkk6y28gI4cF4Cf7v8Ae7Z9hWYdAtIsBr2R4lXLlG28ngn0x06+tXbfwvYJJJcQZSSNcqWy2f8AeB9R2oAo3xv45kt7oK2wALIv8a44OPpirUPCYxkDpjPNQyTSTSor/MUG084XjOOKu2UMj5Vcc/dOelAEE6PIN0g3en+yPpVG5gIQEgqenWte5jJchWAwMZHGf8azpkYfKRtPOR7f0oAx5dqnB+7346VMhGwkc0THb1Xp6DjFLGu5Dt5HYYoAbbz3EN/CYCyngbgOmTzWvI1rNdS20mpLbwhsMzffnIPBP91ccd6xWYq+R1U9u1dJZ6TpuoWwu75YpZ5OsjDt0HQjn+tAHT+G7DR7MRTpp1vBMjYaRZPM34PXcfXr171e+Llh/aXhY3FqdzQsJQq/xL0JrhG8M6ZKmVeSB9xwFbKr7gdT6f0q3Ha6rpq+TpOuM1swwscq7lY45BHQdP1oA4r7Zpv9iSRy288WqJtCzxyfLIN3p1BxkHFaWreI/Dv9nzW2kaPKJpcA3Fy24qO+OTzx1qPU/Dl3K7Tm1QLgsTaybl69genOeM9qpW2hw2t7D/a0GoeUTkxxwgM3sCTQB6D8ItIWfSr25uYkeG5cIgZMhsdaxPiB4OWyunvdGhKxk/NEvQH/AGa3z8QYdP05LTSdBkhgjUJGJGChfc/41xut+J9f1RtssogQH7sa9PxoA5+3vHR9k2Rk4YEdK2bVUUjZICh5ArHkhlklMk8hdz1Y9TWtZWnlgHeCGHG2gDTLb4/XpVC6B3HkH3FaGAkYzj5vUVSuhtwccYOOKAKY4Ix371UMRMzDrVvjODUtogknIxQBJbWqrDyOTW1baZHJYs2MnFQR2rSZVBwBWvpfFrIp7UAdj8KZtli9uT/q3Ir0SvIvhtd7NWuYM8HnFetA5ANADqTNJmkzQA6kzSZpM0AOzSU3NGaAFoppNFAEeaUGmUooAkBpwNRinA0APBpc00UooAdTJziJj7U6ors4gY+1AHkXiGd38SOq8jpV0OUjAIJqF7Yz67PKw/irUk8mOMmTHAoAoT4eAkdcVlwDirv2uOUyBDwKrIAF4FAA3Ud6fvAxg4zTGUnp1qHeUOSOR1waALbzcjcwHIGTQWyrAE7vaqHnMz/ulDE8c1PEwDYkcdcYx/nNAF+1t2GDkY6nI5rRMCugUnHOeee3FQQzRshKH5AewNPWeDJHmqW7gigBr20QfPmZyTwXAH5DntVW4tlOTHJIqZJYo2Ac+rf0zV+Fo8ts+cbuQqdP0psuSTiP/gTkE0AYwtnMg2xvtXlXZsKM+melNntyo3M7SBR83UKP8a03t9/zu3Xjr2+tRXKMgOXCgk43DhfYf570AZxQIq4YHBBHYADuB2qO/vJILY28BIZ8DHOQD3z0qW4Iiw7jKcBVByQfWoLaze4d3cMCecZ+Xj6/rQBnWNrJI+1hxnrn+tdFa2wRCDgHpnj+tSwWi28YKkqW68ZzVhcADk9MmgDJvgBlDG5A4B29Px7VjzxxglixHPVh1roruMSK2EXgdk6j1PpWHNGXc7Ynweo4z+BoAy7mHzASAOBjKiqsIIZlzxnir08YVm3ZXPPI/rVVB+8GWBHt2oAbcRblzgHA6etWdGu2tpFglAeFjld2MAjvSsFxyajK7iV4BHIAPSgDqwBK2zl1ZQNpHX3HelMCSbiW2YHGM7gB/nqc/UVR0e7WWMQygbgPlI+np+Xetdo0YEnAQg98HH+TQBUa1JVR5ihv4STs3fjyCKjms7770xuELZHmFFkxnnHyg5zWhaoyII1iDR7RxnHH+70pkpjXiJ5ID/dwQB/n2NAGBPYxKm9rpfNkHzZADE+hBHv0rMuLNAMeYXwB17+tb2ou8gJM6tk4CHOee1YEwYt8ynJ/2aAKLwYctxiljGwnnirUsDAHC/dGTjIzVSQMpbOefQ8H8qANFXRoRufJUdapzODkdCP1qqsx7HOOx7VI5Lc0ARMMHPpVyxKiQuR2qo4Oe+asW7KrIGPGaANmwuCNxx1p9tdeU8iseDVmD7MYV2Yzis/VbV0jaWMHGKANDwHc7PFJUHhs17pEcxqfavnv4cq8viCNznqa+goP9Uv0oAkpKKKAEpKWkoAKQ0UhoATNFBooATFAFLSigBAKcKSnCgBRSigUtAC1DeD9w30qeorkZhb6UAebSFYb24J/vVmatehlKqeTTfFFy0F5c7D0NcjFqTSXA3nvQBsW6PbfOScMc81pRsJE3dB7VHGBdQKVGQKdAMIB0PpQA5sYIqrN/eOCMjGOpq65yDwOahMQb7zY/H+VAFJHVQPJVsD0UkVcgVGG4rtbgrnHH/1vpUZt1UMVO7P8X3T/APXqO1/dO3ykktktjGSPbJ/SgDTt5PnUbiznoWBx+vT61q2qMVB3Nk88H/PNZSXDrGWdYyW6Bk+UHrz3/KtOK6VduZAwPAxxn9OaALhXYBuLD1yelRPhcELjjk9SKglnlWVGiGUySw29f5+3cVUnvUZhHI8Pmtjanmcn2Of8KAJp7gbSiKcNxz1/Kqk2eGKsw7EclqSWYfKqhU3EnLsQPwyOtRhg2S8isoPBcHAOevGMD3oAq/ZmupvOkaRQegbnn3AOD9c1sW8IizuQEnooQAD2OKfa24jxLmPOOTtyfbn0qWRliBwVGRwq5OR70AVQ2ZNpRMrwdmSAafJMM5wSDjrUO8KNzcYzzjgf4VUnnO4g89+tAF59rREo2PQevtWXPv2s5BUfdz/T61YjbdgsQe+OgpZ50TI2jB6qOtAHO3yb2zHlvqc1mZw/oR+lbd0FdWZAQo6ZrElJVzjv14oAfIzHBXk+9TW7bwAOu4Z+tVkOF5NTWrDzCMAE9O/NAGrDb/Ik0RO0YLgHO01qwzsdkdySjc7XYHkZ9elV7cRugVQF3D5cED8jxnryPpViW2VwCA0bDk5O3Hr/AJ5oAvwyHPzJnjGRjB/zxShVmc8Y3DIwOB/9asNDcwSyZMjknI8wsOMetWvtocRjY6PnIyTjP9aAJ7yEEZLB1IPfv9fyrCvIdp4BwRjlcEn61tSXCMfkPyDPbqD2x+PWsu+cOu8um04K54BI/wA9aAMidXj53E4HzZ4x+NU5kLOWVVK8/gR2/wDrVdvEZoikirtI7c4H4d6qLHsiADs46qS+cD0oApMp68AgcjFOUkLtPIPIyelT3A4UKu8f38fpUA+8f4VPc0AKBx09qv6ZZ/anYBfujNUVB6Zrb8P3CxXZU4CsKAHqnkMAT0rXjlgubRozgnFYfiS6SKX92etZuk6g/mNzxQB2Xw7sVXXn2jhBmvZ0XCAe1eVfCxDNfXU3bIFer9qAExSYp1FADcUmKdSUANxSYp9JQAwiinEUUAR0optOBoAWnCkFLQA4UCkpRQA6o7j/AFLfSn1Fc/6h/pQB4j4skeTUr1E5xXBpPtmwxwQa7jUruOLxXeQzdHbjNcf4ohigvy8HRueKAPQvDO2TT1PXinSRlZHA9a5/4e6l5kUlu5yV6VuSzo9xkN8xbG2gCRuOv5UqjuByKUfeyakX7p6ZHcjmgAEJkRgQM9MHuO9MexULvLbecEY49jVgkgcdO5z/ACp2IkO9v3ZP3cjPNAFMWbKCUkbb/vjn2PP0/LvSggHa14Fk6AZxz7ACpzA/zSby5J+UnhR9MdfzolY7Dv3+WnUqcY9f8igCs0vkp8ssbN2Q7hg/jkCqkljBLcRXL26mdCCSIvm6cc56VosNrHCPk8cHGfQd8+3SmGLZ1VMnko0YBHuO/wCXegAAI4j/AHe/GOxb6Aj/ABq1bFoyVkeRmAADBhwPQAD+lTWlrn5yCvqHGCfx649qsXEQQBvN2sufmI4/IcYoAgVZCcEbcZCs2SfwH9etTSQhVZienQEc1JEcgl1247msvxHrlnpkIjY7pm5ESnn6n0oAiuZFD4dhkngZqivMuQvzejHisfTXubvUPOlG5WbJyeR/9auntbR5GJSIsQOfQUAQ8gbPIBPXPYfSnxWpbcWz83ar0cUe7a6gj0FW1tIT92Rlz0HSgDAubYeWVCjp2rm7uDa5wPqK7m9iIYFVxjqP71c5qMIGcDBoA57YwbGBk5wKdBFubOMsCBjr+lS3UfGSecc1T0+5ZLtElO1WONx4xQB1NhuWMZzt5wpfA+nPHv71qyeXlZB94D51ZVA9Mj/EGqNtAsmwox553BsZOf5VeQOgyzYOQctlR+PUfyzQBWd45ZGjYIXUgh1DEEH68flVZ43L7EmwIyCu7DKfY5H+FaDwllBcAhslSM/N+n6jmqk9tCwdpMiUchQCSR6nJPT1WgCBvNYkPFlCQdrYwD7DOO3rVZ0wzFlDK+TuXjI9fark0XzAANvBxhuMfVsfzGP5VE8RAcOG6n7wAB9+2PwoAzrqEKQxVsjhgBg/5/Os59+ZA4KsrfMGHT34/Cte53IEIVdvdeo5/wA9ayrpgD5qtlVGM55Az+ZoArtlgc84PrxVZ8b+RgD1qaR+TnAOecUwqed54xQA6FeOeh9amSQQTByQAKbHkJ04rI1e62kIvFAEut3wmnG1s8UabuSFpW6VR022+1XK7/uk81va40NtbRwwYBPXFAHqPwbTdpskx6vIa9Nrzr4NJt8PIfVif1r0WgBKKWkoADSUtJQAlJS0UAJRRRQBBThTRThQA4U4UwU4UAOopKKAFpk/MTD2p4oYZUigD558bxGPxcSeNzCneItCEtis8fLba2fibprDxBDIowG71JE2LdFmIIAoA5LwVYXVteyXBBVAO/etO5lkOoCdWAXONorZjmhDbYgMHrWXfWqLeK24hjyoFAG9bnzIlYd/Wnt94DGeaq2c4KAHj2q71JA5oAVSSc8eucVYBdgQHxnhmI6j0FQxqRzzxxmrMMZeMOWZQRx8uMUARCAKOBz/AAnpx9c0rRFyBGyfgckfkauLCuGxGmTywZeT/SnQoGQLJsJHO84HPbigCitqqbGWQbQMGPcVyfUD/GrMUKsuEbAYZDBMgjpgGrm0blLbsrnIwBk0vByeccD0H6CgCv5MULL/AA4PynZjPYDnqe9UbqdY41ZsKc7c9M9c/wA/zqzeylAEGBnnk84+g5PNYFw5knjVfnO/KooyQM/556UAO1PV5Y7RktQPObAQ4+6Mda5iLS7i7nMk292c5LHqT9a9A07RFlBmuDksc4rcg020h+YRjJH4flQByGlaGYSu3lmAyxyMfhXUWVoqpsJ5PUjvVxkhiG5QA2McnNVIpQZWANAE66ZCJDkDIPUCri2kWwLgEdiaSIqV5NOfBXCvQBUu7VTEcKDiua1ixQKzFcZ4rrYym3LHPOKyNclh8spxnPrQB53eQ8kBenY1RltQ4YhOR29q6C4RZLnA+8exq3Bp8a4LBcd6AOb0K9m0qfYwJt3b5kPOM9xXXqi4LwtjIB4zgjqR15rNvNOiDOseChGVNS6WztB5bNzFwMjPHYUAXJPNlQCGMSMhAKu7N0+nfoRUgQGPZMFVflyCuVzj+6eefUU+EBZF+/gAZOOuf8ipYfK2rIApUrguilePrnp3oAy7iz+VcoBgDbjcR9Dg4xTWihZVdFIDZBAPH+96H8vqK0mwWw7JvI+V1bkdgPfr361UlRB+7JG5eeQU6AHOD0PH86AMeaM7W2ow2ZLADHHJ4FY9ygDOSAQR/Fxj/E10M6tu8sq/y7SAe3UdR7EflWBqMf3tvc8k96AM2U9xyfamlupJwc85qV0JY5wff+tRMG6H060AStIEt1z3/OubnhknnZsEjPFbl3JtWPoBnFSaTChjO8ZyxxmgCtYRpBFuPDCqF3O1zdcnoa2L62wx2dKzRaMJlIHLHFAHvHwlh8rw1Bx1BNd1WD4MshZaHbRYxiMVvUAFJRRQAUlLSUAFJS0lACUUUUAQ0opKcKAAU4UAUoFABRS4pcUAIKdSUtAHF+PNHN3Glwi5aM5ri/sEkqYYnFeyzQpMhRxkGuV1Tw9IjF7QAg/w0AebtZS27kqCQO9Pvo/9F+0I2WUdMV1r6HqMuVWBRnuTVHX/AA3eW2hzF3XeuGG0UAc9o8zSx4lTByCMn1rSthILh95OPvLntXO6Vd+Re/ZpgQxT7x6MfaumgzhWY5yBigC3bgYXOTk8/WtCFRnB6dMVRtgANrY57VdjfoSSPQmgCYJtfexBBHC9Me9LvKKT6cBjUTy4O4tz6ep/qaY9wqqxA4A5Ygnn2PSgCZiCd5yPfdjPt9Kq3EzLlmb5VXjbwOPeoZpl6R4JIBOQB/PtVKS8IOWYgkYGBjPXGO/8hQAXskki/u2lUEjAxg/Tnn8zTtOt/LUuQfTcerf59KhgRr24KNwo5aTJOB9e57Vv29uixomzG3oM5oAsfa0tbUMWzxXI614/NnLst7RpuxbOAtdDe8KV25UnGApNc7KtnFORLb7ieArDHWgDAvvH2qyRs9vBEM9Mgmm+HPiDLJqCQarEiLIQvmpkAH3FdbBpGm3yMotwg9FGOaxNS+G1rcSl7aZ4u+ABQB6RaSB4wQc8UTOACKyfDYksLKKzupfNaNdokPUj3q3fMc5DYHXNAFe6vGjBWMkVzGpXLhjkk9xmta6kHO5ufY1wfie/muH+x2RO44DuvYegoAkm8Q2kFySW8yUcEIM4/GpIfGImuFhtrOWXJwSP8KXQfDljaqkl4Qxc87jjH1rZN7o9i2YUQtggsBigCVLhpot7rg46UloxScsMDnIz3qBr6K4UiFT8ykg9jTlfd5ZDcgYOOAR6CgDZkffGTGqM6/MFf1B9R0pwkddpmVdxzkgkdvXHeqjMWi8yJ1DjA2kEBvaoVmPzbBIpHBQEgp7daANHzNpJVxwNxGNmfTn8O+T9Kgd43leMAGTGHH3+DnGc/WohN+7G7OM5w3Qfj0/EU1rg8B8EHJzggHH58fU0AVbx/Klk3Mo+TcQvOF6c9u1Yt2pDMCRhOpB6+v8A9eta6IkCKDlzgMO3tn0H4dayrpuqISx3EZxyfT+dAGZJ8oYFcHqOarkcY6k1YnO5j8uATjjNVZz+7f3z36UAVbmRPlEjYK8/Wuh0G0+1WinnrXL+WJ5QGGzGMg969X0rwVqKWUNxZzKVdQfLcdPoaAMG600InzenWotC0R9S1eCOJCyI4ZzjgAV20PgzUbtwt3KscfcJya7PQ9AtNHgCQRgHue5oA0LOLybZIxxgVNRRQAUlLSUAFFJRQAUUUlABRRRQBEKcKQU4UAKKUUClFAC0UUtACYpaKKAFpCM0tFADdo9KxfFELSaZMo5+U1uVW1GJZbWRW6FTQB8+RTAakRKygKSuQevFdVbTKyIFBPyjB7Vzt7p//E5njiVGiMhLM4zWtY7EEcZVlMQCc9KANWCcNIwCkbT3PWp0mJKq4CNjucgVnnZFMZFIBYfkfYVOk2FaRCWBHy7eenXFAFx5B8ryNgE/KowST/LNV57n92AnAI3E88D29aiacs4C8KOc4/8Ar9Ko3N0gBywGF6kc5Pv/AJ9BQA6efdIWYEj1YE/jz/OqjTnAWHaWckDHA9z7jFU7q6Ea8kluihs88+n8h+NaWj2LsyzSR4JH33JJb2A7D+dAGtpdv5KLlGwvPbLH1Pv7dvrWokjdCMAj15qoGx8hOfcjik3ncclRkck8j8aANEEMmXyM8YBNV7jToZQSwzkYDHn8M9fypomyNwwfUA5/lSSXflr825e4J/8ArUANgtWgI8vaFH8JUYx9atDzCc5A/lVKS8KglyOnb/69R/btqFwXDADgevpnvQBbuoJEPmKRkdO2azrq9dVzJG6YODnoasDVN8hSf5QRlR6ipjcxsFDKD6AkcfhQBymqXs05KQxud3HCms5NGu4wJZYwhJ+4fvY9eK7iWREOCqgYzxWTe6jDtdHOWUcbk5HHUUAYE1tJJGyybmJGAGPeq0WlRSHEiLgHjqcfrWgzJ5rbSdkhyVzkMcdj9aje67MDnGc9j36+tAE0YVEUxpnPAA6UnmKjH5SoA4YHv/kVD56hVGcqVzwcYJ60rZEaOMEEYJHegC88/wC7bzHyrKMjbkgngkf57VRublkkLqgZl+VuMhh2+vfirNs2Y/u7gPfof8OlVNQgjIZs4yfug9DjPSgCaK7MiiSN4hu/vLuI9McZH+fWpftDsp2qScDKNyD7ZxyfbNc2l1NYOVbmEk5UDAyRWrHO0qrsAxgDaBuI468AY6+tAFmSUKkjyfM3TAJHJOOOMH/9dZc8qnfuYqGB7gjr3x1qSfcYV3Pgtx8uDn8qpTyMsRV1UliQCF69jxigBsz7W7dOuaqSSjIX+9UoDOwXeH2jjHbPOKint18t2d2Axk49KAII4mnvQHkVBxndzmvqDQ1C6XbKDkCJR+lfOPh+ETLNNcL+7kljijyO4bJNfSWmgJZwqOyCgC3SUUUAJRRSUAFJS0lABRRRQAUlFFABRRRQAynCkFLQAopRSCloAWlpKKAFpaSigBaKKKACorhd0LjrkVLSN0xQB4tq8Ri1SWNcK7MVAP8AOqlhuEyC4XO8ttctkEfT1rY+JFs8OpfaY024xubsPese0e4uNMWa4DeZvPQADB6NgUAaBgJysXl7COVIGDUkMBiT5Vw2Dkk9Px9OTVexDfJPn92y8heQx9a0d+1d5U9v4c4OPbp9aAKztjhBt/DoPb9f8isLU5/KJYNgYJ4+v+ea6OfcIchQPrnn+ua5XVfMa7t7dQUUyqXA5wBzg8/5zQBY0PTJLy4W5uiNg/1cZ/n/AJ9a6Yy+Uu2PbsAwzZrMluljVYIgxYr8yxj5sf0HvWNLqNrNKbZU/dgbcjkL7k/56UAbP9oggiFwyqccZ5PoKINQ2nY5LMzclWJC+w+nvWEszecYZt67ZOQgI7c8/lj61etXwq7YmVA5yT8zPj0z2oA3knYYZn2nOAMcj3x6VVutUVWBkkK7QeOpx06etZOtah5sOYQf3eWOSO3X+eBWfcB2jgupwfOm4AHTI+vTHTNAGxqOoyxzYkkZVIyqHnHGcnHoKpXGrF9OgmhOfLAGXP3sgdffvWHLcShmWYklgxwv8RHAA9qbvk/s4WqbSQSzDGfmzkUAP0+7ubqaW4muXTauFwcA84/Lp+VdmlwRbRyRynbxw3O4Z61whilt9xf90uBuHTcfetm0vpbmHcT/AKtsgY68dPxoAs6vqjfvfIXJT74U/MCeOlc6uriW7jeXJVEIcHuPQ1cM0zXBfyFc4wNpwfTGaoXlq0QZwjIH6Buo7Y+lAEl1rJaNmVuPMA2dh6YqzbamJ23SbiNhYe/Pr/nmsaAbEZpH2bRkIV61Bb3DxXQcKPNLDgDj6YoA6zfG+Ah5ycZ7+31p/mLs8t2KjGAxI+6RWLNM8c4WSINH8u5s8oT61I8zXMMyqf7pjcY45/Tkc0AbNrevbzc4cMMfNkjjnGex+tNnuI9Rt2HmFZckggEcdgf1/KufujfQPE8snmIctwOM9/ofrTnmdvLljzGFGXZeNhJzmgDQuoJTbKLhg3Bw4/TijTJyMROMyKeCB29+349aNNuHug1pMwMhTcAGGB6jnnGc1HYJJbaqgD8sSuOuaANOeBFUNgkkEgA5z3/DP5Vl6nGTKFjdRIMLhcHj6enFdCYiDIjFADhto6njocdOR+lZ986oQM5AJHB5PHBNAGSqMqs5ync5P8qr2907K0SkdPmJ6YpbppRJIZHCoqFhkZz6j60zTI0DM4JAZTj0AzQBs+GC1zq1lYrApMMgOeecnnivo22QRwoMYwBXgPwmjFx4tXexZkUnk5yB0r6D7UAFJS0lACGiikoAKKSigAoopKACikozQAtFJmigBM0uajzS5oAkzS5qPNLmgCTNGaZmlzQA/NLmo80uaAH0U3NGaAHUUlFAHnnxNspXRJFYhCfm9x6Vx4d/ISEMzcFVTGNvHC5r1nxVbCfS5ScZUbhkeleRSvPJeySORgqCioO4POKALdnBcS2otWlZNgxuxyK1rVfKQhi0pQemM/SqGnPdXE5RIwryEYBx+taTK8J3syEjqVbII+ooAqNDv84zhmjQ4RWBH5+vP6ViJGkniO1j6RhSRzwOB/jXUyIzgCPBBHUkn8MVyGqcannZysbIuwkj1yP++aAH6jcoIZIBIA0j7iVbJCk4A4HfOMVjTRvE7tKSDHtOwHjeR2/xq/pSwyaheXjwEiIL5SsRgSHIHHtyfrWX4pug8ksiMV2kM3JJz6fligBzXZMlsis0myMLMq9SQTgfkQPwNdNpgaeN2lVWK4MYU9z2z64rzq6ujb3L4YMXwWO0H0OR+dbeieKIbW6hMgZEQHjZnJOOePpQBoPYtFdSRSyM0WQAV5PJ4rp7bw68kSI8R2Jwpb+LINVNO1bTvtDTxB/3mCFZMD9fSt8ag90ozL8nYKaAMWPwpFKEfUJkDZIKpycdq0bbRNPg2bIVKIc9OWPqauJJGp7D3NPaQFRtG6gCrdafp80eJIyMnAyuRn8azZfD2mviRrlQBkBc4xWtLIoYqPfO48D9KimeN4huXO4YHQc+v0oAzksdMtiArM2epVTzSXdpYzABEKZHfHU9KkmmjwcMFI5yO5qKa5RI+5z/ABDvQBiy+GrQ2pKSq02RnJGcD/PSsjU9DltdUSZBlXO8NjIH4e3pWzd6lGA+doz90Y5NZs+psGG2U/LgAHkflQBTu7WSK4IUOyrHlzjHzc9KoMSXlGSJM/Kh6H2P6Vfn1O5YeXJCzg+i4NYt3dyOXjWI7XbPXvQAPfSHKNkhgUYE54q7YXSGF4pdoj2DDHgByRgce2axpYWTEjHLE9BVu1Pn+WLqZ2WM5VQOAMjOPf8AwoA6CGCRYEkghEjRKqSAYBK4ORnvxn8qsWyeZqlvLCVKh8E98FeGx6EfqDVi2u4LSCCdfMYPKYdp4zjDAEYx0PH1NMFqsV9EkY8tEzvXfkqO3OP/ANVAGx5cEcRVM+YwJYseT257+1YmpfvEEzoWiXO7YOM+/wCWR9K0pHW3gFsJN0hG5mOOe2c/y/Cs2OBykgTcIm2gCRgoznOB096AMqVxKJEIjYbgxUd/ce9QrKiHdAzGJTygHP0q5eQWdqk8Hk3AuvvwzRSK8bA9ew/PPaqkWxYNkTck8cc59MUAd98GLNX1K6uTGVyflJ6gele2jpXIfDvRl0zR4yy/PIoYk9eRXXUALSUlFABSUUUAFJRRQAZpM0lJQAuaM03NJmgB2aKaTRQA2lopaAAUtJS4oAWgUUUALSikpwoAWigUtABS0UooAiuYVnheNxkMMYryHxHpb6dPcTW8ZUxfMiMOHGexr2THFcz4vtwLPeUDAHnjtQB57oNzFqN9HqErFVRRGYxkHnv71dlkNnLHaIpkHIMi9PUmqVzo8UE122mXCJdOQ0SMcZXHzbff2qODUI7iBPmVX/h8xjlyOo9j7UAasc4kkcGNjEEyWHRucY9uePzrL12PZfWXyGMBxhgMYXuQPbmr1pHPewRz2zwiRxt+zzNww+o7j+dVNTuGlRbiZEeCNSkqA7vLYZzweh4/Hn0oAzr+3t7C0MCENK0nmytHkkgfdH0z/MVxmq6kku4S2xcFyxwxUnqOePr0rsVnW80xblFYtIPLdUXPyg8f+g/pXGW1izl1kjAiLAZ3At15ABOfTkigCikT3N00jKDuOdnf6cV0dno1tdxIdio44HYN/n1p1rpcr8QxRKi9Xx+g9frW3o9mLMgY3P1Yn7i57UATaXYEwrA4G+PJ5GQx9Kty6fJDjfbEKeGKDHHt3ratoElAYEKV4wK0oEIQJIoYcAkigDkIdIkn2mOeQEHJ+c8D0qzPaXNsMlmIHQ5z0ropLALMZIG25PYVfsoyAVmVG5xnFAHI2tsjAiWeRHfk/L+lTPbAlsSSlVI52jmuqmgikUDyY1OeoFMazijQY5D8E0AcPcWok3mBZAM7S7c7foO1VJtDnuXXzZCQwPQ4Nd81vEiSEAZDAYIzUUtmr4YAcdx2oA87bSreFwd4PHIk/lUGpx2yMoijHqwOK6LVdNjRz8+SeMZrMu7cGONQp3bR/jQBzk7yOFAGwg9fbFV5bFYiAB83Veelbot0t8+bhnPOBzis67IkwSu5iRxgUAY0lqZ4wSACDhQw5B9KbbW5iuMSI20/KykZI9ePXiugt7WRZMKN3OQMkZ4qDVJwJwQii5QZRinzE/yPSgCO9/dXcNtw8SBGByFDMUAJP5D/ACa3PDs8kSy3UjDOdobqMA88n3/pXKreuQZJSDM64+bqD0+nT+dX4rwrpyFG3YJHlKvBGTlvfHoaALNxOXvbl4ouZGAUhQA/HUduMn86rWc0d3LEJDO4LcRFhsKj19PX8aT7SAvmyRktDtll2jkN1AwOx+Uc9KzrZ7sNCgjOHyIztzu7cUAad3H9ouzM0yeawKbThQF7YHQYFO8L6XNfa/DCykIhEmSMg88EVBJp0l1qNzAbpDHaxFppQMLuA5A9eeB9K9V+FekGa1+2z2zRIuFiEi/MwA6mgD0WyhEFrHGP4VAqelxijFADaKdijFADaSn4pMUANNJTiKbQA00hpxpCKAG0lOxSYoAYaKcRRQA7FGKWloATFGKdRQAmKMUtLQA0CnAUUtABilpKKAHClFNFOFAC4rK8SL/xL5D6A1rCs7Xlzp8v+6aAPPri33XMDRpll+dTtyOO1c/qUtrNKLTKojyb1JHzJ6ithbmV5liBx2BBxWN4r0QJi8RZWtpH/gXlGPH5UAWBcJp7M8TZQnaUJwMgcfnj86haQnzp8ESz5Vwpzw3J+mTyf0rChv8AeGt9oYMCpBQjhRxyehrQsrq0tpS91JKySoBJCoyZSCSD14P6UARC7m0e6Zmt3WGdQssAfOH7Nn2yeg6Vkw6ZGtyZZWWOOSQMrDOCOgz7np+NWp4Hu7lhulaNvlKqBkKcc8fkexojikhtvs05Lje7RynI2Nleoz057f8A16ANu1he4TyvLljkDMJC6jp6D6jFOFoft6iYMRGvyMDgA/y//VUumCc2i3XluZChVlkcnJHf6fT0raiiV0AYBvXPegDKilkhfbBuYBtpbIH1+v1roLLUEY+W7KWArLayAcJFEAwGS2e30ptvYvFKzwsoHcgcn8TQB1URRidpGO9WBjv+hrz671GWyvAxk2xtxkH0/wD1ilXxbcIzZO6NWIB29cUAd2+0dDzUMpUhVJOPfmuSg8XJOp4DMPv7eAPbNMu/FcaKRgDPbdzQB1m4MGBzz+FRSkmMDzVHrg1w0vito9xkVFXsc54rPu/GExY7doQnBIHTigDqtQ+zxndI2SOxrCudTgQMVwMnau3Brn11cX9yI5XLFj3Y8elQx6fLcybgTsLZC59DyP8A69AFu4uybhlDNnA+RhgVMltlSWUfN7/y9amtbIO6OMhQNxUnr7fpWgVZFVx/CSeB1oAjEKvb7VbGO5Nc1cWs011LO8vkoI2xGCGzjjg+5xXRX0/kqGUgHBc84xgZxXKRypPK0gmKLEPlUDLMxXpgfw4yfwxzQBRuvkiVhlVLFSCOeMcUtpMsk+DgLgF2PAU5z1/T3q7cvAbUCEvnZlyRkBiR0rNEMsEj7U81B99HJBOOeR1oAuMkmoagtvYRyFpBtZByePpW9LJqNperarLNFHBEiOsLqGcgADd/d7Z7/jXPSIltaksHE7vlAwIKKM8f59KsrcXN6f7NKSeWVDBVx9/A5Pt14oA6TwPZyarK2nQQYVn3ySnlSwP617/p9uLe0jiCgFVAOK4X4V2C2NmYhsdRyrgcmvRKAExRilooATFGKWigBuKQinUhoAaRSEUppKAG4oxS0UANxRinUUAMIop1FACUUUtABRRS0AJS0UuKACilooASgUuKMUAApwoxTgKAFFUdaGbGT/dNX8VT1YZspPoaAPLQo37vQ1cuLoy2axRyImDxuHWq3Rm+ppht1mkUn+E5APTNABY6UVsLmbV7Rpv3zNvhcBgpHcdwawpdKur0Q3+nWTskPyRgcYX3HWvQ7bUYBaFLlVXcNvvuHcVy0d9LaLKbuO4jW3ctDJjJJPb6Ht6UAYlqFup5JXFrFcQlkJWIlRgqNw9ju6j0qnq0V5eW5ks4VL78SY+VRn5WkzngHgHsuK0/FBvbtdMaHzCJ0aS5YSBUA4wGbHHXvxWRJJfQ38c1kY5Lgq0U3z4XB55wduCC3PbHNAEdnqjW11bRX86BGG9mUlt/vxwPp368V3djKs5aWFv3ZUEGuKtbWa6t1K2kSbWVlVAhXZknqv4859q2NGum2sWdWJb7m7IC9iD6c9PWgDpRjeGwRxjmnYBXA+7/ACqKOVXwRwc9KUyhPvZBHHtQBgeItPN0FUHDgbhk4yf6Gs46NBaWEifP5mwl3Y9zwB+ufyrqphA7Mz7CTz8x6Y/+sKj2Q7Dkoc+5I9aAPOobGa1McDZUzwtn0Rj90/iRWYZZJJ8SbyTxtA+bNdrrVuPNkmMQfzG5DHbn0x6YHSsKO1SRGe5VQ6kcscbeep+lAGWZI5IWLj5WUkhugI6Y9zzWhb6RLK5RnjCnO3Dbm+n1rodK06BkDzfvZEYSEOOFyMA89+MfjViG1FszY2pE/wA3B4B70AcyNPa1UxSW6Tx53K2AHiPTIPcex4+lXrJSYwrnyuMM2eXPoB/M1ulAV+UKRg4OOg96ijijVAqhCDzyuBn/ABoArLGuFAXkADrwBRJJtGGwBnHWppZYkQlRtDA57+3NYOoXTvI0ccijHG7GCDjt/jQBW11vtl1bRQuqhiI2Le56/pWfax2bSKtkkxZG5ldsIcDBZuMd+Mc49TSFz5MzLIgnjiDo5PYnk/XkH2pYtWWHTIsK0kQlWTyG4CsBgAHOSMjcenoaAI7mB7jUZo445EaNiLiEqCsZXALccEHB49fWrd9fQy2xgs4HkEhy1w4DSuAMOB/dAAHXqKpz3VztOozI2+ZDFkjblinBI+h4NXdGYSXjWumJH5zMSkr/AHYhjDED8Mf/AK6ALl6sd7pwgsJ4rnyYwPtEihWKgkgBfYkjPtWXHFdWt0JvOKurbV+XBPua6y0WztNOZLmG2VkyGKrhmfPBx2H1rn5nM8pckn0oA9Z+EMryafKXcsfMPWvSK8w+DrYtbhfSSvT6AEooooAKKKKAENIaWkNACGkpTSUAIaSlooASiiigBKKKKACloooAWiiloAKKBS0AFLiiloATFLiinUAIBTgKBS0AFVNUH+iP9KuVT1Xizk+hoA8qdh5rj/aNP37BmoJGxK5/2jSuWZQB0oAlmzOoVWyMcg1YFy0mlzwFGmuI4vkJGRkE4HuKzy7AhRx71ZgmMLPhh8y9fcHNAFGWxjlsbYaorLbNEFVoyYz3ypGcEdSD17VR8U2otbGWPTW8jyEjjYN94RgDge7HBOe2BXoSLBfJFK0Oy4ljwAEB2kDgg+vWuV1aCVI7iKKSKVySg80f6zAHy9SG4/E4/MAwNOumt9MhhQEvG+91Qb/3hziTp0A7c9TS6dbapMpvjEV80Btq4AVccZH+FXDGbuyb7L+5IliMxbO6UgEjhei+3uTTpor1xOk80UYXkoygckA9MZ6f05ODgAu2k7XCEuoV1Jxz26dffmp3kVF2YAJGcZyM1ShaadAltuJXAGwcDtn8+3tVO5Bj4E57K0brksc+2OTQBqNMgxuhOR93AFRPf7SPkdAfXHJ+lZ+qXklskKFx5kg2hehB9xzjqB1qik5lnkjZZZW3YZWBwBj1xQBqXhjlgLSSRqDkZxnd6965u+KCEsZSSX253gZHp6Ee9bF7Igt1EyBCAcbuQuBkdPyrH86388MzgCTChGHCHk/59OlAGlavL9hWSO8CM4Bf5Dj6n8u9TfaxgCbDSBd2eNp+h7VBbwK1q0jZiDnAJO4fT9aiMcdvGzvcIFkCnYFPGRnvwR19KALrXYJySAh+8fTj/wDVQ052blLKep2HOf8A6/8ASsPzTFP5v2hQrrtYHO3b+fGP/rVZt7gRRhd7OEA+duOvT2zx3+lAEl2zvGzghS3Y1y9z5jnzVdFZU2hRyQOxroZp/tqSRW5HnAZMfGWHqP61zt7AoleMFC+R5hjPyr+PT8RQBNcKv+kL58UaAEec/IO5clQAM5rPikgaSOC2gaQysod3AUsAc4UZ4X6mr0cEq38azxwyeegjZXchHXAGcg5yAM/hmrN5pslrP9o0yFj5MgWW3kjBAzkqfdTzj9aAEv7GR9Eurxk3RedGykPk7PmUfyBrR0S8stN0lNsAkvXfc7K27OOR/wDqp8xE2jaxCTHEpmR49vKMqADCgepI71mWVz9lUpDDEsjclgvT6DtQBoX2pG/DKIkhRnMjBerMe5qhjHApo4PJyT1pSTigD0r4PTqkl1GzYO4H9K9bDKehr578DX7WOqEqfvDpmvX7bVXkQMOaAOlorGTVcfe4q1FqUT/xCgC9RUS3MbdxTvOT+8KAH0lN86P1oEiN0NACmkp1JQA2ilooAbRS0UANopTRQA3NLTAaUGgB9FNBpc0AOpabS0AOpRTRSigB1KKQUFgKAHUtV5LmOMckVn3OrovCcmgDXLqvU1l63dollJyOhrOa+nmPHArI1yVvs5DPnj1oA5YglifepUIYYNRLkilifZJhhwaAFI/eY7VG6qrkE8d6nYr5gIqO5jDncODQBdstZjglhiMzIc7VJ7ZNTavoTX0E9xpyWxjlkEj7vmZsDBKjseKx5LaOTbuXkdDWrYawumg27IpjddpbHKDuaAKl4kMWnXE127zxs4KLHN5eNqDGG6KMseMcnoOKx9RvZhbBooSJZCGQSFS3l4wpyOufzP410Oo2rX8NulrYIlqSXdeh2lfmb34AyOvI5rH1SGCKzM7tIUkUt8i4PTG0nPAGMD86AMme7uoNOH2h/wB7uHEeSxPYHsOBVVnupbxm+0LGYyC29ScnGCABznsavyFp1tFhGJTMAM8LGMDnI5ycjnrWrBY2+mad9qZjLI8pTywBgkHG0DnjIyfxoAyEsZRdkbl8pyqCeRAcg8kAHuST7Dqe1WtVu5LXzZUhiDPK6plMDapwM49gKgvJ5lmtwSJZ0lyw4wzlu3rj/Cqct39uuGQkSStIS7g/Ipyfun6Y/pmgBPtCXECxKXaWMY3ZBAJ4Aye+P6UlppjmdblvLnk3BVOwgbu/Oea1YLOG2sHOQNw8w5OAPr/n0qnDqkkmy2R0kctuY4+7zigCzPayNJEYZDHlWRVxxkAkAj1zVRXit7cSxiOVlLfJnAIJ6A/jx2rX0OWKO/aUOGRXEiRmM4L9CT7Dk+ny81hp9nuEl8+KSQFSTjChiemSBwKAGT2WllwVjvIfMAaF1IKvnORg/wAXGMZ69D0qtpq7p50s598UZBjYx4EgbO7IPTjnBOOvrTtSkW2W0WEeUzxHywhJVCJDgHPbjrRFH9k1aO0j2Kkso/dMcEqx6g/X9MUAULl3sZXmtNwimGxWHTa2PXkdCpzVCRZNpKjzJMglxnaFz0IOOffpWxeW3n2cxVCqwXEqeu0EDII7YYD6VRS3jtIZZZYg88EGRDJyAzkAA57c5x7c8dQCzpKrFb3ZuIPIvEnEUbxo2RlTyMtgYA/IiptQVNN8PWLPIzXct1LGFUFSY12jbjsAaTTYvtyrJqkrPvgecyM/KRLhV8vH8RYHIx0zU+sm2i1lZsu8kSkhZ1w0Lkkk46E+5+tAFWK4L23lR74wyKkiOM8rxkH6cU24SGJV2H5u5p8YVyzpnBqKRMscjmgCA8HcTxTshhxTm6bccVH0GAKAEWZ4JBJExVx0IrsfDHjUI6wXvynpkng1xEh5qpN1yKAPoG21W0u4wVdefenOUPKP+Rrway1m9s8COViB2JrYg8bXkeA+T+NAHrjTXCD5JTWbd6xqMB4bj6Vx1j47VgBKcGtB/FFncp8zLQBrjxZOpxJJg1cs/FjiVVLB89hXA6hdW8xJjlApnht3l1dU3hlFAHuunal9ojDHIz61po4cZFc7YqEt1A9Kt2175bbXNAGxSVDHdRv3FShgehoAKKKKAENFBooAgBpwNQK1SqaAJM0opgNLkCgB9KKbGd5wKS6kEC5NAEuaa0gUVQa+GM5FULvVokBy4oA1Z79I881kXesEHCnFc3qniGGPOZAB7muS1LxpbREhZNx9qAPQHvjIfnk4+tRvqNpCMs4/OvILzxrcykiAECs2XV9Quj88zAH0oA9a1Hxda26kI4z7GseLWpNUJPOyvP7eF5ZBvYsT612ekQiKAACgDVUelOx3NNTrUh9DQA0JzRIedtSZwvFM2l+cUAVWkIfb3qwoG5A8KO3TD5wfypk2VwFUZ9ahuLiTzF3fd9qAOlS5820+zRyiOaOMBUzxtzyPU5596ybzS44J79IIlktkIZraVtqKm0hjnHzAYztHI96p2pN1dIqHBJGXParWpKYbeSPTVeS7GVUthg25gWJ74Pp0oAwDLALWWXSHS4Ms5MCbfLRMDBcDH5fUU281n7Mlm9xF50bbXBjfBVieucYGcZOev1FVrbRZbKB11NNkaZmRlcbSQT+7GMk9GP0zUWq295ZT28MlobeGRTGhjU+W/cY9unHX6UAMgELXEjxvLLvjMQcPtMQ6NjPHPqPU+tSx3FlbWTRrwzpgqy859QR796yvtOy4eLaBbEtlpFKlsEg8A5GMdM9qq/2hHcOzM2MBREVOMKOSP89/WgDRGoma3w4AJUlm2kggN2H5fpUOn3sNtMzqTu3YLuT+npWTJODBhX2Aj7oc8jOfofoPTmo4bhRK0okwAMlmH3m69KAOnGqRrKzGSSbcuVcrsG337nr7VTecrG03nSCAMUVA3Ltww9sevpj6VmySRTyOZVQI0ZMQD8Kc/n6ip2BfToookLNcSM4PQpjCruH91iD+IoAbeXGRCs4QeXk78ZHzHOPTrk/Sl1C5NzewunyLLb7owvUlf/rjP/66TTbJ5ojb3SElj5zqTgkIp4PpnkewGarxtMuqwFwjlSVYrJkHOST7AE/higDUi1a4a6jlQjM9vI5ixhZJDk8+2SWH40O4vrqxlniD/a4xESmTllYDOOw5Kj0+X0qvBBNNfW2nfZZmlJMZXYVYRk9MHoepP1xWwl7Bp135g8uIwsyQRRZcgbs4JPG4nkntQBvLAmieHIhHGsV+RtWNmHzBCS2M+5/HBFc3d3KapKs7xKkhUByOjn1qnql7Pq2oTXF27M8hyFHRR6D2qS2iJVc8baAJXQRLgYANMBUjlqV0YzcnK+lK6KAelAFeVc/cPFMcADnrU6gAcjmopACeaAKkoqrKnersg9Ki8veSKAKOKa8dWni2mmleKAKLRmoyZF+6xrQaPNQSxUAVPtMy/wARNdT8NnkuNfCnnjNcvImDXa/CK2MmuyPjhQKAPc4YysSj2qvdW7MMjrWkEwgppX1oA5/zLi2l4Y49DWpbao2BvzUd9AGIIFQLDwBQBtw6grY5q0k6t0Irm/LZTxUizyRnqaAOkyDRWNDqJH3qKALcYJ7VOqnvUmAopM5oAMVGwJOKmC06NctzQBLbRbVzWd4iJjtHcdhmtdcAVQ1iMS2jqecg0AeJ6r8RYoneKIMzKSDj1rlNQ8bahdEiL5Ae9ZfiWyNn4hvoCMASkj6HmqccJPagB1xfXl02Zpnb2zUSRFuvNWo7ck9KuQW3qKAKcFvyMitGK36YFWEt8dBVyGDK80AJYQZkHFdVaLhAPasnTrdQ2a2ohigCwmAaVunFNXtT84oAkA3JjHNMwyIQeakj6daWQAjGaAKUregNDx70HH51OsfmOApFOnQD5X/SgCiXEGM8H1FT5kwJInIPfmmy2SyJgMc9qfDtgTax3P6UAQXMv2qK3ilUfuHZkJGcE9aL+2hv7iTzCscKx7htHzbsDkfiKsMEc4ZDtxnI9aqsuxgVwWPXNAHJ6tpEzTLJv8x5T87tHtPHTvznqaqarp82l2kcSQAo/wAxlGBk+mDzx2+td15LswkdVdh0BHFUruKWXelygYE55oA82kDMhmbLj0A+76YqSCxM9k8zkRpnIJOBkcY9zzXV3NlbuARERgg8Cqk9qm1iY0BOSCV5BoAyDbWoMSrG5BULmIncxxk5PTHOKtwQjTmguJobprhlAjVyo2rjggEE8dKlgtTb3KYdGkQ5BflelNl0+RsyTSPK3TcTQBrNBe3GlvLJFcMEVJn+yBd0bBiBwBzgFPybvVfUYobDUkZI57IecJXMuDJIVXdgccDdxjHXHpWdY3X2G6XbJIse1w8aMRuypA/Uih2a5U73OQPvHkn8aALqeJLpY1jhuiBg5dowJeRypYckd6zCis8aqOKelugGCAWNW7a3KLkj6UALFBIDuyBVyCMK+WbPtSwxLIpZyRirUSrjgdO9AEMkQODj8ajlRAKuOuetVLhGYgY4oAgIHUdKrOuSTVwLgY7VFIvpQBSdaroj+bnPFXWTNMRMPQASWx8vdVQxnPFbRQeR+FZxX5zQBXVDmo5YsVdbA7UxlzyaAMeePGa9U+C2m4tpbpl5d+D7CvNbiMsQijJY4FfQXgDRhpmhW6FcNsBP1oA6NhTSuRTnODSKeKAKVwOcGq3RwKnvGw2aqo256ALRAAyRUUkasPlqZiNnNVySDxQBXdStFWGAcY70UAbZOTUsKZpka5q3CuKAGMuKbH96p5FqJBhqAJM1FcrviYe1SGmNzQB89/FXSvsuvpcquFmXBPuK5i3gyOle0fFDRPt2lSSxrmSE71ryizjBUUAQpAAelXUgG0cVOsAxyKmjUCgCNIht6c1IkfFTooI6U+OPLUAWLFMVpKm0VXtFwRxV5l+UUANVafjikTnpSnORQA4ZWpFG4c1Gc9qkjyKAFSNedowaUjcMOufeplPHTml2ngqPrQBSwVbnpSPEjncF59atSRg+1NCAcdKAKjRskfHNVpo43I6itN0qAxfNkigClDcbW2HJ5wM0l0vmjJDLzyasXFvk7kxn1oAcw5wCfegCjNZLLGMRkg++KqzWixxgbRketasTORzkAVBdxxzAc8/WgDGZY1ZC0QbnkYqGXaBgfdPUVpXkZEW2PBcnH0qpDZrK3lTSFWzgH1NAFBLCAwzy71z0A71SEAQFW4Cng1a+ymCZ0J3MDg88CnSxhhyaAKsaB3G0Zq9CGV8Bc+1NSPYRsH41dVCSDQBIkQZeVxUhUKowMVLAuV+frSSjJwKAIXwRzVeYjpViQdqrSqwII5oAiK+tROlWmGRk1A4IoArlKjeM9RVgLUix5FAFX5hHioMYPNaDoAMVSmwM0ARPio5TximyMSeKikY9ByTwBQBpeE9Mk1bxFawquURg7/QV9I2kIhtUQDGBXB/CzwudOsvtlyv7+b5jkdB6V6JJgDFAFKUc0Rj5TTnQsaQqY1NAGddqWY1HDb4G41afDNg09gFTigCs4BGKgINWMHNBQEUAVcENmipGWigDZjPNXYTmqRG01NC+DQBdYcVXYYarKkMKhlHFABjIphWnRnIxSkUAUNQtFubdkYZBGCK8K1/TG0fWpoCMRs25PpX0JjIrhPiL4f8At9kZ4F/fRfMuO/tQB5lGAwqdLctyKq2j/wALcEHBBrXtSOlAEKWzY4FSpHjtzV2MA1MlsD82KAGWsWFyetWQN3BppUrxjinLntQAhXaaM09hke9MzQA7pTkPNNH3acp4oAlX2NSqVHU1XU+lSI2ThhQBKSCOlV3+/wA8VKzY6ComO7ORQAn1qNyVPHIpA3JBoZgMBhwaAEdhVWQSNwMAe1WGU5OOlREBc7evpQA1FdVxwR7UxlVFycDHekaVlyD0qtPOiry2fagBs8WVLqwOax7sruyWJx0FPu73LEIcA1TaJppNxb5TQA4OpOQMsewqRIyx+bn2pywquDj2qdVHQHHvQAQpuODwBV2FPm6ZqG2gYjGOPU1pwxBAMdaAIGQD5m4pjbdmRVm4VZFIOMVWdVVQFPSgCrIM89qZsyM1LK2VwKZGCRQAzbnioZE61a2mmyLxxQBQwSanQgCo5DtNR+ZgUASTAEE1mz5PSrrPnrVWcgUAUJG2jmu0+GvhJtYvF1C7j/0aM/ICPvH1rK8JeGp/EupBApW1jOZH9favoHSNMh0yzjt4ECqi4AFAFiCFIIlRBgAYoKljUwFOAFAEHl4qpcVoycCqU4496AKCjL1Jt45pwTbzUbuaAGOADTGp3LU1lIoAhcUVJiigDUfnmkj4ao0epBQBegPFOl6VXibFWM7loAgU7WqbqKhcYNPjbtQAp4qvdRCaMqwzkVZeoiKAPF/G+ivpGpG7iX/R5T82B0NZdvcg4wa9m13SodTtHhmQEMK8T1zTLjQNSMEgJiY5jf1FAG3aMHrSj4HFc3Z3W1Qa17e6DY5oAvE88009eKTzA4pjNjoaAJFJPFI6Y5piOc1YQhxg0AQYIoBqSUY4qEnFADw2DT0kBYgnmq4bNOA74oAslsDg0zd2NMBB700n3oAUg54oZDnI5pBjrmnBwR70AMO7PH5VC5BJOcH3q0vJyRUc0cbAkigDLndcMNwz7Gsu5YtkbuPar91a7ZCyHg1Rlt2zyRQBTaNSQAKhmjfzMRsdvpWikAAzx9asQwQgZAyaAKttFI6jzO1XordV+Zvyp2SBnGAOgFODMy4IxQBKh6Y4HpUpLdqrI23tUwYsKAEkIHIqtKe4qdlLcVA4JOBQBBt4OTUkSnpSlKcvy0AKUwvNVpnCipLi4VV4NZF1ddcGgBt5Pk8GoonziqUsu9+tTxHA5NAF0gMM1a0LQbrxDqC21upEYP7yTsop2gaPd63eLb2inb/G/ZRXufhjw/baFYpDCg3YyzHqxoAd4c0G10Owjt7aMLgcnuT61rUpNJmgAAp3SkprnsKAGuc1XI3NmpyN3FN2elAFWVM9KhMNXWWkK0AU/LApGUEdKtlc0xk9KAKTADiippIi3SigCGKQMeDVxDmsK3lKt1rYtpNwoAtrxU8bVAvSnKcGgCw65Gagb5TVhDkYpkq4oAarhhS1TZyj+1W4mDLQBG61z/inw7b61YvHIvz4yrd1NdKwpu0HgigD50uYbnR9QeyvFIZTwT0YetaFvcAYIPFen+N/CcOuWTFFCXCDMcmOhrxuRbrS7t7O/jaOVDjBHX3FAHRJc+9Tx3C55NYCzkjINSJOSc5oA6BZRnip437g1gQ3mGwTWhDPnnPFAGoWyKgbI60kcwYUOwNAEZfHFO3nHFMfHam5IPHSgCZWpJDimF+wpCSVwaAHBqcrAjioVPy4NIWwaALYcgdaa7ZGKrGQjvmguSOuKAGTruBwaoyRc1cdt3IPSqsykoeaAIQucq3QdhUyIdvSq0T4GD1qykgJ+9zQBLjHIFN5bikZ88ZzT4lIoAVEA6inNgfdqULuHpUUowaAIyx6ZqN8YyKR5VGfWqU14OQKAJ2lCnk1BJcjnBrPmu88VXaZmFAE9zck96zJpeadKxLYzVd2APNAC5wc963vCegXviG8ENupEQPzyEcKP8aTwf4TvvE14uxGjtFPzzEfoPevoLw9odnodjHbWkYVVHXuT6mgBnhvQLTQ7FILeMAgfM2OSfWtdjilNQyNigAZqQNUDvURmxQBcaSkU5NVomLGraDAoAeowKFHWlFA4NADGXmm7alOKYaAIytIVzUpAppIoAZtAopc0UAcuqZfitWzyMVUjj+atC2TGKALi9KOhpV6UEUAPRsVMcMtVDkU+OXBwaAIp4+aS3JQ4NXGCyLkVUkXaaALQ5pwWoYZM8GrC0AIUBGCK5bxh4PtNetjuUJOo+SQDkGutpDQB80azp1/4fu2t7+NlXPySY+VhVIXgHINfSGtaFY6xbPBeQJIjDoRXjHi74aahpbvcaQGuLbqY/4l+nrQBzaXBYgg1o2ty3c8VyxnkglMcqsjqcFWGCK1dPugSBmgDp4pz2qUzms2KXjjpU6TK3HegC155HWnLMGPWqhbA61CXIPWgDTVtx4NOYnjFZcdwQetWEuc8k0AXjwOnNRbsinR3AIwe9MldR0oAiYnOaY0nPBNDsOxqFyD34oAcXbJJxUZmLGo3kx3o4PPAoAXA7d6cqAHioXfHINNScetAF1CAeasK64qnEwYU5pQvFAFz7QACKpS3O0kVVuLnbwprPublmHWgCxc3Oc4NZ0spPTrTWkyOvNJjNADRlutDHAANPxirmkaJqGt3QisYGcd3Iwq/U0AZbklgFBLHgADJNd54M+G0+plLzWlaKDqIejN9fSu08IfD2y0grc3mLi767mHC/QV3SKqDCgAUAV9N062062SC1iWNEGAFGMVcFIKUUAITUExwKmY1VuH4oAqyPUaZduKZISzYWrFuu0UATxDb0qyhquOKcHx3oAs5ppaow2aWgCTNGaj3UuaAFZuKjPJpSaSgBcUUgooAx4hzV6CqsS4NW4xigCwDS1GDTt1ACtzUZ4p55qNhQA9JSvSpTiQZ71TBIqSOUqaAHAFWq1C/Y1ENrjNA4NAFykqON+OakyDQAUjIrjDAEUUZoA5HxX8P9I8QozSQiK4xxNGMMP8a8e8QeA9a8NzNIkbXVqD/rIxyB7ivpDNNkiSVdrqCPegD5gtLxhw3XuD2rSimUjIr1/xB8PdI1YtIsXkTn/lpFx+def6n8ONa05mazZbqIfg2KAMgyB14OKhlJAqvPHeWMpjvbeWFh/fUilNyrAc0AKZMc96aZz601gCMiomHNAF+G4JAy1TtccYJrMVwo5pXcEdaALT3A6ZqtJeBQearSue1UpSSetAF/7WM5Joa8JGBWbg4qWPIoAt+c3c8U5CxOe1QopbGRVyJMYoAsQuwFMnmwMmpAuFqrdcGgCtJJubOahY84NK3PAq7YaBq+pSBbKxldT/ABFcD8zQBnFakgiluJVigjaSRjhVUZJr0PRvhXdSlX1W5CL3jiHP516DonhXS9FQfZLZQ/d25Y/jQB594T+HEs7Lc638qdRAD/M16hYaba2EKxWkKRqowAoxVsKOgFOUUAIBinUUtABS0lIzYoARjxVKck5xVl2zUDrmgCqE5+WrCjApBhaN+7pQApNIp5owTSMMUASqeakJ4qurU8GgB+4UoaoScGnK2aAJd1GaYDThQAuaKQ4xRQBRTHap1B9KjRR2qdc0ALn2pc0uCaYQRQA/NITTaTNACEc0w8U4mmtzQAqSFTVhJA1V1TNSKmKALS1KD6VBE3rU4AI4oAXOaQmgimMcUAPDU4Gq+7FOWSgCxQQD1FMVgaeKAKl5plneIUubeORT2ZQa5fU/hxod4CYoTA3rEcV2lIaAPHr/AOGGpQMTY3aSp2Egwaw7zwX4htVybLzB/wBM2zXvdMbHcUAfNkum6nE5WWwuFI/6ZmmfZrrobaYZ/wBg19IPFE3VFP4VVntYCM+UmfpQB87PY3jcLbTH/gBqE6bfZ/485z/2zNfQBtY1f/Vr+VTpbxY+4v5UAfPsel35/wCXG4P/AGzNKdK1EsNthcf9+zX0XFHEv8C/lVqNYSPuL+VAHztBpOpsP+Qfc/8Afs1oQeHNZfG3T5ufUYr33y48cKv5VGY17AUAeP2fgbWrnHmLHCv+02TW7ZfDCA4a/vJH9VQYFeiBQKcBQBz+meDND08hobGMuP4nG4/rW7HBHGMIiqB6CpM0lABQRS0YoAbilFGKUjFACUdKM0fWgAJqGRsU9ic8VGRQAzvk01zxxSseaOMUAQFSTmlXC05qaaAHK3NK/IqJie1Ju96AELEGnCSo25po60ASu3NCvTSBilBFAE6NxUgNRJT846UAOPNFNzRQBShlPQ1bjbNUB1q1bsDxQBbBprc04AYpDQAwjFRkGpiKQigCICl2ZNOwakFACInrUm2lHtS0AIBipFJFNozQBNuHemsoNRlqA9ADXUioskGrBOajYZoAEerCPnvVMjBpyOQaALwoNQpJnvUobNACEUxhUhNRSnjigCMioXPantuNRshoAiKgmnBQKYVYHmmuXxwKAJt6L3oWRT0NUJFkPaoszKaANkSkdelOEw9ayo5pP4qsA5HBoAu+YDTw/FZ4cr3qVJh60AXA1OFVlmU96eJVxxQBYFFQCQml3570AS5HSjtzTAeOKXk9aADNIaU1G1ACM1Rl6R3xVd3oAezZajdxVV5MGk804oAtM1RsfeoDLjqaiabPegCdm96QHvmq5lHrT1fPSgCbfTd3NQs1Ir460AWwwIpfpUCtUqEUATI9ScnpUIANSrQA/tzRS9uKKAMtCanhba3NQp7VICQRQBoI2RSmoYjxTyeaAHDJ706mA0FqAFNANMZuOKaslAFkGn5qBZPWpA1ADwaCabuprNQAE4pofmmuwxUQfBoAtB6duFVg4p2+gCU4zSbaZuBp4NADgCKcGI9aQU+gBvmn1prPxTioNMZBQAzcc0hlxTtnvTTDkdaAIXmJ7U3zjt4FPeE9jUJicfxUARSTPyAtVpJJOcCrnlk/xVBJaueQ9AFF55k7E09LuQEKRRJAxJDS4qFrQAgtMTQBfW4LKTiozOVP3hUCRqOA5Io8oFvWgC7BOW5yTV2N2YcDFVbSIAdK0YkHHFACopPWpljpVAFPyMUAAAFBNMLUhb3oAUmomp26mMaAK81VixqxMciqvegBpGTQRx0qQLSsOKAKz9OKjbjmpn61C/PWgCIt2xUkZOTUffFSKR3oAc3emDGaRmw3PekzzQBaXlaeoNV437ZqwuSM0AWEzUy1Ah9amXrQBJxRSUUAZML1ZHNFFAE0ZOKlBoooAXNNJoooAYWppoooAUGp42zRRQA4mkZqKKAIHaomc0UUACuc1KGNFFAEinNSA0UUAODYpfMoooAcsmacSCKKKAG0xmxRRQBC7iq0smOhoooArG4KnrSPd4GQTRRQBRuLhXOeQRVbeXPeiigC3AMDNWU5NFFAGlarwKurxRRQA7dTS2aKKAGk0maKKADPFI3SiigCvKKrtxzRRQA3fTDJ2NFFAEbyAVXaYc0UUAQvJgmhZcgUUUAI7E4xTwTwc0UUATxY71cjOOKKKAJlqVaKKAH0UUUAf//Z";
+const MEGH="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5Ojf/2wBDAQoKCg0MDRoPDxo3JR8lNzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzf/wAARCAG4AbgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDvwKWgUoqhigUoFAp1AhMU4UUtACU4UCloAUU4U2lBoAWiiigBpoFLRQAUuKKKAClFJSgUAKBS0CigAopRRigBKKXFFABRS0UAFOFJS0AFKBRSikAYopTSUAFLSUtACUUuKKYBSU6kIoAaRSU6kIoEIKWiigYUtApaQBRS0UAJSijFLQAUZpaSgBDSGnGkNADKMUtFADSKKU0UAZgpaQU6mAtKKQUooAWlpKUUALSikFOoAKXFApaAEpaMUtACUlOpKACloxRigApRRinCgAApcUoooASloFLQAmKTFOoxQAlFLRQAUGgUpoABS0gpaQC0UUtACYopaKYBRRQKBBRS4pcUAMpMU8ikoAZQKcRQBQMKWiikAUuKKdQA2lxSgUYoAQ0lKaSgApKKKAExRS0lACUUUUDMwUopBSimIUU6kpe1AC0tIKWgAFLSU4CgApwpBS0ALRSUooAKKWkoAWgUUUAOoFIDTqAFooooEFLSUtABS0lLQAlLRRigApaMUUDExS0UuKQBS0UtMQUlLRQAUCiloAWikzS0AIelNpxppoACKSloNAAKcBSCnCkMMUoFFKKAEpaXFGOKAGmmkU4000AJSUGkNABSUUUAFFFFAGYKcKaKdTAUUuab3paAFpaBThQAAUtFFAC0ZooxQAtKKSloAWjFApaQCClxS4oApgJ0pRS4pQKQBRS4pcUANpRSGlFMQtFApcUAFKBQKWgAxRilooAbS0uKQ0AApaFGaUjFIAooopgFFLSUAFLSUUALTSKdSGgBtFLRQAClFGKMUgHClpBS0DFFFGKUUAJimEVIaaaAIyKSnmmUAIRTacTTaACilooAzM0o5pgpwpgPFKKQU4UAKKKXFLigBKWjFLxQACnCm0oNAC0oFJSigBcUoxQBTgKQABRilpaAEopaKAClBpKKAENJSmgUxCinCm0ooAdS0lLQAUtJml+uaACgilpM0AJ0pRzRSZxSAdiigHpSkUDAUhozikLexpiCikzS0ALRRRQAhopaBQAUtFLSAAKUCgU6gYlLRSUABpppSaYxoADUZpxppoASjFGaXNABRSZooAyxThSAU4CmA4U4Ugp1ABSgUCgUALilxSUtABilFFFAAaBR3pwFIBRThSAU6gBRQaKax5oAeKKB0paAGE0UppKAENFLRTELSigUtACilPSkoJ445oAOARTsiombbjcePWoJb+CPO5hkD5h6fWgCyxwQT0pc+vFY8+qK0bEuI1IONxqkuvRySJFJPEnqRJ1PoM0hnRvOiHuc8cdzUfm7iAQACM89/asx7qKSAqCFdGAH1HP9KytZ8TRWMEjxKGIA2nsCen40AbOpazb2CFpnwkfLsTjHt9eawZviHpEB8qZ5o2Jxkru/l0/KvNtd8US3gSGN1EMRLMc7izE5yexP8q59LgSMXnPmO7ZLlckUCue3Q+OtNuTttJkb1ZmC4H/AsVfh8QRuo3XEEe7oGOePqOK8FZ9NwwdJnbtiXG39CKIpbVXHltcwdt4kOPbjpQFz6E/taHaPnEp/2DzmrVvqNvOMo/Ppg5/KvDtPu5lAeC/Yk8gkjj65rqNP1y42qZr+OM8guYztU/UHj8qBnqaSK3Rgfxp24Z6iuJtfFsOQEWe5ccHykG0n1HetSx8VWEjhLzzrKRjjFzEVX/vrp+tAHRinVBDNFMgeGRHU9CjAg/lUwNMQtKKaT2HWlHSkMfmkzSUUABNFJRmgANNNKTTSaAGmkpTSUAIaKDSUwHCikFFIDOFOFIKWmA4UopopwoAWlpBSigBaWkpaACl7UCigAAp4pBSikA6lpKUUALTTTqMUAC9KdSCnUCG4pKdRigYynYoIxQKYgxS0ZpjyKvUjigB49zVe6nSMHfII1x94nGaqX+rQ2aOZGBYdF9T2FeZ+IviC+GW1T9+RjLLyuPQcj1pDO71XXrSxHzy5OD8gOST9fSuC1zxfHJE0UTvPI7giNflUY5we5rgbrVbq+k3XMzOSe560RuF+UN83t1/+tQK5vXGt6jIrTSeUQRtUnD7e/H+fSqjeI9Sto2ha4jkiY8xyRqwP6cfnWPNduXCo7CNOgP8AOqzTssZHylyCcFeg70CudVY+MHt0VQZAN3zLvOCM9AD0NZviPxDLeyLHGzCNR8oJ6f8A18VzjPk5IPHAz3pNzElhgkdB6UBcmMzbQd/T1pjvkMRkn1J6VXIJYk596epBJU+mDTAkWUjhmwOw9KmU88OOPTiqg/DPqal42ggdR27EUAX47qSLB2gKeuehrStr+MsI5gJUzwu7H61hxOyBlUjPUZ9qsROjIcfK47joaQXO30rV/JZCqLbKDnMQ7+47121l4hsbyLy70wsWXCyqoIP1PUfjXi8V1JCwDEn6n/Oa07S8j3Z3tH2/vAfhSKPZra2jgmWWyk8ouTyHG1ifUdD/ADrpbSd5IVLphsDJB4zXiWm6jPblVtL1sE8BcgH165xXW6X4yvo5EhuysikgbiuMDPcjj9KdwPSQQBnrmn5xWRYaml05YMBkcYbcD7jFaAYY+Y8fXrTETZozUXm7mATmpBnHNIY6koooAQ000401ulADaXFIKWgBMUlONNoAKKKKYGdS5NFLQAAnNPFMzg08UALSikpRQAtFFFADhRSZoFADhThSAU6kAtFJS0AKKdTRSimIcKWgEUGkAUCkFLQMU9KYeKfVe4uUiOCctjO0daAJO3Nc54j8RWemRuGuF84DiNfmJ/Af1pniHWFtLYtcORnhIV4JP8zivM9auppd1w/lou3CoRjj/d+vr6d6BDde1+71B2ZybeFvubjudvSuNlkUknOfdhVi7uyQ7A5YkAHH8qzZSQ4SQ5JPP19KALEYGNx5zzmmtLsjdxw7nagz+v5VDNMGJTOQq8mo5AwdFIGFHOO57/59qBEySrtbdgAY4I61WDhiNv8Ae5JPWnTcQg9345qAttYYA9qYAcZOCevanRqCWAznGajZzk4GM06ORgQecjoc0gJWjEiE5G8fl/8AXpq5ABbknAAxUnynDqNp7jNEu53wM8nkUARnAdhnBzjnpUiqTwW/CmPh2OPU06LptI4A60wHKctg/KRTgNmcDIb1pwUsADjJ6GnLkqyYww5wfWgB8T5+VgSvr3FSQ7hIVJyKgGDjPBqxgqWY5wFxkH1pAXIJT0U4Her8c8SYPm5OPuPyM/jxWRC4ZiSSr4xnFXI5Hj/eIeV6N1yfQ0ho7vwz4pjto0guDiNehBAK/j0IrtLDX7GeMGJZpGbnEamQkfhXmGj6rbzr5FxZDeyEHy9oyeoIzXRabrM2nXqlHDW7nHJ+6T2JFMZ6NY3U0zbRaSQr/el6kfStMHjrmuYj11d6AyQLnhjySB+NdDCwKK27cGGQR0NAE1FLikpiENIaU01jSGNNGaSigB1FIKWmAYopQKKAM6ikFKKAFIzSqe1JSHg0CJBTqaDTqACiiigAHWnim0A80hjxTs0wUtADqBRRTEOFLTaWgB1LTM07PFIA+lOB4qvNOsabsjGcZqm9+JI1NqwZ5OmOcD1/CgZYvb2O1gLM3zdFXuT0A/OseeZo7aWdyVPVnA59MD2qS6URXUBeUSMCZGJ9cYGB61ha7qHmDypW8uCIAskeSzN2H5849vegRlTKbq5e5dW3FeBnPloPU9u/1JFcJ4ru1RlRZA7MNzBRgLz0rqNS1Rlt5HdGwnAUnGMfwgfrn+przbUbp7m5aRyMe3QewoAjaQscliMc8f0qs+SdxwAtOjY7S7euBntTArONzHnOFXr+OKBD4CvmoX5UHJAqQljHIeem79f/AK9QoSjA7cHoM1NEyhCGOXPqeOv/ANamBDK2HTOD8vHtUWOM++KsTqC+B0AxQiD+EDjnFJuw0rkO0bsc7qNnIyck1bMDFNx4PbvSPCVjDHk96lSKcWiqg5K1YRDsOfvevpTZFYfKRxnp9akjcqWXAHX8aGwS7kJVhkcflUgwH5GM+9TgRyDrtbHTsaa8XynABz7dDQmDiMOScgnA/MU9SGb5iAexPemopQ7jzjvj+dOUbmx27HtVEkmNzbuP6fnUrM4GCDg9/Wo1QAkDjPr39qd5hA+TgdcNQImWNGiBBPynkLnIFPSRCfmYkdN3Qn6iqf2iTb8yDaOScYZfxFV5mw+VJyOeDxj1FAGmJf3hEUp+U5VhxitK3u7qb91kuSMAN1A7YPtXLi4Y7RwGB6+tbdqVmMZK5z0A4xjtQM7/AMNxLcTKb824lVcMZwS2ccbece9el6FCsFlHErMyooABHTHtXkvhuZIZYRN88MjYVmJ+U+h9q9V0ySOPEUZ2heqg9v8AP50IZtb+KM5pqj3J+tLTEBphp1IRQAylpcUYoABS0lFAx1FAooAzaUU2loELSkZpKKAAHBxUlMpw4oAdRQDRQAtApRRigBaKKKAFBpQabS0APzRmmiloAUUpNNoJwPWgDn/FjOmnzGN2RyOCOx9f8+lc34Q16N7eSGeZIrhTtIdvvYPOPrW541m8q0imQ/vI3zsxkOvcV5ve2ggb7Zp7R3ED5Yx9wOox6/zGKQz0S91KOO6jnjifbtIMxHbBOAfwH51y+sXdva2glkchyWcsHO5nOecfjxXM3PiK0eykt5Hu4n/hXeWXI/z3rF1HV1llUWRmkY/daTk59TQIXXNWHkCCByzv95s52j0B9+5rnJcsQOfpU08oVjlssO56k+3pVVpWOOc54FAiRnUIF984pgZmfcDikYgY6Z/OiL/WLuzgEEnrQBMq7SNpBcngA9P/AK9OXDPtA+6KfHkHfyTnn/CpIoiAQy/MfftQBCcELu7kmrdpbhlYnsOo7VHFblgGY89MYrVtISEA2HDHH4VnN2NqauxqWEmxSOmM4anC3xGC69Tjp1FbsakQldoxtO2pLewEkoDfMvT8uKwVTTU6XT1VjlbyyZJGZfnGcmoYoGGdyMR7g12o0dHkwMge3FOOh/N1B28jmhVQdI4f7IGx5Rz6j0pRbOhICsWHYjpXT6hp0QyykK2MkY4f/wCvWdLBLGF2DcpHBx/L/CrUzKVNGQ4wSGBUjg04Iok/hGe2avPGkoDsM4HzgHt6ioLq2kgEZdg8bjKN6itFIzdOwx4coCxYjqDUDxsqtucn1K//AF6sxn5CrcqDz24/xqtMdrc4ORjI5+lWmZtEUfyNvTBx8rZPWpjaebFujb5lJKnrn2qsInDPt7LzU9jKxG08HOBj+f8An1pkmdImx8g87ulaujytvyw6NnPpUGoRb4w4+8nXA6g85osnKNk8HoOKBnX6ZIXnaOUAxsQQR168/wA816z4VmF1o9rIRueLcjEDGccV4rBcpDJFkEjaDnPBFdv4U8WwWNg9tLMu4szKG4JyT/8AW4oGesROCoGc/wBakrnPCuoT6lC1zKu1GOFBGOn610VAgNIaKDTASigUUDFooooAUUUoooAy6Wm04UCAU4CkFOFACEUuaQ0lAx2aUGmilBoEPBpwNR04GgB5pKTNKDQA7FFKDxS0AJRRS0AJSik604daAKep2y3dq8JAOR0I6GvLtV0h9Mndot0TA5ZTKfLfP8QI6e49a9cYDPI/Sqd3ZxXCHzI43GOjx7gKQHhmqXMAgHnJKzcjMc6MpPp2IFYFw7MHS3thHz1/ix6fSvc5vCllFmUqmVIaMLGCUI5715hr4kRr1mWNDcGR3kYYIA/u+/OPSgDgpEO9i/JDYJ7ZqJOA/sKlmYldg+6n8/WmQjAYn0wKBEZBJqeJMknkKD1pqoS+O44qZuP3YOFX3oAk3hsHJCjoBxSCY78IMc8moZiVReeozj0qMOE6nP0oGasM0cYIY/N0PHatWzuITzkZ7DNciWJOSat20vlFfmP0FRKFzSNTlO6+1bjHBGvCgFvf0H4102mWgEKsSDkYz/n1JNcJpVys1wpdsdyB+grutPv1GAD6AccYrjqrl0O2lLmVySXZEzdOOx71nanqCpErodsgwM55HQVev0lkbzUCbMcDdXKavFNKHxj7vG3vSha46l7aGbqWpEpgNlDtBwemO39ayhfTpKdsrbfQmro06TOWUNvGCpPGPf3/AJUlnofm3bRO25QMoAa61KKRxuE2ytPdMyk7dsg98n86fbamz2qwPgqmcc5I+lat/wCGHgsmnDcj+EHvWVY6ZuZlOFwccn86OaEkHLUiyzCInk4bKsAc/wA6z5/9Y67QT1+tW/Ja1uSMHYeM+tZ9ycTLgfxdKpEy1RMs2518wbdpxn/ZIqCMLFPLF0dSRnPHsRSICpfHQ9AanjRHmVn/AIuM4PWrMxytulboMqcLn26VGFEcqKCD3NWrmzRZQ8MxkAHQrggjtxVCFgQwz84XAz27UAXJrhW2KWOQOD7Va03UI4Z0aRAu3uOv+cVkvFNIUCRsWPGc4/WmSlFAgQeZJn7ycj6D1oEew+BvE7SytHtVLSMlyx5IXPAY9B2Nem2c/wBoiEgIIbpj0rw3wD4cvLp0N0wFuvzCEPnJ9W7V7lYQiC2jjGMKoHAxQUT0lOptMQlFFFAC0UlFAx4NFNFFAGZSg0lKBQId3p4ptKDQAGk60NzQDigA6UbqazULzQBIKcKaOKKAHA04UwGnUASA0opgNLmgBe9O600GnA0AHSgdaRqQUAPNB5HNFI2R0GaAKtzII489hzg14r45Uw3WoWrIcK5lRu21sYA988V6vr0t7bwM9mN0p+VIyN2fbFeN+PNO1OwME2qTh2uWbdjsQR6dhkUgOIc5fjpmkB+UcDk1Jcx7GyHDg4Py1EOoHPTI/OgRZjG55PTOD70jrzuOMsQTjsKWJ1UM+cjOSKGBLgZAyMUAQNlz174qSO18wjoBToYwV3j15FTJN5ZBJAwOp6Cpk30NIpbskXQLqQbolUj3ODUUul3lqu54GwD1HNXYtaSFAJI5ZB/3yDWta6np93CT9nu7dgN3moNygdCTj39qzvM1tTZzVvO0bhkPSuz8K3jXMojPJ9PWuKvwi383kyrLHvO10GAw+ldR4DDPqcZHQdaiqvduXRfvWPUH0xmsVfB3EdK5fWbUwIXJ27vavR413WgA9K5bxPZJcW0ykhXCbk+o7VyLdHWnoeez3gj/AIMk8AVnvqvkTb3nCEY+VBj/AOvTLtZi7qcxhTgkDk/Sq2o6fG0CPArKR98PwTXXGK6nPUnLobF3r9vPZgQ6hL5jcOhU4b8TxSaXqCQ28hmw6FSA6jOCT1P4Zqr4a0MPI09+p8pB8kZAO/6+grQg8Ly3V/IwAgiJLFU6KM8CnJQWhEHUk7hDpUl/avOpyWyVA4xmueltismZAQ4BY+2K9R0zSmt4/IaTII54wa4bWbfYdhXBJZWP0OeKinNuViqtNKN0YNyvlgKGGQACc9+9Ik+x48ffHP0z1NR3Od3y/LzzzUJHzcd26/Sus4i+Z28piCVdhgccY9fxqn5LbWLSFWJGciplnBJMoJAOOeMUoCzH92WyeAvWgRXyVQF2JB4+Ydau21+kYVBHtBPLe3061WdXP3U3emFPFFqYhdRrNISmRvCgevNMD13wPrck1pFa2GmyFs7S5IJ/Af4mvUrRZREDMoViOQDnFcJ4Jv7WHT4ls5FuN6jZCoAK+2e2K7638zyV83buxyFOaRRJSUtIaYhKSlpDQAlFFAoAcKKBRQMzBTxTBTs0CHUU3NKDQA6muKcKDQBDtOakUYFLiloABS0lKKAE707NJSc0ASKad1qNaeDQA6lzTc0ZoAdRRSigBw6UjfjRmigCrcukKtKyE7RkkDOK8i+J2r6ZeRWqwTM88Ev7xSjD5SQSBke1ezFQeozXE+O9EtLm2LtaRSyH5Y1xg5Pv2+tAHgmo3UM11I1uhSE8KCckAdKqE7h156Vu61of9nQyNMESUORtUkgj2rABx0pCJYn/AIW6HjNSsSF7ZHcVVzmpEc80DLUOfLYgfKTyPSgKryAvzg8gnrRAMrkKc9sDirltbtJ95AT7VDdi1FsS4hjuFGxgpA6Edq0tKMekadeNvHn3cXkqV5IQn5uPfpVuz0vZGZGxgDOKqtBvlMj8nsPSs/aG/srLUxzYrwYw4z/ewK6zwYgtr2Md6zJYfLUbsZNbPhRN+oL6L1rOpK8TSjC0j1+0kBtVPfFZ+oWa3JAzwe/cVftlAt14O3HWozjJOQD3FcrOlHD3/g9oHaS3Ck5yGbt9PSskeF0MoMzMxHJDDjNeqwskkZV1yen1qhPpsUvzIcHrWinKxCSvqc1pmiwIFGBxx3roIrCNVGFAFSw2jIVUA8VqQWwZR2+tJXkNySMX7KQ5+UYNcH400xkmRlX5Hm5HpuBB/pXq80KoDwK5vxJZJd27Agbkww/Ckm4yuL41Y8SvLMQTvHIODnBP6VJZ2m9pEIXGwuMnge4rd8X24hnicgYbIbA61naJavqEgt4T++J+QevqK7ozvC5wzp2qNIzXhVyyuMMBhgB1qJYvIwYissYOSB1H1HatrUtHktdSFvcQ7SYmZl5yAAea55XOFxkjHpmrhJPYznBx3JpZg5IKkZ7HuKmtQJJFicAA8K5UcGq8MJl5xxnB49a3PD+lrfXPlLuDEjao5yOQfyqyD0H4R2fyTedEjFGBBKjI+h/SvVgABwK5TwJoS6VZFWZmcHIY9wfb8q6ykMSkNLmmmmAUhopKAClpBTqBigUUCigDLFGaSigQ6nCmrTqAClzSUCgB9JSZpwoATFLRRQAUA80UAUAPApRSCloAWikzQDQA7NGabmlFADqXNNFLQAtUtSWMwsZeFIOfyq6KrahA09u0a9W4z6e9AHgfj+Gd2NywcQHiIM2dq9B+f9K4YjvX0D4m8GR6w7oSVjW3Ijz0DDofy4H414drelzaTqElpOCpU8Z9KBGeKdtxz60BeSB6ZqxPEVjVvbn2qb6lJaXNLSYw0Zz0JroLC1QMMCsTSm22iP61rW90V4rComdNJpGnduvl+VGf96qqRKBnvTFcdz1qUsAmSCRWFrHRe5QnVnlPtXQ+Do0im8yQjLHpXLXWoLbqzYGSTVax8QeVMCC6/WtHByjZERqRjLU+jbDyrm0CoyjA7kVUaxV3yJB+decaL4rkeLZFG0jgdAcVn61q3jZ7ki2txBDnKlPm3D3JrLlb0ZpdR1TPWYo/Ico4DRscgg9DUgVSxCnIPNcV4M1nUr2NYb+KRZV+8xQgCuuQMvK8Y7UthtFuNMtjvUrt5a+hFRpJ8u7tjrVW4n5+Vhhv1qr2RFrsS4nwMn7pH5Vk3MrSBgevb1xU80xclSMHrVOc4UHA5HesW7msVY4TxqMiHaBuByO9J4U0qTTpWa5Tgv8AunB5A4NaGvQrPe2St0MoBPtn/wCvXW3UFmGhs7IZEYwOMmtpStTSIhG9VtmJ48Cf2T/awQCcWrwBh/EWKgfoTXjqQlTlidnTPUYr1z4mvjS7SygdSRLlhnqQMkfTLDPpXmvkExyYUlAxG3uPUGunDr3LnHiXeduxNpERF15M6FiOMHv6fr/Ou6+Hmjm41cSS7dsbtIhPVhnniuR0pt8ZlUgsm0FifmHb+XPtXsXgvTlaGC7IAOwcqMZPQ1sYI7CNQoAHQd6eaAMCg0wGmkNKaaaAENJS0lADhSigUooGKKKBRQBkCnUwGlzQIdThTVoLc8UAPpaaKWgBDSqc0hpAaAJM0ZpuaWgBc04Gm0UAPBpc0ylBoAU0oNNpwoATNKDSEUA0APBpaYDTxQAopeowabSigBGUHgivL/jH4YSexTWLSHM0ThZiO6HgfkcfnXqQqG9tYr20mtbhA8UqFGU9waAPk6RRDKrLyvXp27j+dXLsjPHQjj6V3vjv4dvZpcapp77oVI3R7enqR/n1rgkXzbaNCQJAvy57+1RPuXTe6LemcWhX0Y1bRiOlVLBXjMkcgAIANWOh/GolqaR0Lcbkkd6sSiXyOFbH04qtbNhhRqGp8EE8LwBmsWm3obKSS1Me+iyDvJAz2qKzMEUmGiV+ON3emXUxmkzzgVPptsJpVz3PrW9rLU5m7y0NRL2GygMsMKo3qPWui0jxJqLRxjzAd38LngfhWLJoslyUgjZNick5rRtbGGzjCtcxF8gbc9fx9KzfKapVDudN1pY3KyhT0ywYDLdx+HSujg1G0uIkkEqgN05ryySQxTCXarRjOFDAg5qvHrzW6LHHui6gEEYBP9az5Oxpztbns6urLlCCPUVQu3AxjOc9q43w94jYKsPIUnLEnpmuia48xt6Kp4xuz1rGppobU9dRWkyD6HjOelVbn0VyAKe8jdgMZ5GKp3UoACbh7nPFZo1MPVV8y8h3sFHmLg9v/rV1gjZJhFZxxWchG1m7nPcetchrNysPlytj5MNz0IroZfFugTWS3M1zEGRecHk//XrWSbSMk/eZw/xJuFGqWtpbk4sozvOSfmbk/oB+dc/EwE++NgpYAHJ/nU+pT/b7qe9bdunkYnnkZ6foarW0LhlwnmJ0IVclfwrvhHlikedUlzSbOi0bSJlnWUKxtblgjhR0ycbhn3/nXuej2a2VjFCvVBtJ9cfzrz34dWMTt5aTGeEjc0bLgofcHvnmvUEUKgAGABVEi000ppDTAaaQ0pppoASgUlOFAC04UgpRQA4UUlFIZiigk0gp3WmIcp4pc03pSUAS54pFPNItKo5oAcelIKU9KFFAC0uaQ00nFAD6UGmqc0tAC0opBTqAFoBo7UUALmkNApTQA0U9TTaUUAPzQKSlBoAcKUUgpwoAqahareWctu4+WUFT9D1r501fR59LvriymQh4pCUJHDDOMj8RX0qfauK+JPh1NT0ae8gUR31oplhcfxjHzK3qCB+eKUldDi7O54jDuinUueWBFWQw6ispLp5ZgXULzjrV7LA5zjBxWbTS1NFJN6Fh5THGzDGcVj3UhLEtjr1rRkbfEw9uKoFd3BxgHPPeiIpsrrIM5b8qvWchkYBFb/gIqskEW/5l6HkZrTtZorbBTHFOQQ0NTTLfUI3zFBIUb+9wP1roLDQ725DmdrWNTzljk/oK56LxHJGdoCgD0Ga0LDxZcJcYaUBOAwH9Kyal2OlVIbXLeoeF7pDutZwX/wCmaED9awtV8M6raWr3c0qEAcqorsofFMciAuSAwxz0zUMt59vVklUlXXAVXxkj2qVOSYSjGSOU0Od4wBKpJPAPvXo+nTn+z41VcuFBx7dq4SPZbXGxhg56ds11UNwQhKLlZNoUjsB1rOsrlUXbQ0JbliFYHAGQVPfNZ8yH7UHZhjb84FO3sEfLZXG7P+FZ0t+u/wC92wMHis4rsbSaW5jeLLpo7BgOey89q4SEEkDIGehPauh8TTi4dYVO7y22r6Y9D+lY0KiFlZ1DAMQVPcV301aJ5tWV5M0I5vkYEqGIAZScduo9xWr4Z0eXVrgx204RlI4P3seoH1461gSIJCVjViQMj1x/9avWfht4etp9OiuXY/aGcSquBleMfkR/OtCEdp4N0SPTbYE3Ek8h5LOMY/CuoqKBNiAEAEdcdKloAQ00040hoAZTTTjTGoAQ0A0UtADgacKaKU0AOopFooAwwaeDUdKDQBIaFpOtOUcUAPHSnCmDinCgBxNJmkIozQAppCKQHNPoAavFSCmjFPFABSigc0uKACikFPA4oAbRS0UAGKKBS0AJmlzSUuKAHg06oxxTgaAHVHKiSxskihkYYKnoRT800mgDx7x38O7m51jz9BijWApvdC2Pm9q4K7hmsp5rS5XZNC+xwexHWvpogE5PavKfix4ZP2gazYLu3gLcIp+7gYDAfz/Ck1ca0PNUfPPWqtxzJgAdOlL5m05GePWo2bJz1zUpWG3dD9pIGSaBHuU84GcGnRYbgippAvCqAO3WlsC1IAmevGc9asWibxyQe+TVux0xLl1MsmeeQa2NNtrGG4SJo85xy3PvUymXGHUvaTpyTQqBv2r0I5z/AI1oz6ZKYSQWVRu8sNwTVu0uoIsiPkdAWxgnqWH5GtI3kN5Hm4ZMK5ALfLyBxge9c7ve506Wsjg7yGMeWgZ2xyGz+db+mT4jRWZAB/Cx/SqOrGFruSWBl2NxuPG0+lVI7gGAHJyGwSD2H+RVNcyIi+WR0N/NGkTFSORkKOc1ixpLeyrBEAHzyc5wKprPNdERR7v97t+ArsPDukraxmQ5LkdSKh2po1V6j8jzTXoxZa/eW6gkRnGccn5R/jWc5M0ry7QEHp6dgK2/G8bL4uvUUAFmQgY5OVFbPg7wFqniC5R7oNaaePmaUrgsOwUdzXbD4UcE17zRgaTYSSXNuRG7M86IoXOcZGR+VfRGieHoNKYPB+7+XBVeh/z/AFo0Tw1pekRxC0tEDxjAdhlvzrbFUIWiiigAppFPpDQBG1MNSGmkUANxQBS0lADgKUCkFOFACgUUtFAHPE0A0wmgGgCZTUgbFQKafmgCTfTlNQqealU0APY00UGigBQOaU0nakzQA7NKppopy0ASKafUYOKN1AEgpwpi08GgBCKTFOJpKADFLSUtACEU4CiloAaRQKd1oxQAlNY0/FRupzxQAgPNEsaSoUdQ6kYKtyCPcUnOak6CgDwT4m+GYtI1XzrGMrbTjcUHRWzyB7e1cKW//XXvPxctg2hW0wHKXOCfqp/wrxK6twSWT8cVLdnZlct1dESTLswQAfb0pwlLHIx7mqzxsvJ/OmBsHuKLInVG9Z3aqpPfHGen5UjX7CfzCTnJ5J61kRynGM4HQ0hcMxy2QBwc0uRFc7OlXWpMIFwFA69DVuDWJUjYSEGMnABGcj/9dcik5QfdycdfSpFkklACrn+VS4IpVJG39uALMZdp5Az0+tLpySXjAAFIyfT71VbWwkkILfN83HOR7D613mh6WFYNKpyefp9azqTUVoa0qbk7ss6FpKRhSUwfWurhtxFGABjimabZBDvK49BV+UYXgcVxt31Z27aINJ0LSbhn1K4soHut5Vp3XnAxjk9OKu33izw7pZEd3rFlE3QIsgYj8FzivGPi2s0d7ZOskgiljZWQMQpIOen0NefHIHHH0r0aLvBM82srTZ9dadqNnqdstzYXEc8J4DIf5+lW68I+HOuT6RHBOCWjf5Zo8/fX1+or3Cyuob22juLaQSRSDKsK2lG2pkncsilFMFOFSMWm0uaaTQAhppp/WmNQAUuKaKeBQAYpRRQKAFopCaKAOdIoApM0pNACijdUbNTQ/NAFlalWqySc1OrUAOLUdaQ0CgB3agUnWlFADhTx0pgp1AC5pwpopRQA7NOBpooFAD80U3NGaAHU4UzNLQA6lFNpQaAHUtJmloABS4pvSnA0AN281X1K9tdNspry+mWG3hXc7t0A/qfarEsiRRvJKwREUszHoABkmvnTx940u/E186q7R6dEx+zwDjj+83qx/TpQkJsteJ/HV54o1UwLmDTU3GK37kjoz+p/QVhsMg1iWcmy6RvwraDZ5FZVNzensV3hzwRx7VA1sDyR+OavDrQy5FSmNxuZv2KRv9WCfwq1baLPKcM20CtbT1SR1jJxk/nXRQaWsrRqu3AOQcZ/SolVaNIUU9Tn7Dw6khzGglQY3MxyffiunHhy3CIIsluoXGMCt2zghttq7VDgYyBg1ftyXyQmOeTmsXVbNlSSMjTdAjR1Zo13L93aDwfx/nXRWlksLA457AdBU1tGvOV6Hrjn6VaDKvYE1m3fcvbREqLhfQ02UZ4xSo+7mnEcCgDz34o6ZJfaTFJAAZYJN+PVSMEfyryOGF5rhYcEMWweOR617n42mSHS5NxALHaPfPX9K8uhVHujIqjdjr3IrswnNJcvQ5MUknfqbGmIIbdVTouMAV2PgnxC2m3yWsrE2s7BWXP3GPAYf1rkrRSsYVccjirEURikDAnIPUfpXqcqascF7O570D604GsXw3rMWsWAkHE8YCzIexx1Hsa1wa42rOzNiTNIelIKKACgik6UuaAAClpKM0ALRSZpc0AFFFFAHNiiiloAbtzSNHmpaKAIkQg1OhplIo5pgT5zQDzimDijdzSAmFGaYrZpc0ASCnA1HupynNAD80uaZnmnA5oAfS03NCnNADz0pBRmlFABSg0lAoAdSikpe1ADhS5pooNACk1BeahZWCq17dwW4Y4BmkCZ/M1538SviG+kO2l6HIv2wZE8+M+Uf7q9t3qe31rxlrme8ne4u5pJ5Ccl5GLEn6mqSE2epfFLx8l1DLouiyhoG+W5uUPEg/uqfT1PfpXlMcfmvtJxmkkYt1OTUlv97PtTSJuQTx+ROUByBgg1o20u5RUF/HuRJQOQOfpUVrJjisqkTWnI1M5pc5+tQq2RxShuaxNyeKUxSBx2NeheHbyC6hRmKlgOlec4LHitrQZHt5gV6Z6VlUjdG1KVnY9G273BiHNXYItoG/r29qx7C6Z8cGteBmYDnJrmOguh8DgYpevQ1AAxPJBqdMADpSEWI+nSpiwwegAHU9qqo+SAOvrXKeMfEQgR7K2kOACJmHf/AGauKu7IiTtqc34+1b+07+O1gJ8iPOSO/PJ/GsOxiBLAYyP4faqglknnaWQEZOMY6CtO0BCljwOlexh6fJGx5dafPK5bOUt9y53D0p8dwHAVz8y45zzUayAo6NzzUOACG9Msa6TE39A1eXTNVhuEY7RjzFB4Zc4Ir0fR/GuiapkLc/ZpB/Bc4TP0OcH868ghJeQ/K2dgHHuaymlkNwyI3yq2GOKznBSKUmj6UhnjmjEkMiSRnoyMGB/EU/NfOeleIb7SrzFncSQlDyUbg/UdD+Nei6N8STtVdWtMpj/XQdfqUP8AQ1k6b6FqaPSM0maztJ1rT9YhMun3KSgfeXoy/VTyKvbhWZQ/NLmo9wNLmgB1OFMFOFAC0UUUAc4DS5qMnFLu4oAeKXvUasTTxQAtOQCmmiI80ASGm7ad3pRQAKKUilFJnJoAApqRARSCnCgBSOKUcCmsajLknFAErNxxTlOBUIJqUdKAHg04U0U6gQGlFJRmgB2aGcKpZiAB1JPArnPF3im18OWmTiW8kH7qHP8A483oP514/qPiLVNbl3X927gk4jB2oo9Noq4wbE5WPaNS8X6DphK3Wpw7wM7Ij5jfkK4HXvixPP50OgW/kqDhbmYZcj1C9B+Oa85lgkMsuXADfdOaq2uUd0PUCq5EieZle9uJLmZ5ZWLOxJYnqSe9NT5Yx7802YYdh6Gn4O1fpU9R9BtTW5wwPaoaliOMdqaBl9huwMZBXH1rLIMMpX06fStaIExEt2YVVv4CfmAORnn1omrq4RepNZFHGGqW4haE5x8p71m20hRsd66C0VbqIo3euOWjOyHvIoQMCw5rotOjG0MDWBPYyROdvIHoau6bdyQNtcHHuKiWq0NIOz1O607hfmfPoAK3raYKuBwBXHWdy0iggD862bZ/lyWJPb0rlkjqTub4lLvhee9WMHHzHj0rOtJOAelZPiLxIloj2tod1yRgsOif/XpJNibsS+I/EK2Qazs/9eR8z5+5/wDXrzXVbhpZVgBJZjk1clnOHllYk8kknrWfFG7SvMyht38Weld2Gpa3OHEVNLE6RBY0GTuY9c9q0NuIlQg885quigzfQDirjh1bHUYxXppHCNVQuSx9+aQsXYDA6DOaS5PAUL0JotTg4bnIIpiLCxhZDjocH6HNZc222DDIyCSffmtT+6BjJHArndUmxJImcncQfzpPQCCzkaWZi3JLZJreclLUMM/UdRWXpFtnLsOK11XGUI4b+VEdhsZYalcWUwuLaZ4pozkSRnBH+feu60j4kzJsj1aBZUPHmxDa34jof0rza7Hlu+DxRl28tAOQN2fepaT3BNo970jxNpOqbRa3a+YwyIpPkb8j1/CtpXr56gkZYTk88YNdPo3jTVdPZIDIt1DjhJskgDsG6is3S7Fqfc9iDU8Guc0LxVpmrKFEot5yceTMwBP0PQ10INZNNbl3uPzRTc0UAc44zRjilpM0AC5BqUVFmnA0APbpRGOaUUoGKAH0UgpaAFHSlFJThQAvalBwKTmmOe1AClsmgCkHFGcGgRIelPSoi3FCvgUAWAacDVK6vrayhM13PHDGP4nbH/664DxL8RJvnh0VPKQcfaZACx/3V7fU1Si3sJtI9Innit03zypEn96Rgo/M1wnib4lWNnutdD23l3u2mQg+Unvn+L8OK8s1jULi/Ia9uJZmyT+8kLfzqpapgGT8Fq1DUlyNPU7+41O8lu7yQyzStlmPH5DsPas/GDn6085pO4zWtiBMc5PpVaMhrmRh0AAqyX657VUts/PnuaTBFWdCbllHdqVgCf5VNE265eQgEAVIURjgrg+o7VnYq5TxQoBznNPkXaSKWJAWyxwoGWPtSYy/bPHDATNIAh6Z7mrc0AKJtbPUcenY1ztxM08hY8Doo9BWppepKsaQXDEBT8rURmnoxuNtSvcwGM7h0rT0SXLAA9aklhiKNgloz0PB/GqtvbT2VwHYfut2N4PFYVabSZvTmro6mSx8y33gA+2Korb7WHGD9a6nR08606dRVXULARtvAAXqa4VLod/KVLIhEGcVca9CEDdtHqe1c/d6rFBlIcSNjHHQVnpPLdTAuSfbtVcl9xOolojqtR8QOsfkWLcY+aUdfwrnhvc5J6nlm/xquNQhEoSPa+Dye1V7nVpEyYwnA5JGf/1V1U8Npd6HHUxF3ZF6WA3A8oZCjkv/AA/nVKfVLaCWKJWMqAfOyD7p9Pesa6v7m64llbZ2QHgVVrdSUFaJg7yd5HaW0kVxGk0TIRu5I7e3tV0uyoqN94A5Psa4S1uZrSUSwOVb9D7Ed66ex1WG/XYw2TnH7vPX3B/p/OtoVEzNxsaU43ISQM5H8qji3Km7Geemaa8jI2XAZCc7l9BxnFNZzJzEdwJzxWhJK03lwGQMQyAsAR0xzXLEtPPz1Jya2tXuljtTGGzJIApHtnOazdMi3MZD36Cplq7DRr2ihIwOwqaSUBTng1AWCjaOg/Wq8sjOceppiI5pBIxXPU1PDtXuMnpmq5jVenU96kTAQHuTSAuFuOCMDpSqxQ7snNUySMOOcGplkDL35pgXzMFtWYjj9c11nhzxtqFlFGLh2vLVfviQ/vFH+yf6GuImc/Zwmcgmn2sxQhYzz0oaT3BNrY9y0fxPperhVtrjbMwz5Mo2sP6H8KK8UF35UiouckZABorN0V0ZfOexg0Gmg0pNYGgqGl5BpqipBQA9eRTqaKXNADgaBSClFADxThTBSlsUAOZsVHnJoLUA80AO7UhORSk+tMBwaAF5rnfFHi2z0JWgXFxfbciFTwnoXPb6dareN/Fa6QBYWTD7bKmWf/nip6H/AHj2/OvJLku8jSSSM7uSWZjkk+prSML6siUrbD9d17UdVvxdX05Yg4CDhUHoB2pHk3Dms26HPPerUz7YifQYFaLQhlaQmWbaDnJwKtABUAHQcCq9rH0cjrwPpVgjqBTQgyT9Keo5BpnPFOzhAevJpgRnoze9V4Bw3uasH/VfU1Bbjr9aTGVYmwzr64qeMnzGyOcbcelVmPlzE9CO30NToxSHfzufOD6e9ZplWJp2hj/1rDI6KBk1QuLgyfKihI/7o7/WoWzk5OTWlZwrJB84Bz61OsnYrSJmUoUkZAJxVi9t/Ik+VTtI/Kn2ty6KFX+EccVm007FJoghuZ4P9VKy+wPFW01m7RSoKcjGdgpJLZZEYqMOOmO9UOnBqnzRFoztdB8cfY41hvLVWUDG9OD+VXr3VptXhZoJx5J6og6fWvPKsWN5NZTrLC2CDyD0YehrGVKL1S1No1pLRvQ254GRun51Y0uPczn0qeSaK8tEuIPlD9VPOD3FLAy2dqMgeZKcIM9ayV27dTZ2Sv0Mm8t0jmdokwDn7prOvw6BEKgBhnIOc1ryzDzxKyeaqvkxuxUMM8jI5FM1vULS6s4rOytXiRZPMd5HDMTjAGQBwB+dd9S+yOGNt2c/RUohz3NK1sw6EGsuVlXRDSqSrBlJBByCO1KY2HVTTaQzpdJ1I3i+TMQJgOTj7wHf61aeeOHcZvlHUMD0PeuWtHeK6idPvBhitPUrmOdxFEMoh5bP3jXRCba1M5KzK13O1zO0jZ+Y4UHsOwrSsW8uP+VZUSF5OOfStiBMJg/QU47kslc+Y3Ix7ChwI1yKViFxg/hVeV8nAI9BViE5ZulSAen0pEUqD6Din9PqBQAjDggj8qjWQxyf0zTt2CeagfJNAFln8zaEJAqaP90CSDuPC022iyQewp5YM24dF4A9aaEDMIlJAGeeaKhkPmME6880UAe5A0hbJoFNCHdmuM6CdOBTwajBpwoAeDThUdOU0ASClzzTCaaG5oAnzgVGzEmgNml4oAM809aj708HigQpNZevaxb6Lp8l3csM8iKPvI+OAP6+grRY8ZNeKeO9eGsay/kMWtoAYoff1b8T/SqirsTdjEvL+e+vLi8uXLyyuWZvU/4U1ZBNFuFVrcb1cd+f5UywkwzxntyK2TsZklyP3efQipZxuCJ2JyfpTLziBj7inZJ60APXAAxTkBzknrTVGSBUp+Tjqc0wBRwPrSS/6ofXFOXnB96ZLyUUf3qGAj4CYHr/AEqvApDMB1zVlxkn8aij4Yke1DAj1C0Mh8yPG7jI9aiA32yI6FZIzjI6EVpnoe/AqCVMOeO9JxV7juYsiYZvrWnp5/cJ9Kp3K4dqt6e2IV+lRFWkN6otTRCaMqe+axADE/Pbg1vxnpx2rPvbcbiRwfSqkr6iT6D7Rwy8etNvbJZD50I6n5lFVbd/KlBPQ9a1oWywXHBOaFaSswejMbyRjvSGIY9K0LyIJhgOCTxTLeBpiDjCZxn1PoPelyoOZkmjzvbpMhBZTgqP9qpyxH+kzMS7/c9h7U9ooYMK56YPlj7x+vp/Oql3Izygt1IHA6AUlBRdynNtWI55S2fU1CF3H68U8IW5xxUiL+dVa5I2NBjPvTiuTz9anVP5U1x8xFVYVyvsyw496k+zKwwVzUirhvfIFWCRHkkcAUWQXM2WERDaoAJ703aBwKlkO5ix7mmxjceKmwXLFkgBPsK01+UYPOBxWfa/fPPHU/hV05ZRz15NWhDZF3cr2qKGMsTkHI5qdOcDHU1aiiCbmxwBTsBW27VGc9eahdwuasXjKmNvUDms2SUsffpQxDy2QCPrU9vFvZfzNQ20b3EgVAcf0rViRYVPIJoQwBEanj24qByMYA6dB6UsrkHjsenrToYw3zSck9hTEFrGd5YjOR6UVOrAMoPBHRVHJopgeyCnjFR04MK4joJMilWoic0A4oAn4oBFRA04UAPLUmKSnAUAFOFJinAUAKtSAcUxRUmcCgRwfxU1qWzsY9MtXKSXKF5WU4OwHG38Tn8q8hL5579q7r4rXG3xXGrfdFpGP1Y1wkq+VIf7jcg/0rVbEPcntuvHfn61Xl/c3auvCk8/jUsXytjnB6fWlvI98ZI6jk1T2EtyS95tWP0NCHuaa7eZp+f9n/P8qWIZC+4FHUCzHgIT37U2Z/nJ68098DYMdqjuepINMB9qxZxkDFDjNwPY0yxkBII9Klcfvvwp7iGSZAOPeo0zk49akkI24zjrTYcHNAFgHKn6UyVeSelSngcDtSSLkHg9KYGReLhz7in2B/d496L4crx2pticL+NZ/aH0NKMg9D+lQ3i8/jT4jgjn3pbqMkA9uavoIz5IcqCBzUsE+1Fz99elMkPygCoQSpyOxzU7AWAHuJgpJySfoKtmZ0Xy7YFIxwHxyx/pUVgMxzSHPHyDA6Z61ZfDwxquT5ZO4MMHP19KmTldWKilZ3Kmdqksxz3JqCPMrEk8nvT7xtqiMZyecE5ogXC7c9T+VX1EPIxgAegFOVMNSn73SpANq0yR3ABqP3Pc5pzNgZHpUfJyBj0pgSwJyCevWorxuiDHHWponEaMxPHaqEj7mJPek9gGse1Swg4+WokG7n8qtRLgDA96SAlhG3I/CrajcufwrOlchcg4wcUunXLGQoxyD61V7aAasKYYeo9asB1CfN3OajT7hI78VW1CYICFOO1VsIrX8wLHaepyaqIpdgq854pjMW6d6vW8Ygj82T0yKjdjJnP2aExocFvSpoZAts288/wk1St0a8n3fwDrirTMDKABkr0U9P8A69WhCohYgscJnAOOv0qxuOFOCFJ61DyRv5L9T7Yp8rIufMbJbkKOxoAkAO75eh6kjvRVV5ZLkDBwhwDj+E0UXA9t3UDmm05a4zoHYp2KQU7GRQAq1IBTEWn5oAcBTqaDRmgB3alX3pgNOwaAJRSNQg4qtq96mm6XdXz4xbxNJg9yBwPzxQB4t8ULwXniu62Y22wWDI7kDJ/UmuZhlWVBFJ+B9DUksr3V1cPO26SRy7E9yTzVJgY5D7VrsZ7lsAxvtf8A4CR3qeP58qw+YDp6ioYZFmTa/wD+qpNux9w7dD61SJGR/Layxn+HP5dRUsBHygfSmTHcXYceZHk/Udf50sJyqn6GhDZaYHz2BH3VzTbrlXPXjNSOR5ob+8hqvId0bn0WqYivpr4yPQ1qSDEin/ZFZeljdKw961ZSBuY9jjFKOw3uVJSMkEc81JbKOeOcVBINzfnVm3GOfb+lNbiHyHAyPSnA7lOfSon5AHtTkY9Pb0piKWoJ8oPoaq2pwh9cmr9+MwE/jVC1xsb1yah7lLYvQEbck9OKtSnMHaqEbEDFXM5t2ye39apEmc3L7T+dQP8AKfwqeQfvT9TUd4NmD6ipY0aFipWxRgAS2W5Pv/8AWqZlwrHftB7EZFMhwLO3UqrERjjOD609yQvKtj1AzVrYHuZlx/x9leMDGMDt1p8WeG9c1XmbddSbeMt1xirYUAcdBgVCGydFHPvxSyYGfpSqMA4qJ2JODjGaskc2CMcen5Uzvn3zQD3yOmaZM+1MA8kYpAMlkz8o+6KgPzHFLninRrkj9aQEluu5hVs4CD6022TGPY+lTSrjIP8AeqkgKN02Eb0zxUGnn99zS6gcPt9803T/APXAn1qG/eKS0OkiO1Rz0GayL+Ql8Z5rQL7YWJPtWOxMspPetJPQgktYTIwPan3ErXE3lIfkXgGnzyfZrRUX/WP09qWwhCRmV+AOc0vIZaQi2gWJflLcZ9KdtA2uOFXhiagklQbvMJLZyADTDJJPknKr3ApiLEtxs3JD6/epiRs4w3rmkUpGSNo9qsqRgE4xspgGViXCjGV5NFRMCe/U80UAe2rUgqNakWuM6BwNOFMzTxQA4UtNpwoAByaeBSClBoAcBTs8U0HFLmgBymuO+LF8bXwqYVOGuZ0j/AZY/wAhXX15j8Z71D/ZtiDl13zMPQHAH8jTW4nseaK+24BPANTXMW9Nw6iqkpw+a0IXDx9c8VrHXQzfczo3KMK1bdg64PINZ13F5b5A4NSWcu04pRdnZjequWLpTDLG3JQkgn60215iX2+WrhAkhIPI21StORIueNxq7ai6F8fNCDnlTj8DWfMxWN19eKvwEH5WHDjFZ94dm9W6jiiWwINNcLI31rSmk3DA9SaybThSfUmrQkOBzxSi9Ae5YRf1FTw44HtVKKQmrSHG0+oq0SK2Mp9KQAjHYYpinkE9McU5TkjPI9KAEuRugcf7Geayrc8N9TWpKSUI9VNZVv1YVEt0NbFhTzg1dhOYGrO/i96uWzZXGeaaYERG5x+NR6qMRxHuQanQbpDgVDq3zNCg6kY/WlL4WEdzTVmSKJV2HaijJ+lMuHUAs24kHOAaknAEhUIpIIUHPpVXUXxb8fTNXshGXGd0h9SavjnHHNZkbbZhWvBnA+lRB3KkSElYxVViSefSrE7fLgfrVUnn8apkj85bFRTnLj6VLGN1RSgs5/KkBGBk1ZgjPB4PNRKp3jPrVyJcCmkBMuBkA9G4qSUZDEnuDVaRypbHtUwfej4zkAGqAw7t98zn34qWw4aq0nU/Wp7VtpBrFfEW/hNG7lygUdelJZRL88jnhRUK5llUdadeyCOIQL1blvpWt+pBHGGvLrcenRfYVPd3G3FvCM461JbqLWzaU/fbgCq8MWz52PzE5NIBYIeNznkVPI4XcBxkCo5HA3YwPxqBd08gxn/GnsIni3TSe1XncKoAOdox9aihUQpjAyaqzzln8uLkjv6U9gJZLjaoSM7pCTken1opLW3xk9/U96KNQPc1NSg0UVyHQOHWpBRRQA6lBoooABzTwKKKAA8UKaKKAHFgoJYgAckntXgHjLVhrXiG9vEOYd/lw/7ijA/Pr+NFFVEmRgtyKms34x70UVS3JexbnTzoj74xWYCY3weoNFFVPuEexsWD5B9xVaAeXcyoeMN+hooquwixKTGw9M1U1VdwSUd+G+tFFKezCO4y15jHsakc7Tj3oopLYHuPh7VaB4WiirQhQBx16Uq8EcUUUxCE5AHtWTD/AKxqKKiXQaJW4NS28mxhkZ60UUAW0ADetVb4A31sp6bh/wChUUU5bBHc0rkv5z8D7x579az9SLeSmScZooqpbCW5lkfPWzakNGQ3UUUVlT3ZcguBgcVRDZbFFFWySxnCcdT0pijHvzRRQIkXrkg9auxrhT64zRRVICK4jOGI9BiqrTmEuSDjFFFKWg0ZznNSxdKKKyjuW9jQtAE3St0UVXgVri4aRu5oorXsZlq5cM4XPyx/zqGacLuA/CiihsEQrvlOccelaUEQh+Yj6UUUR7gyG5nJYpEfmPU+gqS1tQGGc+pooprViLY+VQB0JoooqgP/2Q==";
+const TEAM=[
+  {g:"lead",name:"Alfred Adarkwah",role:"Engagement Lead",title:"Director of Growth, Ghost Note",photo:"https://www.ghostnoteagency.com/wp-content/uploads/2024/04/Alfred_2024-700x700.jpg",init:"AA",
+   bio:"Alfred leads growth and client partnerships at Ghost Note and will be Julia's day-to-day partner on this engagement. He owns scope, schedule, and the promise that what's in this proposal is what shows up. He's led engagements across health, education, and mission-driven institutions, and he's the person who makes sure the two-audience thesis in this proposal survives contact with the real project."},
+  {g:"lead",name:"Amiri Rose",role:"Executive Creative Director",title:"Executive Creative Director, Ghost Note",photo:AMIRI,init:"AR",
+   bio:"Amiri leads creative across Ghost Note and owns the co-creation of strategy and design on this engagement. His career spans brand leadership at Jordan and senior creative direction at award-winning independent studios, with work that consistently translates complex, credible institutions into brands people actually feel. On FIMI, he owns the design strategy document and the creative bar for every template that follows it."},
+  {g:"lead",name:"Reggie Snowden",role:"Executive Sponsor",title:"Co-Founder and President, Ghost Note",photo:"https://www.ghostnoteagency.com/wp-content/uploads/2024/04/Reggie_2024-700x700.jpg",init:"RS",
+   bio:"Reggie co-founded Ghost Note and serves as executive sponsor on this engagement. He's the escalation path and the quality bar, involved at every milestone review and one call away for anything that needs partner-level attention."},
+  {g:"design",name:"Sarah Duarte",role:"Strategy",title:"Director of Strategy, Ghost Note",photo:"https://www.ghostnoteagency.com/wp-content/uploads/2024/04/Sarah-D_2024-700x700.jpg",init:"SD",
+   bio:"Sarah leads strategy at Ghost Note. On this engagement she owns the audience framework, the findability strategy, and the content strategy that turns 200 publications and 30 projects into a system a health executive and a legislative staffer can actually navigate. She's the reason the dual-read module has teeth instead of just being a nice idea."},
+  {g:"design",name:"Jahred Corbin",role:"UX/UI Design",title:"Senior UX/UI Designer, Ghost Note",photo:"https://www.ghostnoteagency.com/wp-content/uploads/2026/04/Jahred-Corbin_Headshot.jpeg",init:"JC",
+   bio:"Jahred leads UX and UI design. He owns the information architecture, wireframes, and template design system, and he builds accessibility into the design layer rather than bolting it on in QA. He's designed digital systems for mission-driven and institutional clients where dense content and real usability have to coexist, which is exactly this project."},
+  {g:"build",name:"Megh Vakharia",role:"Development",title:"Development Lead, Integral Studio",photo:MEGH,init:"MV",
+   bio:"Megh leads development through Integral Studio, Ghost Note's technical partner for platform builds. He owns the WordPress build, the taxonomy and relationship engine, the locked block library, and Pantheon deployment. He's built content platforms where non-technical teams have to run the system independently after handoff, which is the exact bar this project sets."},
+  {g:"build",name:"Nadja Boncoeur-Creavalle",role:"Project Management",title:"Operations Manager, Ghost Note",photo:"https://www.ghostnoteagency.com/wp-content/uploads/2024/04/Nadja_2024-700x700.jpg",init:"NB",
+   bio:"Nadja runs the project. Schedule, milestones, feedback consolidation, and the weekly rhythm with Julia all route through her. She's the reason the seven-day feedback windows hold, the reason December doesn't surprise anyone, and the reason you always know exactly where things stand."}
+];
+function avatarHTML(t){
+  if(!t.photo)return t.init;
+  return `<img src="${t.photo}" alt="${t.name}" loading="eager" onerror="this.parentNode.textContent='${t.init}'">`;
+}
+["lead","design","build"].forEach(g=>{
+  const wrap=document.getElementById('tg-'+g);
+  TEAM.forEach((t,i)=>{
+    if(t.g!==g)return;
+    const d=document.createElement('div');d.className='tcard';d.onclick=()=>openModal(i);
+    d.innerHTML=`<div class="tcard-av">${avatarHTML(t)}</div><div class="tcard-txt"><div class="tcard-role">${t.role}</div><div class="tcard-name">${t.name}</div><div class="tcard-title">${t.title}</div></div>`;
+    wrap.appendChild(d);
+  });
+});
+function openModal(i){
+  const t=TEAM[i];
+  document.getElementById('m-av').innerHTML=avatarHTML(t);
+  document.getElementById('m-role').textContent=t.role;
+  document.getElementById('m-name').textContent=t.name;
+  document.getElementById('m-bio').textContent=t.bio;
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+
+const track=document.getElementById('track');
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+function render(){
+  track.style.transform=`translateX(-${cur*100}vw)`;
+  document.getElementById('counter').textContent=String(cur+1).padStart(2,'0')+' / '+slides.length;
+  document.getElementById('progress').style.width=((cur+1)/slides.length*100)+'%';
+  const s=slides[cur];
+  s.querySelectorAll('[data-count]').forEach(el=>{
+    if(el.dataset.done)return;el.dataset.done=1;
+    const target=+el.dataset.count,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';
+    let start=null;
+    function step(ts){if(!start)start=ts;const p=Math.min((ts-start)/800,1);
+      el.textContent=pre+Math.round(target*(0.2+0.8*p*(2-p)))+suf;
+      if(p<1)requestAnimationFrame(step);else el.textContent=pre+target+suf;}
+    requestAnimationFrame(step);
+  });
+}
+function go(d){cur=Math.max(0,Math.min(slides.length-1,cur+d));render()}
+function jump(i){cur=i;render();document.getElementById('menu').classList.remove('show')}
+document.addEventListener('keydown',e=>{
+  const g=document.getElementById('pw-gate');
+  if(g.style.display!=='none'&&getComputedStyle(g).opacity!=='0')return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')go(1);
+  if(e.key==='ArrowLeft'||e.key==='PageUp')go(-1);
+  if(e.key==='Escape'){closeModal();document.getElementById('menu').classList.remove('show')}
+});
+let tx=null;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{
+  if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>60)go(dx<0?1:-1);tx=null;
+},{passive:true});
+
+const mg=document.getElementById('menu-grid');
+slides.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.innerHTML=`<span>${String(i+1).padStart(2,'0')}</span>${s.dataset.title}`;
+  b.onclick=()=>jump(i);mg.appendChild(b);
+});
+function toggleMenu(){document.getElementById('menu').classList.toggle('show')}
+
+function togglePw(){
+  const i=document.getElementById('pw-input'),b=document.getElementById('pw-toggle');
+  const show=i.type==='password';
+  const a=i.selectionStart,z=i.selectionEnd;
+  i.type=show?'text':'password';
+  b.classList.toggle('on',show);
+  const lbl=show?'Hide password':'Show password';
+  b.setAttribute('aria-label',lbl);b.setAttribute('aria-pressed',show?'true':'false');b.title=lbl;
+  i.focus();try{i.setSelectionRange(a,z)}catch(e){}
+}
+
+function pwSubmit(){
+  const val=document.getElementById('pw-input').value;
+  if(val==='@GNFIMI'){
+    const g=document.getElementById('pw-gate');
+    g.style.opacity='0';g.style.pointerEvents='none';
+    setTimeout(()=>{g.style.display='none'},650);
+  } else {
+    document.getElementById('pw-error').style.opacity='1';
+  }
+}
+window.addEventListener('beforeprint',()=>{document.getElementById('pw-gate').style.display='none'});
+
+/* Save as PDF ------------------------------------------------------------
+   Every photo in this deck is a remote fetch, and slides off-screen in the
+   horizontal track may not have loaded yet. Calling window.print() straight
+   from the button can snapshot the deck before those images arrive, which is
+   how the audit hero and the founders photo went missing. This forces every
+   image to resolve first, then prints. 10s ceiling so a dead URL can't hang
+   the button. */
+function deckImageUrls(){
+  const urls=new Set();
+  document.querySelectorAll('img[src]').forEach(i=>{if(i.src)urls.add(i.src)});
+  document.querySelectorAll('[style*="background-image"],.bg,.split-img').forEach(el=>{
+    const bg=getComputedStyle(el).backgroundImage;
+    if(!bg||bg==='none')return;
+    (bg.match(/url\((['"]?)(.*?)\1\)/g)||[]).forEach(s=>{
+      const u=s.replace(/^url\((['"]?)/,'').replace(/(['"]?)\)$/,'');
+      if(u&&!u.startsWith('data:'))urls.add(u);
+    });
+  });
+  return [...urls];
+}
+function preloadDeck(){
+  const jobs=deckImageUrls().map(u=>new Promise(res=>{
+    const im=new Image();
+    im.onload=im.onerror=()=>res();
+    im.src=u;
+  }));
+  return Promise.race([
+    Promise.all(jobs),
+    new Promise(r=>setTimeout(r,10000))
+  ]);
+}
+async function savePDF(btn){
+  const label=btn?btn.textContent:null;
+  if(btn){btn.textContent='Preparing…';btn.disabled=true}
+  try{await preloadDeck()}catch(e){}
+  if(btn){btn.textContent=label;btn.disabled=false}
+  window.print();
+}
+
+/* Fit check -------------------------------------------------------------
+   Print slides are a hard 8.5in with overflow:hidden, which guarantees one
+   page per slide but means over-long content clips silently. This measures
+   every slide against the real print box and reports any that would clip.
+   Run it after editing copy: open the deck with #fit on the URL, or call
+   fitCheck() in the console. */
+function fitCheck(){
+  const PAGE_W=1056, PAGE_H=816, PAD_X=56, PAD_Y=44;
+  const box=document.createElement('div');
+  box.style.cssText='position:fixed;left:-99999px;top:0;width:'+PAGE_W+'px;'+
+    'padding:'+PAD_Y+'px '+PAD_X+'px;box-sizing:border-box;visibility:hidden';
+  document.body.appendChild(box);
+  const limit=PAGE_H-(PAD_Y*2);
+  const bad=[];
+  [...document.querySelectorAll('.slide')].forEach((sl,i)=>{
+    const inner=sl.querySelector('.inner');
+    if(!inner)return;                       // imgfull slides are pinned, skip
+    const clone=inner.cloneNode(true);
+    clone.style.maxWidth='1160px';
+    box.innerHTML='';box.appendChild(clone);
+    const h=Math.ceil(clone.getBoundingClientRect().height);
+    if(h>limit)bad.push({page:i+1,title:sl.dataset.title||'',height:h,limit,over:h-limit});
+  });
+  box.remove();
+  if(bad.length){
+    console.warn('%cFIT CHECK — '+bad.length+' slide(s) would clip in the PDF',
+      'color:#C0392B;font-weight:700');
+    console.table(bad);
+  }else{
+    console.log('%cFIT CHECK — all '+document.querySelectorAll('.slide').length+
+      ' slides fit on one page.','color:#1E8449;font-weight:700');
+  }
+  return bad;
+}
+if(location.hash==='#fit')window.addEventListener('load',()=>setTimeout(fitCheck,400));
+
+render();
+</script>
+</body>
+</html>
